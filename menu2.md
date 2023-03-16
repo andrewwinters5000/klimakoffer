@@ -396,4 +396,39 @@ While Robinson provided a translation
 table for values (lat/lon), there are
 closed form approximations available.
 The form we consider was presented by
-Beineke.
+Beineke in 1991 "Untersuchungen zur Robinson-Abbildung and Vorschlag einen analytischen
+Abbildungsvorschrift".
+
+The approximation that Beineke proposes
+is based on a polynomial spline approximation.
+Given the computational coordinates, he defines the new coordinates of the
+curvilinear grid as
+\begin{align}
+    \hat{x}_{ij} &= (d + e \theta_j^2 + f \theta_j^4 + g \theta_j^6) \varphi_i \\
+    x &= \frac{180}{\pi} \frac{\hat{x}_{ij}}{\max_{i,j} (\hat{x}_{ij})} \\
+    \hat{y}_{ij} &= a \theta_j + b \texttt{sign} (\theta_j) |\theta_j|^c \\
+    y &= 90 \frac{\hat{y}}{\max_{i,j} (\hat{x}_{ij})}
+\end{align}
+with the parameters
+\begin{align}
+a =&  0.96047, &
+    b =& -0.00857, &
+    c =&  6.41, \\
+    d =&  2.6666, &
+    e =& -0.367, &
+    f =& -0.150 \\
+    g =&  0.0379.
+\end{align}
+
+Applying the simplified Robinson
+projection to the computational grid
+gives a curvilinear mesh a shown in the
+figure:
+![](/assets/Robinson.png)
+* **Source**: Ipbuker, C. (2005). A computational approach to the Robinson projection. Survey Review, 38(297), 204-217.
+
+As can be seen in the figure, the
+geographic map can be used to
+display the land-sea-ice-show
+mask of Earth, which is the
+topic of the first milestone.
