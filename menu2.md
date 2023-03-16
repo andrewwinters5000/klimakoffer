@@ -13,6 +13,9 @@ tags = ["syntax", "code", "image"]
 
 ## Introduction Components of the Climate System
 
+![](/figs//milestone1/ClimateSystem.png)
+* Figure from lecture notes: [Stocker, "Introduction to Climate Modeling". Universität Bern](https://climatehomes.unibe.ch/~stocker/papers/stocker18icm.pdf).
+
 ### Atmosphere
 
 Gasous part above the Earth's surface. The
@@ -87,8 +90,8 @@ a coupling of all these components is
 necessary (for instance, water vapour exchange).
 
 
-
-## Bad news
+@@colbox-red
+**Bad news**
 Every single process requires expert level
 of research to understand the physics
 and to generate model abstractions. We
@@ -99,9 +102,11 @@ algorithms and their implementation.
 
 
 A fully coupled globalclimate model
-is out of the scope
+is out of the scope!!
+@@
 
-## Good news
+@@colbox-blue
+**Good news**
 Not all research questions in climate sciece
 require the full model. It is, however, part of the
 scientific work to select a valid selection of
@@ -112,9 +117,9 @@ With this introductory discussion on the climate
 system, we come to the conclusion that to achieve
 our goal "implement your own climate model from scratch" we need simplifications. To be more
 precise: we will need strong simplifications!!
+@@
 
-
-_Comment_: For the interested student, we
+**Comment**: For the interested student, we
 recommend to attend other specialized courses
 available at UoC or read detailed
 lecture notes such as for instance: "Introduction to Climate Modeling" by Prof. Stocker, Physikalisches Institut, University of Bern (2016).
