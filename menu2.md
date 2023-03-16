@@ -13,7 +13,7 @@ tags = ["syntax", "code", "image"]
 
 ## Introduction Components of the Climate System
 
-![](/_figs/milestone1/ClimateSystem.png)
+![](/assets/ClimateSystem.png)
 * Figure from lecture notes: [Stocker, "Introduction to Climate Modeling". Universität Bern](https://climatehomes.unibe.ch/~stocker/papers/stocker18icm.pdf).
 
 ### Atmosphere
@@ -191,7 +191,7 @@ by different researchers in the last decades
 Here is for instance a figure that lists a matrix
 of simplifications with focus on Atmosphere+Hydrosphere:
 
-![](/_figs/milestone1/Models.png)
+![](/assets/Models.png)
 * Figure from lecture notes: [Stocker, "Introduction to Climate Modeling". Universität Bern](https://climatehomes.unibe.ch/~stocker/papers/stocker18icm.pdf).
 
 ## How do we choose a model?
@@ -254,7 +254,7 @@ our model we will use the colatitude system.
 **Remark 1:** the values of longitude and latitude can be given in radians or degrees.
 @@
 
-![](/_figs/milestone1/LongLat.png)
+![](/assets/LongLat.png)
 * **Source:** Wikipedia.
 
 
@@ -268,7 +268,7 @@ combination (map+geodetic datum) the
 coordinates are precise and can be compared.
 @@
 
-![](/_figs/milestone1/SphereCoord.png)
+![](/assets/SphereCoord.png)
 
 We consider real Cartesian ($x,y,z$) and spherical ($r,\theta,\varphi$) coordinates, and have following conventions:
 * Radius: $r \in \R, \, 0 \le r < \infty$
@@ -334,7 +334,7 @@ are somewhat problematic when trying to
 mesh the surface.
 An illustration of converging grid lines
 at the poles can be seen in the figure:
-![](/_figs/milestone1/SphereCoord.png)
+![](/assets/SphereCoord.png)
 * **Source**: Wikipedia
 
 We can further observe from the figure that the
@@ -348,16 +348,18 @@ a special fix trick for the poles.
 However, because of the issues discussed above,
 there are many alternative ways of constructing
 meshes for sphere:
-![](/_figs/milestone1/GridsSphere.png)
+![](/assets/GridsSphere.png)
 * **Source**: [www.encyclopedia-environment.org](http://www.encyclopedia-environment.org) ????
 
 For instance, the famous ICON (Icosahedral Nonhydrostatic) model from the German weather service (DWD: Deutschen Wetterdienst) uses triangle
 surface grids.
-![](/_figs/milestone1/ICONgrid.png)
+![](/assets/ICONgrid.png)
 * **Source**: [www.dwd.de](http://www.dwd.de)
 
 
 As mentioned above, we will use a regulargrid for our
 model. In so-called computational space, we consider
 our coordinate directions as either latitude/colatitude and longitude:
-![](/figs/milestone1/OurGrid.png)
+![](/assets/OurGrid.png)
+
+
