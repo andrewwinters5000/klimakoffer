@@ -22,7 +22,9 @@ website_url   = "https://tlienart.github.io/FranklinTemplates.jl/"
 Add here global latex commands to use throughout your pages.
 -->
 \newcommand{\R}{\mathbb R}
+\newcommand{\d}{\mathrm{d}}
 \newcommand{\scal}[1]{\langle #1 \rangle}
+\newcommand{\partialderiv}[2]{ \frac{\partial {#1}}{\partial {#2} } }
 
 <!-- Name of repository for GitHub pages -->
 @def prepath = "IntroToClimateModeling"

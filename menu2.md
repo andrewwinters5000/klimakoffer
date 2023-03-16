@@ -254,28 +254,110 @@ our model we will use the colatitude system.
 **Remark 1:** the values of longitude and latitude can be given in radians or degrees.
 @@
 
+![](/_figs/milestone1/LongLat.png)
+* **Source:** Wikipedia.
 
 
 @@colbox-blue
-**Remark 2:** Geography the generation of a mop
-with long that venues of a location always
-depends on the choice of a referencesystem the
-so called geodetic datum The geodetic datum
-basically recreance ellipsoid Only in
-combination map geodetic datum the
-coordinates make sense and are comparable
+**Remark 2:** In geography, the generation of a map
+with long/lat values of a location always
+depends on the choice of a reference system: the
+so-called **geodetic datum**. The geodetic datum
+is a reference ellipsoid. Only in
+combination (map+geodetic datum) the
+coordinates are precise and can be compared.
 @@
 
-We con side real Cartesian Gotye has bagtalk
-Map geodeticoffend xyopeknotes are precise and
-cededGeeperspeedrical coordinates
-radius re R O E r c 00
-colatitude o eR O E O C IT
-longitude Ye R O S o c 21T
-with transformations
+![](/_figs/milestone1/SphereCoord.png)
 
+We consider real Cartesian ($x,y,z$) and spherical ($r,\theta,\varphi$) coordinates, and have following conventions:
+* Radius: $r \in \R, \, 0 \le r < \infty$
+* Colatitude: $\theta \in \R, \, 0 \le r < \pi$
+* Longitude: $\varphi \in \R, \, 0 \le r < 2\pi$
+with transformations:
 \begin{align}
 x &= r \sin \theta \cos \varphi, & r &= \sqrt{x^2 + y^2 + z^2},\\
 y &= r \sin \theta \sin \varphi, & \theta &= \arctan \left(\frac{x^2 + y^2}{z} \right),\\
 z &= r \cos \theta, & \varphi &= \arctan(y/z).
 \end{align}
+
+From analysis, we know that the Jacobian of the coordinate transformation is given by
+\begin{align}
+\partialderiv{x}{r} &= \sin \theta \cos \varphi, &
+\partialderiv{x}{\varphi} &= -r \sin \theta \sin \varphi, & 
+\partialderiv{x}{\theta} &= r \cos \theta \cos \varphi \\
+\partialderiv{y}{r} &= \sin \theta \sin \varphi, &
+\partialderiv{y}{\varphi} &= r \sin \theta \cos \varphi, & 
+\partialderiv{y}{\theta} &= r \cos \theta \sin \varphi \\
+\partialderiv{z}{r} &= \sin \theta \cos \theta, &
+\partialderiv{z}{\varphi} &= 0, & 
+\partialderiv{z}{\theta} &= -r \sin \theta,
+\end{align}
+and the respective Jacobian matrix,
+\begin{align}
+J =
+\partialderiv{(x,y,z)}{(r,\theta,\varphi)} =
+\begin{bmatrix}
+\sin \theta \cos \varphi & -r \sin \theta \sin \varphi & r \cos \theta \cos \varphi \\
+\sin \theta \sin \varphi & r \sin \theta \cos \varphi & r \cos \theta \sin \varphi \\
+\sin \theta \cos \theta  & 0 & -r \sin \theta 
+\end{bmatrix}
+\in \R^{3 \times 3}
+\end{align}
+with the determinant
+$$
+|J|=r^2 \sin \theta,
+$$
+which can be used to ransform integrals
+from Cartesian coordinates to spherical coordinates.
+
+@@colbox-blue
+**Example:** Volume of a sphere with radious R:
+\begin{align}
+\iiint_{V} \d V &= \iiint_{V} \d x \d y \d z \\
+&= \int_{r=0}^R \int_{\theta=0}^{\pi} \int_{\varphi=0}^{2\pi} |J| \d r \d \theta \d \varphi\\
+&= \frac{4\pi R^3}{3}
+\end{align}
+@@
+
+It is important to note that the determinant can
+get equal to zero for $\theta \in \{ 0, \pi\}$. From linear
+algebra, we know that matrices with determinant
+equal to zero are not regular, i.e., they cannot
+be invented. Transformations where the Jacobian
+matrix gets irregular are singular at this specific
+locations. The locations $\theta=0$ (North) and $\theta=\pi$ (South)
+correspond to the poles. Therefore, the transformation is
+singular at the poles, which shows that, regarding
+mappings, the poles are special locations and
+are somewhat problematic when trying to
+mesh the surface.
+An illustration of converging grid lines
+at the poles can be seen in the figure:
+![](/_figs/milestone1/SphereCoord.png)
+* **Source**: Wikipedia
+
+We can further observe from the figure that the
+grid cells get smaller the closer they are to the
+poles. So a regular grid in (co-)latitude and
+longitude space gives an irregular grid on the
+sphere surface.
+In our model we will use this particular grid
+(regular in la/lon) anyway and introduce
+a special fix trick for the poles.
+However, because of the issues discussed above,
+there are many alternative ways of constructing
+meshes for sphere:
+![](/_figs/milestone1/GridsSphere.png)
+* **Source**: [www.encyclopedia-environment.org](http://www.encyclopedia-environment.org) ????
+
+For instance, the famous ICON (Icosahedral Nonhydrostatic) model from the German weather service (DWD: Deutschen Wetterdienst) uses triangle
+surface grids.
+![](/_figs/milestone1/ICONgrid.png)
+* **Source**: [www.dwd.de](http://www.dwd.de)
+
+
+As mentioned above, we will use a regulargrid for our
+model. In so-called computational space, we consider
+our coordinate directions as either latitude/colatitude and longitude:
+![](/figs/milestone1/OurGrid.png)
