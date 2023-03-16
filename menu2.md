@@ -18,7 +18,7 @@ tags = ["syntax", "code", "image"]
 
 ### Atmosphere
 
-Gasous part above the Earth's surface. The
+<!-- Gasous part above the Earth's surface. The
 atmosphere includes different substances in gaseous (e.g.
 CO2), liquid (water, aerosols) or solid (dust) form.
 
@@ -26,10 +26,20 @@ Important processes are for instance:
 * Weather 
 * Radiation balance: incoming solar radiation, reflection (Albedo), Earth radiation, ...
 * Formation of clouds and precipitation
-* Turbulent atmospheric flow and heat transfer/mixing
+* Turbulent atmospheric flow and heat transfer/mixing -->
+The atmosphere is the gaseous layer above the Earth's surface and is composed of various substances in gaseous, liquid (such as water and aerosols), or solid (like dust) forms. It plays a crucial role in regulating the Earth's climate and supporting life on the planet.
+
+Some of the important atmospheric processes include:
+
+* Weather patterns, which involve the short-term changes in temperature, humidity, wind, and precipitation in a particular region.
+* Radiation balance, which involves the absorption and reflection of incoming solar radiation, the Earth's albedo, and the emission of radiation from the Earth's surface.
+* Cloud and precipitation formation, which are critical processes that help regulate the planet's climate.
+* Turbulent atmospheric flow, which plays a crucial role in transferring heat and mixing various atmospheric constituents, thereby influencing weather patterns, cloud formation, and precipitation.
+
+Overall, these processes work together to create a complex and dynamic atmosphere that is vital for sustaining life on Earth.
 
 ### Hydrosphere 
-All forms of water above and below the Earth's surface This includes the whole global water cycle after precipitation has reached the surface
+<!-- All forms of water above and below the Earth's surface This includes the whole global water cycle after precipitation has reached the surface
 
 
 Important processes are for instance:
@@ -37,7 +47,19 @@ Important processes are for instance:
 * Transport of ocean water masses, transport of heat.
 * Change of inflow into different ocean basins.
 * Connection between oceans and atmosphere., e.g. exchange of water vapour.
-* Most important reservoir for carbon: oceans absorb a large amount of CO2: more than atmosphere and terrestial biosphere (plants and animals) combined.
+* Most important reservoir for carbon: oceans absorb a large amount of CO2: more than atmosphere and terrestial biosphere (plants and animals) combined. -->
+
+The hydrosphere comprises all forms of water on and below the Earth's surface, including oceans, rivers, lakes, groundwater, and glaciers. It also includes the entire global water cycle, which begins when precipitation reaches the surface.
+
+Several important processes occur within the hydrosphere, some of which are:
+
+* Ocean water transport, which is responsible for the movement of water masses and heat around the globe.
+* Changes in the inflow of water into different ocean basins, which can have a significant impact on ocean currents and climate patterns.
+* The connection between the oceans and the atmosphere, which involves the exchange of water vapor and other gases.
+* The absorption of carbon dioxide (CO2) by the oceans, which is the most crucial reservoir for carbon. The oceans absorb more CO2 than the atmosphere and the terrestrial biosphere (plants and animals) combined.
+
+Overall, the hydrosphere plays a crucial role in regulating the Earth's climate and supporting life on the planet. Its processes and dynamics are essential to understanding the complex interactions between the Earth's atmosphere, oceans, and biosphere.
+
 
 ### Cryosphere
 All forms of ice in the climate system including ice masses,
