@@ -363,3 +363,37 @@ our coordinate directions as either latitude/colatitude and longitude:
 ![](/assets/OurGrid.png)
 
 
+We define the number of grid lines as
+\begin{align}
+\nlong \in \mathbb{N} \\
+\nlat \in \mathbb{N}
+\end{align}
+to get the size of the grid cells as
+\begin{align}
+\Delta \varphi &= \frac{2\pi}{\nlong-1} \\
+\Delta \theta &= \frac{\pi}{\nlat -1}
+\end{align}
+and the grid node locations as
+\begin{align}
+\varphi_i &= -\pi + (i-1) \Delta \varphi, & i&=1, 2, \ldots, \nlong,\\
+\theta_j &= -\frac{\pi}{2} + (j-1) \Delta \theta, & j&= 1, 2, \ldots, \nlat.
+\end{align}
+
+To illustrate the results of the model,
+we could directly plot in computational space.
+However, it is more pleasing to the eyes and
+more common to plot the results in physical
+space (or an approximation to that).
+There are many options available in the literature
+to get from lat/long to other coordinates.
+In this course we all use the so-called Robinson
+projection, which is an interesting one as this
+transform has no mathematical properties (e.g, keep distances, keep angles, keep area) but
+was designed by Robinson by hand to look
+pleasing to his eyes(!).
+
+While Robinson provided a translation
+table for values (lat/lon), there are
+closed form approximations available.
+The form we consider was presented by
+Beineke.
