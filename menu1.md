@@ -31,7 +31,7 @@ tags = ["syntax", "code"]
   2. "Implementation phase": Hands-on programing in groups. Classes in person or via zoom can be used for questions, discussions, etc.
 * We have 1 extra project
 
-* For the 6 milestones solutions in Julia and Python areavailable and made accessible.
+* **Do we want this???:**For the 6 milestones solutions in Julia and Python are available and made accessible.
 
 ## Examination
 
@@ -41,15 +41,12 @@ tags = ["syntax", "code"]
 
 ## Organization of the course 
 
-* Everything is done via ILIAS!
-* Make sure that you can log in there and check "general info"
-* Communication is done through ILIAS
-* If you have a question:
-  1. Post in ILIAS Forum
-  2. Write an email: aggass
+* All announcements and deliverables and internal communications will be done via [ILIAS](https://www.ilias.uni-koeln.de/ilias/goto_uk_crs_5096476.html)!
+* Make sure that you can log in there and check "general info".
+* If you have a question, please post in [ILIAS Forum](https://www.ilias.uni-koeln.de/ilias/goto_uk_frm_5121639.html).
 
 ## Our Wish for the Course
 
-* Let's have a good and interestingtime together!
+* Let's have a good and interesting time together!
 * We are here to help you to learn as much as possible!
 * Let's not focus too much on formalities but work all hard together to make it a success for everyone!!
