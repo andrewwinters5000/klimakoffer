@@ -356,7 +356,7 @@ are somewhat problematic when trying to
 mesh the surface.
 An illustration of converging grid lines
 at the poles can be seen in the figure:
-![](/assets/milestone1/SphereCoord.png)
+![](/assets/milestone1/PolesProblem.png)
 * **Source**: Wikipedia
 
 We can further observe from the figure that the
