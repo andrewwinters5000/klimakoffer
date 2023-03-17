@@ -11,7 +11,7 @@ tags = ["syntax", "code", "image"]
 # Milestone 1
 \toc
 
-## Introduction Components of the Climate System
+## Introduction - Components of the Climate System
 
 ![](/assets/milestone1/ClimateSystem.png)
 * Figure from lecture notes: [Stocker, "Introduction to Climate Modeling". Universität Bern](https://climatehomes.unibe.ch/~stocker/papers/stocker18icm.pdf).
@@ -356,6 +356,7 @@ are somewhat problematic when trying to
 mesh the surface.
 An illustration of converging grid lines
 at the poles can be seen in the figure:
+
 ![](/assets/milestone1/PolesProblem.png)
 * **Source**: Wikipedia
 
