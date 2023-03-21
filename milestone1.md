@@ -455,3 +455,5 @@ geographic map can be used to
 display the land-sea-ice-show
 mask of Earth, which is the
 topic of the first milestone.
+
+**NOTE:** Explain that the grid does NOT contain 180°!!!

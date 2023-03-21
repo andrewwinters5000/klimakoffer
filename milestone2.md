@@ -1,9 +1,9 @@
 +++
 title = "Milestone 2"
-hascode = false
+hascode = true
 rss = "Description"
-rss_title = "Milestone 1"
-rss_pubdate = Date(2019, 5, 1)
+rss_title = "Milestone 2"
+rss_pubdate = Date(2022, 5, 1)
 
 tags = ["ebm", "solar radiation", "orbital parameters"]
 +++
@@ -11,4 +11,179 @@ tags = ["ebm", "solar radiation", "orbital parameters"]
 # Milestone 2
 \toc
 
-## Solar radiation and orbital parameters
+## Radiation
+
+## Solar forcing
+
+Previously, we have made the assumption that the solar forcing term remains constant across both space and time. However, this assumption overlooks the fact that the Earth's position and orientation in relation to the sun changes throughout the year, leading to a variation in the amount of incoming insolation. The two primary factors that contribute to the variability of solar radiation received by the Earth are as follows:
+
+1. **Distance from the sun**: Rather than a perfect circle, the Earth's orbit around the sun is an ellipse. Consequently, the distance between the Earth and the sun fluctuates throughout the year, leading to a change in the total amount of solar radiation that reaches the Earth.
+
+2. **Tilted axis of rotation**: Due to the Earth's tilted axis of rotation, different parts of the planet receive varying amounts of solar radiation as it orbits the sun (depending on the latitude). This phenomenon gives rise to the changing seasons.
+
+### Important definitions
+
+![](/assets/milestone2/Orbits.png)
+
+Before we delve into calculating the impact of the Earth-sun distance and Earth's axis tily on the solar radiation on Earth, let us define some relevant concepts (see figure above for reference):
+
+* Perihelion: The point in Earth's orbit where it is closest to the Sun. Currently, the perihelion occurs around January 4th.
+* Aphelion: The point in Earth's orbit where it is farthest from the Sun. Currently, the aphelion occurs around July 6th.
+* Ecliptic: The plane of Earth's orbit around the Sun.
+* Northern summer solstice: The point in Earth's orbit where the longest day of the year occurs in the Northern Hemisphere and the shortest day of the year occurs in the Southern Hemisphere. At this point, the plane formed by the rotation axis of Earth and the line that connects Earth and the Sun is perpendicular to the ecliptic. Currently, the Northern summer solstice occurs around June 21st.
+* Northern winter solstice: The point in Earth's orbit where the shortest day of the year occurs in the Northern Hemisphere and the longest day of the year occurs in the Southern Hemisphere. At this point, the plane formed by the rotation axis of Earth and the line that connects Earth and the Sun is perpendicular to the ecliptic. Currently, the Northern winter solstice occurs around December 21st.
+* Vernal equinox: The point in Earth's orbit where the line that connects Earth and the Sun aligns with the equatorial plane of Earth during the transition from winter to summer in the Northern Hemisphere. This is also the moment when Earth's rotation axis is directly perpendicular to the Sun-Earth line.
+* Northern autumnal equinox: The point in Earth's orbit where the line that connects Earth and the Sun aligns with the equatorial plane of Earth during the transition from summer to winter in the Northern Hemisphere. This is also the moment when Earth's rotation axis is directly perpendicular to the Sun-Earth line.
+* True longitude of earth ($\lambda$): Position of Earth at a given time as meassured from the vernal equinox. The position $\lambda = 0$ is considered the begining of an _astronomical year_.
+
+To compute the distance from the sun and Earth's axis tilt angle, we need to consider three parameters that vary over time as a result of the gravitational interactions between Earth and other celestial bodies within the solar system. We call these parameters the **orbital parameters** and define them as
+
+1. Eccentricity ($e$): This parameter determines the degree to which Earth's orbit around the sun deviates from a perfect circle. It is computed as
+    $$\label{eq:ecc}
+    e = \sqrt{1-\frac{b^2}{a^2}},
+    $$ 
+    where $a$ represents the semi-major axis, and $b$ represents the semi-minor axis of the ellipse (refer to the figure). Earth's eccentricity undergoes periodic changes over hundreds of thousands of years.
+2. Obliquity ($\epsilon$): This parameter, also referred to as axial tilt, represents the angle between Earth's rotational axis and its orbital axis. The obliquity angle is equivalent to the angle between the equatorial plane and the orbital plane. The obliquity angle varies periodically over approximately $\tau_{\epsilon} \approx 20,000$ years.
+3.  Precession distance ($\tilde \omega$): Earth's axis rotates with a period of about $40,000$ years, causing the seasons to shift in position within the elliptical orbit of Earth. This phenomenon is known as precession or spin. We define the precession distance as the angle between the aphelion and the vernal equinox.
+
+![](/assets/milestone2/part2-earthspin-nolabel.jpg)
+* Figure modified from [https://ugc.berkeley.edu/background-content/earths-spin-tilt-orbit/](https://ugc.berkeley.edu/background-content/earths-spin-tilt-orbit/).
+
+In the following sections, we will assume that the eccentricity, obliquity and precession distance are constant to derive the total solar irradiance.
+This is a reasonable assumption for climate simulations in which the orbital parameters are updated at the time interval $\Delta t_{\text{orb}} \ll \tau_{\epsilon}$. 
+
+### Effect of Earth's distance to the sun
+
+
+
+<!-- As we saw in the [Radiation Section](#radiation) -->
+The inverse-square law states that the total radiation radiation that is received from a source is inversely proportional to the square of the distance from source.
+
+![](/assets/milestone2/Inverse_square_law.png)
+* Source: Wikipedia
+
+As a result, the total radiation that is received at the top layer of Earth's atmosphere is 
+$$
+S_r(t) = \frac{r_0^2}{r^2} S_0,
+$$
+where $r$ is the (time-dependent) Earth-sun distance, $r_0 \approx a$ is roughly the mean Earth-sun distance (defined as one anstronomical unit), and $S_0$ is the so-called solar constant, the mean solar elecromagnetic radiation per unit area meassured on a surface perpendicular to the solar rays at a distance $r_0$. 
+
+Since Earth's orbit is an ellipse and the sun sits in one focus, we can calulate the Earth-sun distance as
+$$\label{eq:r}
+r = \frac{a (1-e^2)}{1 - e \cos (\nu)},
+$$
+where the position (angle) of earth with respect to the aphelion is
+$$\label{eq:nu}
+\nu = \tilde \omega + \lambda
+$$
+The radiation at the top of the atmosphere is then computed as
+$$
+S_r(t) %= \frac{(1-e \cos (\nu))^2}{(1 - e^2)^2} S_0 
+= \frac{(1-e \cos (\tilde \omega + \lambda))^2}{(1 - e^2)^2} S_0.
+$$
+
+
+
+### Effect of Earth's axial tilt
+
+Due to Earth's axial tilt, the solar irradiance depends on the latitude and the time.
+
+We call the angle between the Earth-sun line and the equatorial plane of Earth _declination angle_ and note it with $\delta$. This angle changes throughout the year, as the Earth revolves around the sun (see figure):
+
+![](/assets/milestone2/Declination.png)
+
+In general, the declination angle can be computed as
+$$
+\sin (\delta) = \sin (\lambda) \sin (\epsilon).
+$$
+
+Depending on the declination angle and the latitude, we identify three regions of interest:
+
+
+#### (1) Latitudes where there is no sunrise (winter)
+There is no incoming solar radiation for latitudes that fulfill
+$$
+|\phi| + |\delta| \ge \frac{\pi}{2} \,\, \text{with} \,\, \phi \delta < 0,
+$$
+or equivalently
+$$
+z = -\tan(\phi)\tan(\delta) \ge 1.
+$$
+
+For these latitudes, the insolation is simply
+$$
+S(\phi,t) = 0.
+$$
+
+
+#### (2) Latitudes where there is no sunset (summer)
+Some regions of earth are exposed to incoming solar radiation throughout the entire day during part of the year. These regions fulfill
+$$
+\label{eq:nosunset}
+|\phi| + |\delta| \ge \frac{\pi}{2} \,\, \text{with} \,\, \phi \delta > 0,
+$$
+or equivalently
+$$
+z = -\tan(\phi)\tan(\delta) \le -1.
+$$
+
+The calculation of the effective insolation is more involved, as it requires the use of differential geometry. The result reads as
+$$
+S(\phi,t) = S_r(t) \sin(\phi) \sin(\delta).
+$$
+
+#### (3) Latitudes where there is daily sunrise and sunset
+There is daily sunrise and sunset at latitudes that fulfill the condition
+$$
+- \left( \frac{\pi}{2} - |\delta| \right) < \phi < \frac{\pi}{2} - |\delta|.
+$$
+
+For these latitudes, the calculation of the insolation also requires the use of differential geometry. The result reads as
+$$
+S(\phi,t) = S_r(t) \frac{1}{\pi} (h_0 \sin(\phi) \sin(\delta)+\cos(\phi) \cos(\delta) \sin(h_0)),
+$$
+with
+$$
+h_0 = - \arccos (z).
+$$
+
+### Bonus: Computation of the true longitude $\lambda$
+
+Kepler's second law states that a line segment joining a planet and the Sun sweeps out equal areas during equal intervals of time. Therefore, Earth moves faster when it is closer to the sun. Is a short time interval $\d t$, the area swept is equal to the area of a triangle with base $r \d \nu$ and height $r$. Therefore, ee can write Kepler's second law as
+$$\label{eq:dAdt}
+\frac{\d A}{\d t} = \frac{\pi a b}{T} = \frac{r^2}{2} \frac{\d \nu}{\d t},
+$$
+where $\pi a b$ is the total area of a ellipse, which is swept in a complete period $T$.
+
+Assuming that the time is meassured in years and replacing the definition of the Earh-sun distance \eqref{eq:r} and the eccentricity \eqref{eq:ecc} in \eqref{eq:dAdt} we obtain
+$$
+\frac{\d \lambda}{\d t} = \frac{2\pi}{(1 - e^2)^{3/2}} (1 - e \cos (\lambda + \tilde \omega))^2.
+$$
+
+## Time discretization
+
+In our simple climate model, we will use 48 time steps each year and set the first time step as the vernal equinox. For such a time-discretization with 48 time steps, the main astronomical events and their correspondence with time steps are listed in the following table:
+
+|  Astronomical event |   Time step|
+| ------------------ | -----------| 
+|   Vernal Equinox   |   1        |  
+|   Summer Solstice  |   13       | 
+|   Autumnal Equinox |   25       | 
+|   Winter Solstice  |   37       | 
+
+In addition, the following table presents the time steps that correspond to each month:
+
+| Month |     Time Steps  | 
+|-------|-----------------|
+| Jan   |  38, 39, 40, 41 |
+| Feb   |  42, 43, 44, 45 |
+| Mar   |  46, 47, 48   1 |
+| Apr   |   2,  3,  4,  5 |
+| May   |   6,  7,  8,  9 |
+| Jun   |  10, 11, 12, 13 |
+| Jul   |  14, 15, 16, 17 |
+| Aug   |  18, 19, 20, 21 |
+| Sep   |  22, 23, 24, 25 |
+| Oct   |  26, 27, 28, 29 |
+| Nov   |  30, 31, 32, 33 |
+| Dec   |  34, 35, 36, 37 |
