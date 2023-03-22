@@ -191,7 +191,7 @@ of simplifications with focus on Atmosphere+Hydrosphere:
 We used the following criteria to find a model for this course:
 
 * It must be feasible to implement the model from scratch in one semester by students (ESM is out).
-* We want to have a 2D grid to include earth surface modeling aspects and localized predictions. Moreover, the topic of how to mesh the spheres is an important decision for a grid based models in GCMs/ESMs.
+* We want to have a 2D grid to include earth surface modeling aspects that depend on the geography. Moreover, the topic of how to mesh the spheres is an important decision for a grid based models in GCMs/ESMs.
 * The physics, the numerics, and the computational aspects should be accessible to a broad range of students (math, physiscs, meteorology, geophysics, etc.)
 
 **What model did we choose?**
@@ -218,7 +218,7 @@ algebraicsystem that is not based on multigrid
 but uses direct solver packages instead -->
 
 
-## Spherical coordinates and grids
+## Spherical coordinates
 
 The shape of Earth is very close to a sphere with radius of about 6378 km. Therefore, the geometrical model of Earth is reasonably given by the surface of a sphere in our 2D climate model.
 
@@ -339,7 +339,7 @@ meshes for sphere:
 ![](/assets/milestone1/GridsSphere.png)
 * **Source**: [https://www.encyclopedie-environnement.org](https://www.encyclopedie-environnement.org)
 
-For instance, the famous ICON (Icosahedral Nonhydrostatic) model from the German weather service (DWD: Deutschen Wetterdienst) uses triangle
+For instance, the famous ICON (Icosahedral Nonhydrostatic) model from the German weather service (DWD: Deutscher Wetterdienst) uses triangle
 surface grids:
 
 
@@ -352,7 +352,7 @@ The grid that we use in this course is illustrated below:
 
 ![](/assets/milestone1/OurGrid.png)
 
-In the illustration, the boundaries of our domain are marked in blue, the grid lines of the mesh are marked in red and the grid points of the mesh (the positions where we will store our numerical solution) are marked as purple circles.
+In the illustration, the boundaries of our domain are marked in blue, the grid lines of the mesh are marked in gray and the grid points of the mesh (the positions where we will store our numerical solution) are marked as purple circles.
 
 Since our domain is periodic in the longitude direction, we do not need to store the last column of grid points ($\varphi = \pi$), as their position on the surface of the sphere is the same as for the first column ($\varphi = -\pi$).
 
@@ -408,7 +408,7 @@ The form we consider was presented by
 > Beineke, D. (1991). Untersuchung zur Robinson-Abbildung und Vorschlag einer analytischen Abbildungsvorschrift. Kartographische Nachrichten, 41(3), 85-94.
 
 The approximation that Beineke proposes
-is based on a polynomial spline approximation.
+is a simple-to-evaluate algebraic formula.
 Given the computational coordinates, he defines the new coordinates of the
 curvilinear grid as
 \begin{align}
