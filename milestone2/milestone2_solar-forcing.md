@@ -11,8 +11,6 @@ tags = ["ebm", "solar radiation", "orbital parameters"]
 # Milestone 2
 \toc
 
-## Radiation
-
 ## Solar forcing
 
 Previously, we have made the assumption that the solar forcing term remains constant across both space and time. However, this assumption overlooks the fact that the Earth's position and orientation in relation to the sun changes throughout the year, leading to a variation in the amount of incoming insolation. The two primary factors that contribute to the variability of solar radiation received by the Earth are as follows:
