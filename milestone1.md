@@ -292,43 +292,45 @@ coordinates are precise and can be compared.
 
 ![](/assets/milestone1/SphereCoord.png)
 
-We consider real Cartesian ($x,y,z$) and spherical ($r,\theta,\varphi$) coordinates, and have following conventions:
+**TODO**: Introduce latitude ($\lat$) and co-latitude ($\colat$) systems
+
+We consider real Cartesian ($x,y,z$) and spherical ($r,\colat,\varphi$) coordinates, and have following conventions:
 * Radius: $r \in \R, \, 0 \le r < \infty$
-* Colatitude: $\theta \in \R, \, 0 \le r < \pi$
+* Colatitude: $\colat \in \R, \, 0 \le r < \pi$
 * Longitude: $\varphi \in \R, \, 0 \le r < 2\pi$
 with transformations:
 \begin{align}
-x &= r \sin \theta \cos \varphi, & r &= \sqrt{x^2 + y^2 + z^2},\\
-y &= r \sin \theta \sin \varphi, & \theta &= \arctan \left(\frac{x^2 + y^2}{z} \right),\\
-z &= r \cos \theta, & \varphi &= \arctan(y/z).
+x &= r \sin \colat \cos \varphi, & r &= \sqrt{x^2 + y^2 + z^2},\\
+y &= r \sin \colat \sin \varphi, & \colat &= \arctan \left(\frac{x^2 + y^2}{z} \right),\\
+z &= r \cos \colat, & \varphi &= \arctan(y/z).
 \end{align}
 
 From analysis, we know that the Jacobian of the coordinate transformation is given by
 \begin{align}
-\partialderiv{x}{r} &= \sin \theta \cos \varphi, &
-\partialderiv{x}{\varphi} &= -r \sin \theta \sin \varphi, & 
-\partialderiv{x}{\theta} &= r \cos \theta \cos \varphi \\
-\partialderiv{y}{r} &= \sin \theta \sin \varphi, &
-\partialderiv{y}{\varphi} &= r \sin \theta \cos \varphi, & 
-\partialderiv{y}{\theta} &= r \cos \theta \sin \varphi \\
-\partialderiv{z}{r} &= \sin \theta \cos \theta, &
+\partialderiv{x}{r} &= \sin \colat \cos \varphi, &
+\partialderiv{x}{\varphi} &= -r \sin \colat \sin \varphi, & 
+\partialderiv{x}{\colat} &= r \cos \colat \cos \varphi \\
+\partialderiv{y}{r} &= \sin \colat \sin \varphi, &
+\partialderiv{y}{\varphi} &= r \sin \colat \cos \varphi, & 
+\partialderiv{y}{\colat} &= r \cos \colat \sin \varphi \\
+\partialderiv{z}{r} &= \sin \colat \cos \colat, &
 \partialderiv{z}{\varphi} &= 0, & 
-\partialderiv{z}{\theta} &= -r \sin \theta,
+\partialderiv{z}{\colat} &= -r \sin \colat,
 \end{align}
 and the respective Jacobian matrix,
 \begin{align}
 J =
-\partialderiv{(x,y,z)}{(r,\theta,\varphi)} =
+\partialderiv{(x,y,z)}{(r,\colat,\varphi)} =
 \begin{bmatrix}
-\sin \theta \cos \varphi & -r \sin \theta \sin \varphi & r \cos \theta \cos \varphi \\
-\sin \theta \sin \varphi & r \sin \theta \cos \varphi & r \cos \theta \sin \varphi \\
-\sin \theta \cos \theta  & 0 & -r \sin \theta 
+\sin \colat \cos \varphi & -r \sin \colat \sin \varphi & r \cos \colat \cos \varphi \\
+\sin \colat \sin \varphi & r \sin \colat \cos \varphi & r \cos \colat \sin \varphi \\
+\sin \colat \cos \colat  & 0 & -r \sin \colat 
 \end{bmatrix}
 \in \R^{3 \times 3}
 \end{align}
 with the determinant
 $$
-|J|=r^2 \sin \theta,
+|J|=r^2 \sin \colat,
 $$
 which can be used to ransform integrals
 from Cartesian coordinates to spherical coordinates.
@@ -337,18 +339,18 @@ from Cartesian coordinates to spherical coordinates.
 **Example:** Volume of a sphere with radious R:
 \begin{align}
 \iiint_{V} \d V &= \iiint_{V} \d x \d y \d z \\
-&= \int_{r=0}^R \int_{\theta=0}^{\pi} \int_{\varphi=0}^{2\pi} |J| \d r \d \theta \d \varphi\\
+&= \int_{r=0}^R \int_{\colat=0}^{\pi} \int_{\varphi=0}^{2\pi} |J| \d r \d \colat \d \varphi\\
 &= \frac{4\pi R^3}{3}
 \end{align}
 @@
 
 It is important to note that the determinant can
-get equal to zero for $\theta \in \{ 0, \pi\}$. From linear
+get equal to zero for $\colat \in \{ 0, \pi\}$. From linear
 algebra, we know that matrices with determinant
 equal to zero are not regular, i.e., they cannot
 be invented. Transformations where the Jacobian
 matrix gets irregular are singular at this specific
-locations. The locations $\theta=0$ (North) and $\theta=\pi$ (South)
+locations. The locations $\colat=0$ (North) and $\colat=\pi$ (South)
 correspond to the poles. Therefore, the transformation is
 singular at the poles, which shows that, regarding
 mappings, the poles are special locations and
@@ -387,6 +389,8 @@ our coordinate directions as either latitude/colatitude and longitude:
 ![](/assets/milestone1/OurGrid.png)
 
 
+**TODO:** Explain that the grid does NOT contain 180°!!!
+
 We define the number of grid lines as
 \begin{align}
 \nlong \in \mathbb{N} \\
@@ -394,14 +398,20 @@ We define the number of grid lines as
 \end{align}
 to get the size of the grid cells as
 \begin{align}
-\Delta \varphi &= \frac{2\pi}{\nlong-1} \\
-\Delta \theta &= \frac{\pi}{\nlat -1}
+\Delta \varphi &= \frac{2\pi}{\nlong} \\
+\Delta \lat &= \Delta \colat = \frac{\pi}{\nlat -1}
 \end{align}
-and the grid node locations as
+the longitude grid node locations as
 \begin{align}
-\varphi_i &= -\pi + (i-1) \Delta \varphi, & i&=1, 2, \ldots, \nlong,\\
-\theta_j &= %-\frac{\pi}{2} + 
-(j-1) \Delta \theta, & j&= 1, 2, \ldots, \nlat.
+\varphi_i &= -\pi + (i-1) \Delta \varphi, & i&=1, 2, \ldots, \nlong,
+\end{align}
+the latitude grid node locations as
+\begin{align}
+\lat_j &= -\frac{\pi}{2} + (j-1) \Delta \lat, & j&= 1, 2, \ldots, \nlat,
+\end{align}
+and equivalently the colatitude grid node locations as
+\begin{align}
+\colat_j &= (j-1) \Delta \colat, & j&= 1, 2, \ldots, \nlat.
 \end{align}
 
 To illustrate the results of the model,
@@ -424,16 +434,14 @@ The form we consider was presented by
 Beineke in 1991 "Untersuchungen zur Robinson-Abbildung and Vorschlag einen analytischen
 Abbildungsvorschrift".
 
-**TODO**: Introduce latitude as $\phi$ and adjust everything!!
-
 The approximation that Beineke proposes
 is based on a polynomial spline approximation.
 Given the computational coordinates, he defines the new coordinates of the
 curvilinear grid as
 \begin{align}
-    \hat{x}_{ij} &= (d + e \theta_j^2 + f \theta_j^4 + g \theta_j^6) \varphi_i \\
+    \hat{x}_{ij} &= (d + e \lat_j^2 + f \lat_j^4 + g \lat_j^6) \varphi_i \\
     x &= \frac{180}{\pi} \frac{\hat{x}_{ij}}{\max_{i,j} (\hat{x}_{ij})} \\
-    \hat{y}_{ij} &= a \theta_j + b \texttt{sign} (\theta_j) |\theta_j|^c \\
+    \hat{y}_{ij} &= a \lat_j + b \texttt{sign} (\lat_j) |\lat_j|^c \\
     y &= 90 \frac{\hat{y}}{\max_{i,j} (\hat{x}_{ij})}
 \end{align}
 with the parameters
@@ -460,4 +468,3 @@ display the land-sea-ice-show
 mask of Earth, which is the
 topic of the first milestone.
 
-**TODO:** Explain that the grid does NOT contain 180°!!!

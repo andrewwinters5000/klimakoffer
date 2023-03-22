@@ -52,7 +52,7 @@ To compute the distance from the sun and Earth's axis tilt angle, we need to con
 2. Obliquity ($\epsilon$): This parameter, also referred to as axial tilt, represents the angle between Earth's rotational axis and its orbital axis. The obliquity angle is equivalent to the angle between the equatorial plane and the orbital plane. The obliquity angle varies periodically over approximately $\tau_{\epsilon} \approx 20,000$ years.
 3.  Precession distance ($\tilde \omega$): Earth's axis rotates with a period of about $40,000$ years, causing the seasons to shift in position within the elliptical orbit of Earth. This phenomenon is known as precession or spin. We define the precession distance as the angle between the aphelion and the vernal equinox.
 
-> **NOTE:** In the paper of Berger, the precession distance ($\tilde \omega$) is sometimes defined from the perihelion and sometimes from the aphelion. We use the phelion in our implementation as it is the one obtained with equation (6) from Berger.
+> **NOTE:** In the paper of Berger, the precession distance ($\tilde \omega$) is sometimes defined from the perihelion and sometimes from the aphelion. We use the aphelion in our implementation as it is the one obtained with equation (6) from Berger.
 
 ![](/assets/milestone2/part2-earthspin-nolabel.jpg)
 * Figure modified from [https://ugc.berkeley.edu/background-content/earths-spin-tilt-orbit/](https://ugc.berkeley.edu/background-content/earths-spin-tilt-orbit/).
@@ -111,16 +111,16 @@ Depending on the declination angle and the latitude, we identify three regions o
 #### (1) Latitudes where there is no sunrise (winter)
 There is no incoming solar radiation for latitudes that fulfill
 $$
-|\phi| + |\delta| \ge \frac{\pi}{2} \,\, \text{with} \,\, \phi \delta < 0,
+|\lat| + |\delta| \ge \frac{\pi}{2} \,\, \text{with} \,\, \lat \delta < 0,
 $$
 or equivalently
 $$
-z = -\tan(\phi)\tan(\delta) \ge 1.
+z = -\tan(\lat)\tan(\delta) \ge 1.
 $$
 
 For these latitudes, the insolation is simply
 $$
-S(\phi,t) = 0.
+S(\lat,t) = 0.
 $$
 
 
@@ -128,31 +128,31 @@ $$
 Some regions of earth are exposed to incoming solar radiation throughout the entire day during part of the year. These regions fulfill
 $$
 \label{eq:nosunset}
-|\phi| + |\delta| \ge \frac{\pi}{2} \,\, \text{with} \,\, \phi \delta > 0,
+|\lat| + |\delta| \ge \frac{\pi}{2} \,\, \text{with} \,\, \lat \delta > 0,
 $$
 or equivalently
 $$
-z = -\tan(\phi)\tan(\delta) \le -1.
+z = -\tan(\lat)\tan(\delta) \le -1.
 $$
 
 The calculation of the effective insolation is more involved, as it requires the use of differential geometry. The result reads as
 $$
-S(\phi,t) = S_r(t) \sin(\phi) \sin(\delta).
+S(\lat,t) = S_r(t) \sin(\lat) \sin(\delta).
 $$
 
 #### (3) Latitudes where there is daily sunrise and sunset
 There is daily sunrise and sunset at latitudes that fulfill the condition
 $$
-- \left( \frac{\pi}{2} - |\delta| \right) < \phi < \frac{\pi}{2} - |\delta|.
+- \left( \frac{\pi}{2} - |\delta| \right) < \lat < \frac{\pi}{2} - |\delta|.
 $$
 
 For these latitudes, the calculation of the insolation also requires the use of differential geometry. The result reads as
 $$
-S(\phi,t) = S_r(t) \frac{1}{\pi} (h_0 \sin(\phi) \sin(\delta)+\cos(\phi) \cos(\delta) \sin(h_0)),
+S(\lat,t) = S_r(t) \frac{1}{\pi} (H_0 \sin(\lat) \sin(\delta)+\cos(\lat) \cos(\delta) \sin(H_0)),
 $$
-with
+with the absolute angle of the sun at sunrise and sunset
 $$
-h_0 = - \arccos (z).
+H_0 = \arccos (z).
 $$
 
 ### Bonus: Computation of the true longitude $\lambda$
