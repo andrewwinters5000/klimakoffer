@@ -84,7 +84,7 @@ a u_{xx} + b u_{xt} + c u_{tt} + d u_x + e u_t + f u + g = 0,
 $$
 we can define the quantity 
 $$
-\Delta(x,t) = a(x,t)\,c(x,t)  \frac{b(x,t)^2}{2}
+\Delta(x,t) = a(x,t)\,c(x,t) - \frac{b(x,t)^2}{2}
 $$
 to get a classification of the different types
 
