@@ -373,6 +373,7 @@ there are many alternative ways of constructing
 meshes for sphere:
 ![](/assets/milestone1/GridsSphere.png)
 * **Source**: [www.encyclopedia-environment.org](http://www.encyclopedia-environment.org) ????
+**TODO**: Check source...
 
 For instance, the famous ICON (Icosahedral Nonhydrostatic) model from the German weather service (DWD: Deutschen Wetterdienst) uses triangle
 surface grids.
@@ -399,7 +400,8 @@ to get the size of the grid cells as
 and the grid node locations as
 \begin{align}
 \varphi_i &= -\pi + (i-1) \Delta \varphi, & i&=1, 2, \ldots, \nlong,\\
-\theta_j &= -\frac{\pi}{2} + (j-1) \Delta \theta, & j&= 1, 2, \ldots, \nlat.
+\theta_j &= %-\frac{\pi}{2} + 
+(j-1) \Delta \theta, & j&= 1, 2, \ldots, \nlat.
 \end{align}
 
 To illustrate the results of the model,
@@ -421,6 +423,8 @@ closed form approximations available.
 The form we consider was presented by
 Beineke in 1991 "Untersuchungen zur Robinson-Abbildung and Vorschlag einen analytischen
 Abbildungsvorschrift".
+
+**TODO**: Introduce latitude as $\phi$ and adjust everything!!
 
 The approximation that Beineke proposes
 is based on a polynomial spline approximation.
@@ -456,4 +460,4 @@ display the land-sea-ice-show
 mask of Earth, which is the
 topic of the first milestone.
 
-**NOTE:** Explain that the grid does NOT contain 180°!!!
+**TODO:** Explain that the grid does NOT contain 180°!!!

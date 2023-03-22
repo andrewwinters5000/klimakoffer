@@ -21,6 +21,12 @@ Previously, we have made the assumption that the solar forcing term remains cons
 
 2. **Tilted axis of rotation**: Due to the Earth's tilted axis of rotation, different parts of the planet receive varying amounts of solar radiation as it orbits the sun (depending on the latitude). This phenomenon gives rise to the changing seasons.
 
+The derivations presented in this section can be found in the following references:
+
+> Berger, A. (1978). Long-term variations of daily insolation and Quaternary climatic changes. Journal of Atmospheric Sciences, 35(12), 2362-2367.
+
+**TODO**: Add more references!!
+
 ### Important definitions
 
 ![](/assets/milestone2/Orbits.png)
@@ -45,6 +51,8 @@ To compute the distance from the sun and Earth's axis tilt angle, we need to con
     where $a$ represents the semi-major axis, and $b$ represents the semi-minor axis of the ellipse (refer to the figure). Earth's eccentricity undergoes periodic changes over hundreds of thousands of years.
 2. Obliquity ($\epsilon$): This parameter, also referred to as axial tilt, represents the angle between Earth's rotational axis and its orbital axis. The obliquity angle is equivalent to the angle between the equatorial plane and the orbital plane. The obliquity angle varies periodically over approximately $\tau_{\epsilon} \approx 20,000$ years.
 3.  Precession distance ($\tilde \omega$): Earth's axis rotates with a period of about $40,000$ years, causing the seasons to shift in position within the elliptical orbit of Earth. This phenomenon is known as precession or spin. We define the precession distance as the angle between the aphelion and the vernal equinox.
+
+> **NOTE:** In the paper of Berger, the precession distance ($\tilde \omega$) is sometimes defined from the perihelion and sometimes from the aphelion. We use the phelion in our implementation as it is the one obtained with equation (6) from Berger.
 
 ![](/assets/milestone2/part2-earthspin-nolabel.jpg)
 * Figure modified from [https://ugc.berkeley.edu/background-content/earths-spin-tilt-orbit/](https://ugc.berkeley.edu/background-content/earths-spin-tilt-orbit/).
@@ -74,12 +82,12 @@ r = \frac{a (1-e^2)}{1 - e \cos (\nu)},
 $$
 where the position (angle) of earth with respect to the aphelion is
 $$\label{eq:nu}
-\nu = \tilde \omega + \lambda
+\nu = \lambda - \tilde \omega
 $$
 The radiation at the top of the atmosphere is then computed as
 $$
 S_r(t) %= \frac{(1-e \cos (\nu))^2}{(1 - e^2)^2} S_0 
-= \frac{(1-e \cos (\tilde \omega + \lambda))^2}{(1 - e^2)^2} S_0.
+= \frac{(1-e \cos (\lambda - \tilde \omega))^2}{(1 - e^2)^2} S_0.
 $$
 
 
@@ -157,7 +165,7 @@ where $\pi a b$ is the total area of a ellipse, which is swept in a complete per
 
 Assuming that the time is meassured in years and replacing the definition of the Earh-sun distance \eqref{eq:r} and the eccentricity \eqref{eq:ecc} in \eqref{eq:dAdt} we obtain
 $$
-\frac{\d \lambda}{\d t} = \frac{2\pi}{(1 - e^2)^{3/2}} (1 - e \cos (\lambda + \tilde \omega))^2.
+\frac{\d \lambda}{\d t} = \frac{2\pi}{(1 - e^2)^{3/2}} (1 - e \cos (\lambda - \tilde \omega))^2.
 $$
 
 ## Time discretization
