@@ -1,14 +1,14 @@
 +++
-title = "Milestone 2"
+title = "Milestone 1"
 hascode = true
 rss = "Description"
-rss_title = "Milestone 2"
+rss_title = "Milestone 1"
 rss_pubdate = Date(2022, 5, 1)
 
 tags = ["ebm", "solar radiation", "orbital parameters"]
 +++
 
-# Milestone 2
+# Milestone 1
 
 In this milestone, we will learn about the climate system and different climate models that describe it.
 At the end of the chapter, we will select a climate model for the course and introduce some basic concepts about the mesh and visualization.
