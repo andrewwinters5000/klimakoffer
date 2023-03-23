@@ -26,9 +26,11 @@ Add here global latex commands to use throughout your pages.
 \newcommand{\nlong}{\texttt{n\_longitude}}
 \newcommand{\nlat}{\texttt{n\_latitude}}
 \newcommand{\lat}{\theta}
+\newcommand{\Nabla}{\vec{\nabla}}
 \newcommand{\colat}{\tilde \theta}
 \newcommand{\scal}[1]{\langle #1 \rangle}
 \newcommand{\partialderiv}[2]{ \frac{\partial {#1}}{\partial {#2} } }
+\newcommand{\col}[2]{~~~<span style="color:~~~#1~~~">~~~!#2~~~</span>~~~}
 
 <!-- Name of repository for GitHub pages -->
 @def prepath = "IntroToClimateModeling"

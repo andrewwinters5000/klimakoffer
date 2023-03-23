@@ -14,14 +14,14 @@ tags = ["ebm", "solar radiation", "orbital parameters"]
 ## Conservation and Balance 
 
 Many processes in nature and engineering can be modeled (described) with a simple principle: the principle of **conservation**. Consider a closed domain $\Omega\in\mathbb{R}^n$ and a quantity $u=u(x,t)\in\mathbb{R}$ that is defined for all $x\in\Omega$ and $t\geq 0$. The function $u(x,t)$
-typically describes a physical quantity such as mass, momentum, or for instance energy.
+typically describes a physical quantity such as mass, momentum, or energy.
 
-We are interested in modeling the temporal evolution (change in time t). Observations of nature of the behaviour of such quantities lead to the
+We are interested in modeling the temporal evolution of $u$ (change in time $t$). Observations of nature of the behaviour of such quantities lead to the
 following simple principle:
 @@colbox-blue
 **Observation:** The temporal change of $u(x,t)$ in a sub-domain $\omega\subset\Omega$ is equal to the amount
 that gets generated or destroyed inside of $\omega$ in addition to the flux balance
-inside out of $\omega$ through the surface/boundary $\partial\omega$.
+to the inside or outside of $\omega$ through the surface/boundary $\partial\omega$.
 @@
 
 The quantity of $u$ changes, if: 
@@ -30,7 +30,26 @@ The quantity of $u$ changes, if:
 
 (ii) There is a positive/negative flux balance through the boundary of the sub-domain $\partial\omega$
 
-> HERE IS STUFF MISSING
+@@colbox-blue
+**Famous example:** Bathtub
+\fig{/assets/milestone2/Bathtub.png}
+
+* Water in: \col{green}{green}
+* Water out: \col{red}{red}
+* Amount of water in bathtub: \col{blue}{blue}
+@@
+
+### Mathematical problem formulation
+
+Consider a sub-domain $\omega$ with outward pointing normal vector $\vev{n}$:
+
+\fig{/assets/milestone2/domain.png}
+
+$$
+\underbrace{\partialderiv{}{t} \int_{\omega} u \d x}_{\substack{\text{temporal~change} \\ \text{of}~u~\text{in}~\omega}} = 
+- \underbrace{\oint_{\partial \omega} \vec{f} \cdot \vec{n} \d s}_{\substack{\text{change~through} \\ \text{surface~flux}~\vec{f}}} 
++ \underbrace{\int_{\omega} s(x,t) \d x}_{\substack{\text{change~through} \\ \text{source}~\vec{s(x,t)}}} 
+$$
 
 @@colbox-blue
 **Remark 1:** We call this the integral formulation of the problem.
@@ -43,7 +62,11 @@ The quantity of $u$ changes, if:
 If we make the mathematical assumption that the function $u(x,t)$ is sufficiently smooth (such that we can take the derivatives in space
 and time), we can apply the Gauss integral theorem to the surface integral
 
-> HERE IS STUFF MISSING
+\begin{align}
+{\int_{\omega} \partialderiv{u}{t} \d x}
++ \underbrace{\int_{\omega} \Nabla \cdot \vec{f} \d x}_{=\int_{\omega} \partialderiv{f_1}{x_1} + \partialderiv{f_2}{x_2} + \cdots + \partialderiv{f_n}{x_n} \d x}
+= \int_{\omega} s(x,t) \d x
+\end{align}
 
 As we have chosen an arbitrary sub-domain $\omega$ with no special properties, the equation needs to hold for all choices of $\omega\subset\Omega$. This
 can only be true if the integrands balance out to zero, hence
@@ -56,18 +79,30 @@ $$
 @@
 
 @@colbox-blue
-**Remark 4:** For many processes, the source term can be neglected, i.e., we can choose $S(x,t) = 0$. The resulting PDE describes processes, where the quantity $u$ is neither destroyed or generated, but is only changing by fluxes. Such PDEs are called conservation laws
+**Remark 4:** For many processes, the source term can be neglected, i.e., we can choose $S(x,t) = 0$. The resulting PDE describes processes, where the quantity $u$ is neither destroyed nor generated, but is only changed by fluxes. Such PDEs are called conservation laws
 $$
 \frac{\partial u}{\partial t} + \vec{\nabla}\cdot\vec{f} = 0,\quad x\in\Omega,\,\,t\in\mathbb{R}^+.
 $$
 @@
 
 Depending on the process we want to model, we need to chose the quantity o finterest $u(x,t)$, a model for the flux $\vec{f}(u,x,t)$  and a model for the source term $S(u,x,t)$. There are 
-many examples of such models, e.g., mass and momentum conservation in fluid mechanics. We consider here as an exaple the so-called heat equation, or heat transfer equation. 
+many examples of such models, e.g., mass and momentum conservation in fluid mechanics. We consider here as an example the so-called heat equation, or heat transfer equation. 
 
 For the heat equqation we are interested in the change of temperature $T(x,t)$ (which is strongly related to the internal energy of a body) in space and time, hence our choice for the unknown quantity is $u = T$. Next, we need a model for the flux. Jean Babtiste Joseph Fourier (1822) gave a model for the heat flux, where the flux of heat is negative proportional to the temperature difference (heat goes from high temperatures to lower temperatures), i.e. 
 
-> HERE IS STUFF MISSING
+\begin{align}
+\vec{f}(T,x,t) &\\sim 
+\Nabla T = 
+\begin{bmatrix}
+\partial_{x_1} T \\
+\partial_{x_2} T \\
+\vdots \\
+\partial_{x_n} T
+\end{bmatrix}
+\\
+\vec{f}(T) &= d \Nabla T
+\end{align}
+where $d$ is the heat conduction coefficient with $d=d(T,x,t) \ge 0$ in general.
 
 @@colbox-blue
 **Remark 5:** A very simple version of the heat equation results in 1D space ($x_1 = x$) with a constant diffusion coefficient $d=const$
@@ -76,15 +111,15 @@ T_t - \frac{\partial}{\partial x}(d\,T_x) = T_t - d\,T_{xx} = 0.
 $$
 @@
 
-For scalar PDEs with two independent variables x and t of second order
-(the maximum derivatives are second order derivatives) it is common to distinguish
+For scalar PDEs with two independent variables $x$ and $t$ of second order
+(the maximum derivatives are second-order derivatives) it is common to distinguish
 between different types of PDEs. Assuming a scalar second order PDE of the general form 
 $$
 a u_{xx} + b u_{xt} + c u_{tt} + d u_x + e u_t + f u + g = 0,
 $$
 we can define the quantity 
 $$
-\Delta(x,t) = a(x,t)\,c(x,t) - \frac{b(x,t)^2}{2}
+\Delta(x,t) = a(x,t)\,c(x,t) - \frac{b(x,t)^2}{4}
 $$
 to get a classification of the different types
 
@@ -102,6 +137,7 @@ In general, parabolic PDEs model processes that evolve in time and are **not** r
 
 The Energy Balance Climate Models (or Energy Balance Models (WBM) in short) were
 introduced in the 1960s by Budyko and Sellers independently (with some variations). They are thus sometimes referred to the Budyko-Sellers equations (or model). 
+
 EBMs where mainly used up to the 1970s, but later replaced more and more by the GCMs. Nowadays EBMs belong to the class of simple climate models, but
 are still in use by some researchers to date, with publications in 2020s. Interestingly enough, EBM type models are used to estimate climates of (habitable) exoplanets (where naturally not many detailed data is known). Their disadvantage (being too simple) is sometimes an advantage when trying to analyse the effect of single processes or at least
 get on intuition about how they act. To quote the bookby Kim and North (2017) "Energy balance climate models", Wiley:
@@ -128,7 +164,7 @@ $$
 $$
 in a spatial domain $\Omega$, with boundary conditions for $u$ at the surface $\partial\Omega$ and initial conditions $u(x,t=0) = u_0(x)$.
 
-The modeling process involves the choice of $u$, $\vec{f}$, and $S$. As the name suggests we consider as our unknown the
+The modeling process involves the choice of $u$, $\vec{f}$, and $S$. As the name suggests, we consider as our unknown the
 energy, more precisely the internal energy. The internal energy of a body/fluid is proportional to its temperature. In the context of climate modelling we are interested
 in simulating said temperature $T(x,t)$. More precisely we are interested to approximatem the **surface temperature**.
 
@@ -143,6 +179,8 @@ $$
 \vec{f} = D(x)\,\vec{\nabla} T,
 $$
 where the diffusion coefficient (matrix) has the size square of spatial dimension, $D(x,t)\in\mathbb{R}_+^{n\times n}$, with positive entries.
+
+**TODO**: Not in our application.. keep??
 
 In this course, we consider a version of the EBM where solar/stellar radiation as incoming energy source term and the outgoing longwave radiation (in the infrared) as an energy sink term, i.e., the source term has two mayor parts
 $$
@@ -165,9 +203,10 @@ We will focus next on all of these sub-models and parametrizations, except for t
 
 ### Radiation Modeling
 
-The energy balance of Eart is strongly impacted by radiation. The following figure shows the energy fluxes in the global Earth-atmosphere system
+The energy balance of Earth is strongly impacted by radiation. The following figure shows the energy fluxes in the global Earth-atmosphere system
 
-> HERE IS STUFF MISSING
+\fig{/assets/milestone2/ClimateSystem.png}
+* Figure from [Trenberth, K. E., Fasullo, J. T., & Kiehl, J. (2009). Earth's global energy budget. Bulletin of the American Meteorological Society, 90(3), 311-324](https://journals.ametsoc.org/downloadpdf/journals/bams/90/3/2008bams2634_1.pdf).
 
 In our EBM, we aim to include four effects: 
 
@@ -183,15 +222,17 @@ In our EBM, we aim to include four effects:
 
 The goal in this section is to define a model/parametrization for the source term $S_{OLW}(T,x,t)$. 
 
-But first, to warm up with the topic, we consider as a toy model an idealized blackbody Earth, i.e., we assume taht the Earth is a blackbody with radiation in the infrared spectrum.
+But first, to warm up with the topic, we consider as a toy model an idealized black-body Earth, i.e., we assume that the Earth is a _black body_ that emits radiation in the infrared spectrum.
 
-The radiation energy per time unit and area unit, $I$, can be computed by the Stefan-Boltzmann law of physics 
+The radiation energy per time that is emitted by a black body can be computed by the Stefan-Boltzmann law of physics 
 $$
 I = \sigma_{SB}\,T_R^4,
 $$
 where $I$ is the radiation energy per time per area with units $[W/m^2]$, $T_R$ is the radiation temperature with physical units Kelvin $[K]$, $\sigma_{SB} = 0.56687\cdot 10^{-8}$ is the Stefan-Boltzmann constant with units $[W/m^2/K^4]$.
 
-For this idealized blackbody Earth the temperature is determined when the outgoing radiation is in equilibrium/balance with the incoming stellar radiation. The amount of incoming energy can be roughly estimated as $S_0\,(1-\alpha)\,\pi\,R_E^2$, where $S_0 = 1360$ is the solar constant with units $[W/m^2]$, $\alpha$ is the surface albedo with the planetary average being about $\alpha=0.3$, and $R_E=6.378\cdot 10^{6}$ is the radius of Earth in units [m]. 
+**TODO** Reformulate
+
+For this idealized black-body Earth, the temperature is determined when the outgoing radiation is in equilibrium/balance with the incoming stellar radiation. The amount of incoming energy can be roughly estimated as $S_0\,(1-\alpha)\,\pi\,R_E^2$, where $S_0 = 1360$ is the solar constant with units $[W/m^2]$, $\alpha$ is the surface albedo with the planetary average being about $\alpha=0.3$, and $R_E=6.378\cdot 10^{6}$ is the radius of Earth in units [m]. 
 
 The amount of outgoing energy is $\sigma_{SB} T_R^4 4\,\pi\,R_E^2$, and we get our first (simplest version of an) EBM
 $$
@@ -211,7 +252,11 @@ I \sim A + B\, T.
 $$
 It is in general motivated by available observational data, shown in the next figure
 
-> HERE IS STUFF MISSING
+\fig{/assets/milestone2/OutgoingLongwaveRadiation.png}
+* Figure is from the book _North, G. R., & Kim, K. Y. (2017). Energy balance climate models. John Wiley & Sons_ and is originally from [Graves, C. E., Lee, W. H., & North, G. R. (1993). New parameterizations and sensitivities for simple climate models. Journal of Geophysical Research: Atmospheres, 98(D3), 5025-5036](https://agupubs.onlinelibrary.wiley.com/doi/pdfdirect/10.1029/92JD02666?casa_token=X0WG_pxk8AUAAAAA:2mvPv6HgmsA467qq44RYKY8WrJZLh_Bl-lN2kzgdBLJi3-xSVh0il6g-p1PSlxda51H8YVdkx1dsxSI).
+
+The figure shows infrared radiation density plots averaged monthly, measured by satellite compared to the surfacetemperature at the same month and location. 
+(a) shows the whole sky (including clouds) and (b) shows only the clear (cloudless) sky.
 
 If we consider the temperature in units Kelvin, we can fit the observed data with the linear model by choosing good constants $A$, and $B$ to get 
 $$
@@ -251,7 +296,18 @@ Carbondioxide ($CO_2$), methane ($CH_4$), and nitreous oxide ($NO_2$) do not hav
 
 In this course, we follow the paper by Myhre et al. (1998) to define our parametrization of the greenhouse gas effect. From this paper, we first look at the effect of the amount of greenhouse gases measured in parts per million $[ppm]$, as plotted in the following figure
 
-> HERE IS STUFF MISSING
+\fig{/assets/milestone2/CO2forcing.png}
+* Figures from Myhre et al. (1998)
+
+The figures show radiative forcing as a function
+of concentration [ppm] for $CO_2$, $CH_4$, $N_2=$.
+
+Myhre et al. and also other research groups
+introduced simplified expressions that
+parametrize the effect
+
+\fig{/assets/milestone2/CO2e.png}
+* Table from Myhre et al. (1998)
 
 As mentioned, we only consider the effect of $CO_2$ in our model and hence choose the approximation 
 $$
@@ -396,7 +452,8 @@ Ocean ($geo=5$): $\alpha = 0.29$.
 The following figures show that the albedo is dependent on the latitude $\theta$ and has almost a U-shape, with high values at the poles (ice and show)
 and low values at the equator. We do not, that there is a discontinuity in the albedo when going from ocean/land to ice and snow due to the strong and sudden difference.
 
-> HERE IS STUFF MISSING
+\fig{/assets/milestone2/AlbedoLatitude.png}
+* Figure from [Graves, C. E., Lee, W. H., & North, G. R. (1993). New parameterizations and sensitivities for simple climate models. Journal of Geophysical Research: Atmospheres, 98(D3), 5025-5036](https://agupubs.onlinelibrary.wiley.com/doi/pdfdirect/10.1029/92JD02666?casa_token=vmukZ7wlEOQAAAAA:tLZuv_xK9eh-w_cB6x2Q2qYFV49fJnV5K3S7nCWoaNs00JYoQoWAf7HQI4aUjhUnZPhM4CXCjMYUTa8). Date from Earth Radiation Budget Experiment (ERBE) of NASA Shows the observed background and albedo for different months.
 
 Due to the U-shape form an approximation with a simple symmetric function as a model seems reasonable. Graves et al. (1993) do not directly use the latitude $\theta$, but the sine of the latitude, $\sin(\theta)$, and then use a quadratic (symmetric) polynomial as their ansatz with coefficients fitted to the data shown in the above figures. We consider such a modification for land, ocean, and lakes ($geo=\{1,4,5\}$), which covers most Earth, except close to the poles. Consider the latitude $\theta$ given at a grid node, we can compute the value 
 $$
@@ -425,9 +482,9 @@ By incorporating these effects, we can significantly improve the modeling of our
 
 The derivations presented in this section can be found in the following references:
 
-> Berger, A. (1978). Long-term variations of daily insolation and Quaternary climatic changes. Journal of Atmospheric Sciences, 35(12), 2362-2367.
+> [Berger, A. (1978). Long-term variations of daily insolation and Quaternary climatic changes. Journal of Atmospheric Sciences, 35(12), 2362-2367](https://journals.ametsoc.org/downloadpdf/journals/atsc/35/12/1520-0469_1978_035_2362_ltvodi_2_0_co_2.pdf).
 
-**TODO**: Add more references!!
+> [Berger, A., Loutre, M. F., & Tricot, C. (1993). Insolation and Earth's orbital periods. Journal of Geophysical Research: Atmospheres, 98(D6), 10341-10362](https://agupubs.onlinelibrary.wiley.com/doi/pdf/10.1029/93JD00222?casa_token=aTkocQ51OzUAAAAA:dr86J87feYvQiNwbI13BDS8HSHCV4bWn3ouiEkCbl3I9PtuBseVGuK_3YZV8gippC3ZajfOU9wpO-IQ).
 
 #### Important definitions
 
@@ -442,7 +499,7 @@ Before we delve into calculating the impact of the Earth-sun distance and Earth'
 * Northern winter solstice: The point in Earth's orbit where the shortest day of the year occurs in the Northern Hemisphere and the longest day of the year occurs in the Southern Hemisphere. At this point, the plane formed by the rotation axis of Earth and the line that connects Earth and the Sun is perpendicular to the ecliptic. Currently, the Northern winter solstice occurs around December 21st.
 * Vernal equinox: The point in Earth's orbit where the line that connects Earth and the Sun aligns with the equatorial plane of Earth during the transition from winter to summer in the Northern Hemisphere. This is also the moment when Earth's rotation axis is directly perpendicular to the Sun-Earth line.
 * Northern autumnal equinox: The point in Earth's orbit where the line that connects Earth and the Sun aligns with the equatorial plane of Earth during the transition from summer to winter in the Northern Hemisphere. This is also the moment when Earth's rotation axis is directly perpendicular to the Sun-Earth line.
-* True longitude of earth ($\lambda$): Position of Earth at a given time as meassured from the vernal equinox. The position $\lambda = 0$ is considered the begining of an _astronomical year_.
+* True longitude of Earth ($\lambda$): Position of Earth at a given time as meassured from the vernal equinox. The position $\lambda = 0$ is considered the begining of an _astronomical year_.
 
 To compute the distance from the sun and Earth's axis tilt angle, we need to consider three parameters that vary over time as a result of the gravitational interactions between Earth and other celestial bodies within the solar system. We call these parameters the **orbital parameters** and define them as
 
@@ -482,7 +539,7 @@ Since Earth's orbit is an ellipse and the sun sits in one focus, we can calulate
 $$\label{eq:r}
 r = \frac{a (1-e^2)}{1 - e \cos (\nu)},
 $$
-where the position (angle) of earth with respect to the aphelion is
+where the position (angle) of Earth with respect to the aphelion is
 $$\label{eq:nu}
 \nu = \lambda - \tilde \omega
 $$
@@ -527,7 +584,7 @@ $$
 
 
 ##### (2) Latitudes where there is no sunset (summer)
-Some regions of earth are exposed to incoming solar radiation throughout the entire day during part of the year. These regions fulfill
+Some regions of Earth are exposed to incoming solar radiation throughout the entire day during part of the year. These regions fulfill
 $$
 \label{eq:nosunset}
 |\lat| + |\delta| \ge \frac{\pi}{2} \,\, \text{with} \,\, \lat \delta > 0,
