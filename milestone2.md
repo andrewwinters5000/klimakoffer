@@ -41,7 +41,7 @@ The quantity of $u$ changes, if:
 
 ### Mathematical problem formulation
 
-Consider a sub-domain $\omega$ with outward pointing normal vector $\vev{n}$:
+Consider a sub-domain $\omega$ with outward pointing normal vector $\vec{n}$:
 
 \fig{/assets/milestone2/domain.png}
 
@@ -91,7 +91,7 @@ many examples of such models, e.g., mass and momentum conservation in fluid mech
 For the heat equqation we are interested in the change of temperature $T(x,t)$ (which is strongly related to the internal energy of a body) in space and time, hence our choice for the unknown quantity is $u = T$. Next, we need a model for the flux. Jean Babtiste Joseph Fourier (1822) gave a model for the heat flux, where the flux of heat is negative proportional to the temperature difference (heat goes from high temperatures to lower temperatures), i.e. 
 
 \begin{align}
-\vec{f}(T,x,t) &\\sim 
+\vec{f}(T,x,t) &\sim 
 \Nabla T = 
 \begin{bmatrix}
 \partial_{x_1} T \\
@@ -174,13 +174,15 @@ u(x,t) = C(x)\,T(x,t),
 $$
 where the parameter $C(x)$ is a scaled **heat capacity**. 
 
+@@colbox-blue
+**Important note:** We use the variable $x$ as a placeholder notation for the coordinate variables. We want to solve the EBM on the sphere surface. Hence, $x$ refers to the spherical coordinates (latitude/colatitude and longitude).
+@@
+
 As mentioned, we are interested in the (surface) temperature $T(x,t)$ and its temporal evolution - the fluxes can be modeled analogously to the fluxes of the heat transfer equation $\vec{f}\sim\vec{\nabla} T$, which leads to the model of the EBM flux as 
 $$
 \vec{f} = D(x)\,\vec{\nabla} T,
 $$
-where the diffusion coefficient (matrix) has the size square of spatial dimension, $D(x,t)\in\mathbb{R}_+^{n\times n}$, with positive entries.
-
-**TODO**: Not in our application.. keep??
+where the diffusion coefficient has the size square of spatial dimension, $D(x)\in\mathbb{R}_+$, with positive entries.
 
 In this course, we consider a version of the EBM where solar/stellar radiation as incoming energy source term and the outgoing longwave radiation (in the infrared) as an energy sink term, i.e., the source term has two mayor parts
 $$
@@ -188,7 +190,7 @@ S(u,x,t) = S_{OLW}(T,x,t) + S_{sol}(x,t).
 $$
 
 With these first modeling steps/decisions, the general form of the EBM is 
-$$
+$$\label{eq:EBM}
 C(x)\,\frac{\partial T}{\partial t} + \vec{\nabla}\cdot(D(x)\,\vec{\nabla} T) = S_{OLW}(T,x,t) + S_{sol}(x,t).
 $$
 
@@ -199,7 +201,7 @@ discretization we need to get more into the detail of what the coordinates $x$ r
 
 The modeling process is not finished yet, as we need detailed definitions of the heat capacity $C(x)$, the diffusion coefficient $D(x)$, and the sources $S_{OLW}(T,x,t)$, $S_{sol}(x,t)$. 
 
-We will focus next on all of these sub-models and parametrizations, except for the diffusion coefficient $D(x)$ and the approximation of the diffusion operator. This will be discussed in milestone 5 in detail. 
+We will focus next on all of these sub-models and parametrizations, except for the diffusion coefficient $D(x)$ and the approximation of the diffusion operator. This will be discussed in [milestone 5](/milestone5/) in detail. 
 
 ### Radiation Modeling
 
@@ -230,15 +232,19 @@ I = \sigma_{SB}\,T_R^4,
 $$
 where $I$ is the radiation energy per time per area with units $[W/m^2]$, $T_R$ is the radiation temperature with physical units Kelvin $[K]$, $\sigma_{SB} = 0.56687\cdot 10^{-8}$ is the Stefan-Boltzmann constant with units $[W/m^2/K^4]$.
 
-**TODO** Reformulate
-
-For this idealized black-body Earth, the temperature is determined when the outgoing radiation is in equilibrium/balance with the incoming stellar radiation. The amount of incoming energy can be roughly estimated as $S_0\,(1-\alpha)\,\pi\,R_E^2$, where $S_0 = 1360$ is the solar constant with units $[W/m^2]$, $\alpha$ is the surface albedo with the planetary average being about $\alpha=0.3$, and $R_E=6.378\cdot 10^{6}$ is the radius of Earth in units [m]. 
+For this idealized black-body Earth, the temperature is determined when the outgoing radiation is in equilibrium/balance with the incoming stellar radiation. The amount of incoming energy can be roughly estimated as $S_0\,(1-\alpha)\,\pi\,R_E^2$, where $S_0 = 1360$ is the solar constant (the mean solar elecromagnetic radiation received on Earth with units $[W/m^2]$), $\alpha$ is the surface albedo (the amount of the solar radiation that is reflected back to space) with the planetary average being about $\alpha=0.3$ (more details in the [next section](#albedo)), and $R_E=6.378\cdot 10^{6}$ is the radius of Earth in units [m]. 
 
 The amount of outgoing energy is $\sigma_{SB} T_R^4 4\,\pi\,R_E^2$, and we get our first (simplest version of an) EBM
+$$\label{eq:blackbody}
+\sigma_{SB} T_R^4 4\,\pi\,R_E^2 = S_0\,(1-\alpha)\,\pi\,R_E^2.
 $$
-\sigma_{SB} T_R^4 4\,\pi\,R_E^2 = S_0\,(1-\alpha)\,\pi\,R_E^2
-$$
-with the equilibrium solution
+We can relate this simple EBM \eqref{eq:blackbody} to the general form \eqref{eq:EBM} by making the assumption of thermodynamic equilibrium (no temporal change $\partial T / \partial t= 0$), no heat diffusion ($d = 0$), and the following choice of source terms: 
+\begin{align}
+S_{sol} &= S_0\,(1-\alpha)\,\pi\,R_E^2, \\
+S_{OLW} &= - \sigma_{SB} T_R^4 4\,\pi\,R_E^2.
+\end{align}
+
+We can directly solve \eqref{eq:blackbody} to get the equilibrium solution
 $$
 T_R = \left(\frac{S_0}{4}\frac{(1-\alpha)}{\sigma_{SB}}\right)^{\frac{1}{4}}\approx 255\, [K] = -18\, [^\circ C].
 $$
@@ -262,7 +268,7 @@ If we consider the temperature in units Kelvin, we can fit the observed data wit
 $$
 I_{IR/OLW} = A + B\,(T - 273),
 $$
-with $A=210,3$ as the radiative cooling in units $[W/m^2]$, and $B=2,15$ the radiative cooling feedback with units $[W/m^2/K]$. It is important to note, that the choice of this parameters have a direct impact on the outgoing radiation and hence on the cooling. Several others have fitted the data differently, hence some range of choices is available. The values we selected are from the paper by Zhuang et al. (2017).
+with $A=210.3$ as the radiative cooling in units $[W/m^2]$, and $B=2.15$ the radiative cooling feedback with units $[W/m^2/K]$. It is important to note, that the choice of this parameters have a direct impact on the outgoing radiation and hence on the cooling. Several others have fitted the data differently, hence some range of choices is available. The values we selected are from the paper by Zhuang et al. (2017).
 
 We are now able to consider a second, but hopefully improved toy EBM. We replace the crude blackbody radiation with a phenomenological approximation of the outgoing radiation, the Budyko model to get 
 $$
@@ -301,7 +307,7 @@ In this course, we follow the paper by Myhre et al. (1998) to define our paramet
 * Figures from Myhre et al. (1998)
 
 The figures show radiative forcing as a function
-of concentration [ppm] for $CO_2$, $CH_4$, $N_2=$.
+of concentration [ppm] for $CO_2$, $CH_4$, $N_2O$.
 
 Myhre et al. and also other research groups
 introduced simplified expressions that
@@ -312,7 +318,7 @@ parametrize the effect
 
 As mentioned, we only consider the effect of $CO_2$ in our model and hence choose the approximation 
 $$
-\Delta T = \alpha_{\text{Myhre}}\, ln(CO_2/CO_2(t_0)),
+\Delta T = \alpha_{\text{Myhre}}\, \ln(CO_2/CO_2(t_0)),
 $$
 where 
 $$
@@ -330,7 +336,7 @@ S_{OLW}(T,x,t,CO_2) = - (A(CO_2) + B\,T),
 $$
 where
 $$
-A(CO_2) := 210,3 - 5.35\,ln(CO_2/315))\,\,[W/m^2]
+A(CO_2) := 210,3 - 5.35\,\ln(CO_2/315))\,\,[W/m^2]
 $$
 and 
 $$
@@ -412,7 +418,7 @@ Lakes/inland sea ($geo=4$): $C = (\widetilde{C}_{mixed}/3 + \widetilde{C}_{atm})
 Ocean ($geo=5$): $C = (\widetilde{C}_{mixed} + \widetilde{C}_{atm})/sec\_per\_year$.
 
 @@colbox-blue
-**Remark 12:** As mentioned, we follow closely the work of Zhuang et al. (2017) and also use the geography data from this work. This geography data does not contain the case $geo = 4$, but defines every water body as ocean (geo = 5). It would be interesting to investigate the impact of different bodies of water in the geography. Of course, this only makes sense, when the grid size is small enough to even resolve local (bigger) lakes. 
+**Remark 12:** As mentioned, we follow closely the work of Zhuang et al. (2017) and also use the geography data from this work. This geography data does not contain the case $geo = 4$, but defines every water body as ocean ($geo = 5$). It would be interesting to investigate the impact of different bodies of water in the geography. Of course, this only makes sense, when the grid size is small enough to even resolve local (bigger) lakes. 
 @@
 
 In summary, we have now our first time dependent (still simplified) EBM
