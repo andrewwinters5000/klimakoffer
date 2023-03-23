@@ -283,8 +283,9 @@ $$
 
 ##### Effect of greenhouse gases ($CO_2$)
 
-For the interested reader, we refer to chapter 4 of the book by Kim and North, "Energy Balance Climate Model", (2017, Wiley) and the paper of
-Myhre et al, "New estimates of radiative forcing due to well mixed greenhouse gases", Geophysical Research Letters, (1998).
+For the interested reader, we refer to chapter 4 of the book by Kim and North, "Energy Balance Climate Model", (2017, Wiley) and the following paper 
+
+> [Myhre, G., Highwood, E. J., Shine, K. P., & Stordal, F. (1998). New estimates of radiative forcing due to well mixed greenhouse gases. Geophysical research letters, 25(14), 2715-2718](https://agupubs.onlinelibrary.wiley.com/doi/pdfdirect/10.1029/98GL01908).
 
 The main constituents of the atmosphere: $N_2$, $O_2$, and $Ar$ do not absorb strongly in the infrared, as the diatomic molecules ($N_2$, $O_2$) have no permanent dipole and
 $Ar$ has no modes of rotation/vibration in the infrared spectrum. $H_2O$ molecules have a permanent dipole, which makes it respond strongly to passing electromagnetic waves.
@@ -311,11 +312,11 @@ parametrize the effect
 
 As mentioned, we only consider the effect of $CO_2$ in our model and hence choose the approximation 
 $$
-\Delta T = \alpha_{myhre}\, ln(CO_2/CO_2(t_0)),
+\Delta T = \alpha_{\text{Myhre}}\, ln(CO_2/CO_2(t_0)),
 $$
 where 
 $$
-\alpha_{myhre} = 5.35\,[W/m^2]
+\alpha_{\text{Myhre}} = 5.35\,[W/m^2]
 $$
 and $CO_2$ is the concentration in $[ppm]$ and $CO_2(t_0) = 315\, [ppm]$ is the reference concentration in the year $1950$.
 
