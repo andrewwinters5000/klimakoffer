@@ -159,7 +159,7 @@ $$\label{eq:dAdt}
 $$
 where $\pi a b$ is the total area of a ellipse, which is swept in a complete period $T$.
 
-Assuming that the time is meassured in years and replacing the definition of the Earh-sun distance \eqref{eq:r} and the eccentricity \eqref{eq:ecc} in \eqref{eq:dAdt} we obtain
+Assuming that the time is meassured in years and replacing the definition of the Earh-sun distance \eqref{eq:r} and the eccentricity \eqref{eq:ecc} into \eqref{eq:dAdt} we obtain
 $$
 \frac{\d \lambda}{\d t} = \frac{2\pi}{(1 - e^2)^{3/2}} (1 - e \cos (\lambda - \tilde \omega))^2.
 $$

@@ -23,7 +23,7 @@ grid cells get smaller the closer they are to the
 poles. So a regular grid in (co-)latitude and
 longitude space gives an irregular grid on the
 sphere surface.
-In fact, we can note that the determinant \eqref{eq:det} can
+In fact, we can note that [the determinant](/milestone1/milestone1_sphere/#eqdet) can
 get equal to zero for $\colat \in \{ 0, \pi\}$. From linear
 algebra, we know that matrices with determinant
 equal to zero are not regular, i.e., they cannot
