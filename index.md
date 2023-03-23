@@ -10,3 +10,8 @@ Earth’s climate is changing due to human activity. Therefore, the ability to p
 
 ## Audience 
 Bachelor and master students of science, technology, engineering and mathematics (STEM) programs.
+
+## Disclaimer
+
+This website is password-protected and intended to be used as learning material for the students of "An Introduction to Climate Modeling" (Summer Semester 2023).
+It should not be copied, distributed or reproduced in whole or in part, nor passed to any third party.

@@ -470,7 +470,7 @@ Franklin SPECIFICS
 .franklin-content a {
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: wrap;
 }
 
 .franklin-content ul,
