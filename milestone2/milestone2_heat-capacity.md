@@ -12,12 +12,14 @@ tags = ["ebm", "solar radiation", "orbital parameters"]
 
 \toc
 
-We are currently considering the simple algebraic EBM
+We are currently considering the simple algebraic equilibrium EBM,
 $$
-(A(CO_2) + B\,T) 4\,\pi\,R_E^2 = S_0\,(1-\alpha)\,\pi\,R_E^2
+(A(CO_2) + B\,T) 4\,\pi\,R_E^2 = S_0\,(1-\alpha)\,\pi\,R_E^2.
 $$
 
-As our next step, we want to include a temporal component, i.e., the possibility that temperature $T$ changes in time. Temporal change can be modeled by the temporal derivative $\frac{\partial T}{\partial t} = T_t$. Hence, we add such a term with a constant to our model
+As our next step, we want to include a temporal component, i.e., the possibility that temperature $T$ changes in time. 
+<!-- Following the derivations the [EBM chapter](/milestone2/milestone2_ebm/), we add the temporal term  -->
+Temporal change can be modeled by the temporal derivative $\frac{\partial T}{\partial t} = T_t$. Hence, we add such a term with a constant to our model
 $$
 (C\,T_t)4\,\pi\,R_E^2 + (A(CO_2) + B\,T) 4\,\pi\,R_E^2 = S_0\,(1-\alpha)\,\pi\,R_E^2
 $$
