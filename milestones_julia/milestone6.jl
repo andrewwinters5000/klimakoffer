@@ -75,8 +75,7 @@ function co2_evolution(jacobian, mesh, diffusion_coeff, heat_capacity, solar_for
 end
 
 function plot_co2_evolution(jacobian, mesh, diffusion_coeff, heat_capacity, solar_forcing)
-    annual_temperatures, average_temperatures,
-    (first_year,
+    (annual_temperatures, average_temperatures, first_year,
      last_year) = co2_evolution(jacobian, mesh, diffusion_coeff,
                                 heat_capacity, solar_forcing)
 
