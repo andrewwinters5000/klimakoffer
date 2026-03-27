@@ -25,11 +25,16 @@ jobs:
           latex/milestone-4/main.tex
           latex/milestone-5/main.tex
           latex/milestone-6/main.tex
-    - name: Copy generated PDF files
+          latex/tikzpictures/bathtub.tex
+        post_compile: |
+          pdf2svg latex/tikzpictures/bathtub.pdf latex/tikzpictures/bathtub.svg
+    - name: Copy generated PDF and SVG files
       run: |
         for i in {1..6}; do
           cp "latex/milestone-$i/main.pdf" "website/_assets/milestone$i/description.pdf"
         done
+        mkdir website/_assets/tikzpictures_out
+        cp latex/tikzpictures/bathtub.svg website/_assets/tikzpictures_out/bathtub.svg
     - name: Copy Scripts
       run: |
         mkdir website/_assets/scripts
