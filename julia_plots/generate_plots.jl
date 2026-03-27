@@ -2,6 +2,8 @@ using DelimitedFiles
 using Plots
 using LaTeXStrings
 
+mkpath(joinpath(@__DIR__, "..", "website", "_assets", "julia_plots_out"))
+
 linewidth = 2 # linewidth of plots
 markersize = 10 # Radius of scatter plot symbols in px
 guidefontsize = 14 # Size of text
@@ -9,8 +11,8 @@ dpi = 300 # resolution
 
 # Data digitalised with https://apps.automeris.io/wpd/
 
-alb_feb_avg_sky = readdlm(joinpath(@__DIR__,"feb_avg.csv"))
-alb_feb_clear_sky = readdlm(joinpath(@__DIR__,"feb_clear.csv"))
+alb_feb_avg_sky = readdlm(joinpath(@__DIR__, "data", "feb_avg.csv"))
+alb_feb_clear_sky = readdlm(joinpath(@__DIR__, "data", "feb_clear.csv"))
 
 figsize = (600,640) # Width x Height
 
@@ -24,10 +26,10 @@ for i in 1:size(alb_feb_clear_sky)[1]
 end
 
 # Creating plot 1 for average and clear sky albedo in February
-p1 = plot(alb_feb_avg_sky[:,1], alb_feb_avg_sky[:,2], 
+p1 = plot(alb_feb_avg_sky[:,1], alb_feb_avg_sky[:,2],
         xlabel = "Latitude [°]", ylabel = "Albedo [%]",
         ylims=[0,100],
-        # xlims = [-70,70 ], 
+        # xlims = [-70,70 ],
         title = "Albedo vs Latitude (February)", label = "Average sky",
         size=figsize,
         linewidth = linewidth,
@@ -39,7 +41,7 @@ plot!(p1,alb_feb_clear_sky[:,1],alb_feb_clear_sky[:,2], label = "Clear sky", lin
 # Draw ticks that are consistent with the axis in sinusoidal scale, but write the angle in degrees!
 plot!(xticks = (sin.(deg2rad.([-90,-75,-60,-45,-30,-15,0,15,30,45,60,75,90])), ["-90", "", "-60", "", "-30", "", "0", "", "30", "", "60", "", "90"]))
 
-savefig(p1,joinpath(@__DIR__,"AlbedoLatitude.png"))
+savefig(p1,joinpath(@__DIR__, "..", "website", "_assets", "julia_plots_out", "AlbedoLatitude.png"))
 
 # Creating plot comparing the modelling function with the data
 
@@ -47,7 +49,7 @@ x = LinRange(-1,1,140)
 y = 100 .*(0.29 .+ (0.12*0.5) .* (3 .* x.^2 .- 1)) # Modelling function
 
 
-p2 = plot(alb_feb_avg_sky[:,1], alb_feb_avg_sky[:,2], 
+p2 = plot(alb_feb_avg_sky[:,1], alb_feb_avg_sky[:,2],
     xlabel = "Latitude [°]", ylabel = "Albedo [%]",
     ylims=[0,100],
     title = "Modelling albedo between the pole regions", label = "Average sky (February)",
@@ -57,7 +59,7 @@ p2 = plot(alb_feb_avg_sky[:,1], alb_feb_avg_sky[:,2],
 plot!(p2, x,y,label = "0.29 + 0.12 p(θ)", color = "green", linewidth = linewidth)
 plot!(xticks = (sin.(deg2rad.([-90,-75,-60,-45,-30,-15,0,15,30,45,60,75,90])), ["-90", "", "-60", "", "-30", "", "0", "", "30", "", "60", "", "90"]))
 
-savefig(p2,joinpath(@__DIR__,"ModellingAlbedo.png"))
+savefig(p2,joinpath(@__DIR__, "..", "website", "_assets", "julia_plots_out", "ModellingAlbedo.png"))
 
 
 
@@ -67,14 +69,14 @@ figsize_rad_feed = (740,670)
 fit_label = L"Fit\; to\; NBM\; data"
 data_label = L"NBM\; (Narrow \;Band\; Model)\; results"
 
-co2_ipcc = readdlm(joinpath(@__DIR__,"co2_forcing_ipcc.csv"))
-co2_data = readdlm(joinpath(@__DIR__,"co2_forcing_data.csv"))
+co2_ipcc = readdlm(joinpath(@__DIR__, "data", "co2_forcing_ipcc.csv"))
+co2_data = readdlm(joinpath(@__DIR__, "data", "co2_forcing_data.csv"))
 
 
-p3 = plot(co2_data[:,1],co2_data[:,2], seriestype=:scatter, shape = :+, 
+p3 = plot(co2_data[:,1],co2_data[:,2], seriestype=:scatter, shape = :+,
     xlabel = L"CO_2 \quad [ppmv]", ylabel = L"Radiative\, forcing \quad [W/m^2]",
     xlims = [0, 1100], ylims=[0,10],
-    title = L"Radiative\, forcing\, -\, CO_2", 
+    title = L"Radiative\, forcing\, -\, CO_2",
     label = data_label,
     size = figsize_rad_feed,
     markersize = markersize,guidefontsize = guidefontsize, dpi = dpi
@@ -82,12 +84,12 @@ p3 = plot(co2_data[:,1],co2_data[:,2], seriestype=:scatter, shape = :+,
 
 plot!(p3,co2_ipcc[:,1], co2_ipcc[:,2],label = fit_label, linewidth = linewidth)
 
-savefig(p3, joinpath(@__DIR__,"CO2_forcing.png"))
+savefig(p3, joinpath(@__DIR__, "..", "website", "_assets", "julia_plots_out", "CO2_forcing.png"))
 
 
 
-ch4_ipcc = readdlm(joinpath(@__DIR__,"ch4_forcing_ipcc.csv"))
-ch4_data = readdlm(joinpath(@__DIR__,"ch4_forcing_data.csv"))
+ch4_ipcc = readdlm(joinpath(@__DIR__, "data", "ch4_forcing_ipcc.csv"))
+ch4_data = readdlm(joinpath(@__DIR__, "data", "ch4_forcing_data.csv"))
 
 p4 = plot(ch4_data[:,1], ch4_data[:,2],seriestype=:scatter, shape = :+,
     xlabel = L"CH_4 \quad [ppbv]", ylabel = L"Radiative\, forcing \quad [W/m^2]",
@@ -98,11 +100,11 @@ p4 = plot(ch4_data[:,1], ch4_data[:,2],seriestype=:scatter, shape = :+,
     )
 
 plot!(p4,ch4_ipcc[:,1], ch4_ipcc[:,2],label = fit_label, linewidth = linewidth)
-savefig(p4, joinpath(@__DIR__,"CH4_forcing.png"))
+savefig(p4, joinpath(@__DIR__, "..", "website", "_assets", "julia_plots_out", "CH4_forcing.png"))
 
 
-n2o_ipcc = readdlm(joinpath(@__DIR__,"n2o_forcing_ipcc.csv"))
-n2o_data = readdlm(joinpath(@__DIR__,"n2o_forcing_data.csv"))
+n2o_ipcc = readdlm(joinpath(@__DIR__, "data", "n2o_forcing_ipcc.csv"))
+n2o_data = readdlm(joinpath(@__DIR__, "data", "n2o_forcing_data.csv"))
 
 p5 = plot(n2o_data[:,1], n2o_data[:,2], seriestype=:scatter, shape=:+,
     xlabel = L"N_2\,O \quad [ppbv]", ylabel = L"Radiative\, forcing \quad [W/m^2]",
@@ -113,14 +115,14 @@ p5 = plot(n2o_data[:,1], n2o_data[:,2], seriestype=:scatter, shape=:+,
     )
 
 plot!(p5,n2o_ipcc[:,1],n2o_ipcc[:,2], label = fit_label, linewidth = linewidth)
-savefig(p5, joinpath(@__DIR__,"N2O_forcing.png"))
+savefig(p5, joinpath(@__DIR__, "..", "website", "_assets", "julia_plots_out", "N2O_forcing.png"))
 
 
 # Budyko's Linear Model
 
-textbook_curve = readdlm(joinpath(@__DIR__,"radiation_physical_model.csv"))
-fitting_curve = readdlm(joinpath(@__DIR__,"radiation_fitting_curve.csv"))
-points = readdlm(joinpath(@__DIR__,"radiation_points.csv"))
+textbook_curve = readdlm(joinpath(@__DIR__, "data", "radiation_physical_model.csv"))
+fitting_curve = readdlm(joinpath(@__DIR__, "data", "radiation_fitting_curve.csv"))
+points = readdlm(joinpath(@__DIR__, "data", "radiation_points.csv"))
 
 p6 = plot(
     textbook_curve[:,1],
@@ -144,7 +146,7 @@ plot!(
     seriestype = :scatter,
     shape = :+,
     label = "",
-    markersize = 5 # We manually set the markersize here, so the plot does not look super crammed. 
+    markersize = 5 # We manually set the markersize here, so the plot does not look super crammed.
 )
 
 plot!(p6,
@@ -154,15 +156,15 @@ plot!(p6,
     linewidth = linewidth
 )
 
-savefig(p6, joinpath(@__DIR__,"OutgoingLongwaveRadiation.png"))
+savefig(p6, joinpath(@__DIR__, "..", "website", "_assets", "julia_plots_out", "OutgoingLongwaveRadiation.png"))
 
 
 
 # Heat Transfer Plot
 
-heat_ocean = readdlm(joinpath(@__DIR__,"heat_transfer_ocean.csv"))
-heat_total = readdlm(joinpath(@__DIR__,"heat_transfer_total.csv"))
-heat_atmos = readdlm(joinpath(@__DIR__,"heat_transfer_atmosphere.csv"))
+heat_ocean = readdlm(joinpath(@__DIR__, "data", "heat_transfer_ocean.csv"))
+heat_total = readdlm(joinpath(@__DIR__, "data", "heat_transfer_total.csv"))
+heat_atmos = readdlm(joinpath(@__DIR__, "data", "heat_transfer_atmosphere.csv"))
 p7 = plot(
     heat_total[:,1],
     heat_total[:,2],
@@ -192,7 +194,7 @@ plot!(
     linewidth = linewidth
 )
 
-savefig(p7, joinpath(@__DIR__,"heat_transfer_north.png"))
+savefig(p7, joinpath(@__DIR__, "..", "website", "_assets", "julia_plots_out", "heat_transfer_north.png"))
 
 # Diffusion coefficients by surface type
 
@@ -221,7 +223,7 @@ p8 = plot(
     xticks = LinRange(-90,90,7),
     yticks = [0,0.2,0.4,0.6,0.8,1],
     yrange = (0,1),
-    xrange = (-90,90), 
+    xrange = (-90,90),
     # label = L"\textsf{over} \quad ocean",
     label = "over ocean",
     guidefontsize = guidefontsize,
@@ -250,4 +252,4 @@ plot!(
     color = "red",
     label =""
 )
-savefig(p8, joinpath(@__DIR__,"diffusion.png"))
+savefig(p8, joinpath(@__DIR__, "..", "website", "_assets", "julia_plots_out", "diffusion.png"))
