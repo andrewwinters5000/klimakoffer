@@ -17,12 +17,12 @@ tags = ["syntax", "code"]
 
 Your code should be working, and we expect you to write clean and readable code.
 
-For Julia, use [the SciML style guide](https://github.com/SciML/SciMLStyle). We provide a .JuliaFormater.toml, which is read by the package JuliaFormatter.jl. That means that you can use [VSCode's "Format Document" feature](https://code.visualstudio.com/docs/editor/codebasics#_formatting) to automatically format your code according to the style guide. Note that the style guide is not just about formatting.
+For Julia, use [the SciML style guide](https://github.com/SciML/SciMLStyle). We provide a `.JuliaFormater.toml`, which is read by the package JuliaFormatter.jl. That means that you can use [VSCode's "Format Document" feature](https://code.visualstudio.com/docs/editor/codebasics#_formatting) to automatically format your code according to the style guide. Note that the style guide is not just about formatting.
 
 For Python, use the [PEP8 style guide](https://peps.python.org/pep-0008/). PyCharm shows warnings by default if code is not properly formatted according to PEP8. As a ground rule, you should have no warnings in PyCharm.
 
 
-## Julia:
+## Julia
 
 We recommend using [Visual Studio Code](https://code.visualstudio.com/) with enabled [Julia extension](https://www.julia-vscode.org/).
 
@@ -30,11 +30,11 @@ We provide a setup that you can use to implement the milestones. The zip file co
 
 [Download julia_skeleton.zip](/_assets/julia_skeleton.zip)
 
-## Pluto.jl Notebook:
+### Pluto.jl Notebook
 
 TODO
 
-## Python:
+## Python
 
 We recommend using PyCharm Professional, which is [free for students](https://www.jetbrains.com/community/education/#students). It is useful to enable "Scientific Mode", which allows you to show plots in the IDE ([Matplotlib tutorial](https://www.jetbrains.com/help/pycharm/matplotlib-tutorial.html)).
 
@@ -42,7 +42,7 @@ We provide a setup that you can use to implement the milestones. The zip file co
 
 [Download python_skeleton.zip](/_assets/python_skeleton.zip)
 
-## Jupyter Notebook:
+### Jupyter Notebook
 
 Here are the helpful links for using Jupyter Notebooks mentioned in the introductory video:
 
