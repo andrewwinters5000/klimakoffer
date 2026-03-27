@@ -26,7 +26,7 @@ For Python, use the [PEP8 style guide](https://peps.python.org/pep-0008/). PyCha
 
 We recommend using [Visual Studio Code](https://code.visualstudio.com/) with enabled [Julia extension](https://www.julia-vscode.org/).
 
-We provide a setup that you can use to implement the milestones. The zip file contains Manifest.toml and Project.toml for installing the dependencies, as well as a subfolder with the necessary input files and a skeleton for milestone 1.
+We provide a setup that you can use to implement the milestones. The zip file contains Project.toml for installing the dependencies, as well as a subfolder with the necessary input files and a skeleton for milestone 1.
 
 [Download julia_skeleton.zip](/assets/julia_skeleton.zip)
 
