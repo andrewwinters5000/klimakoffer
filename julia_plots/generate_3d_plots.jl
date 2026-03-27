@@ -2,7 +2,7 @@ using PlotlyJS
 using DelimitedFiles
 using LaTeXStrings
 
-include("milestone6.jl")
+include(joinpath(@__DIR__, "..", "milestones_julia", "milestone6.jl"))
 
 
 function parametrisation(surface_data, radius=10)
@@ -37,7 +37,7 @@ function plot_earth(X,Y,Z,surface_data)
             [1, "rgb(26,100,212)" ], #ocean, blue
         ],
         colorbar = (
-            autotick = false, 
+            autotick = false,
             tick0 = 0,
             dtick = 1,
             tickcolor = 888,
@@ -55,7 +55,7 @@ function plot_earth(X,Y,Z,surface_data)
             )
         )
     )
-    
+
     layout = Layout(
                 scene = attr(
                     xaxis = attr(
@@ -80,12 +80,12 @@ function plot_earth(X,Y,Z,surface_data)
                 ),
     )
 
-    return Plot(fig1, layout)   
+    return Plot(fig1, layout)
 end
 
 function get_outlines(geo_dat)
     outlines = zeros(size(geo_dat))
-    for i in 2:64 # Edge cases can be ignored because there is no continent 
+    for i in 2:64 # Edge cases can be ignored because there is no continent
         for j in 2:127
             if geo[i,j] == 1
                 if ((geo[i,j-1] != 1) || (geo[i,j+1] != 1) || (geo[i-1,j] != 1) || (geo[i+1,j] != 1))
@@ -110,7 +110,7 @@ function plot_albedo_3d(X,Y,Z, albedo, surface_data)
             [1,"rgb(0,0,0)" ], # continent border
         ],
     )
-    
+
     fig2 = PlotlyJS.surface(
         x = 1.01 .* X,
         y = 1.01 .* Y,
@@ -123,21 +123,21 @@ function plot_albedo_3d(X,Y,Z, albedo, surface_data)
             [1,"rgb(255,255,255)" ], # white, everything reflected
         ],
         colorbar = (
-            autotick = false, 
+            autotick = false,
             tickcolor = 888,
             tickfont = (
                 color = "rgb(255,255,255)",
                 size = 15
                 ),
-                
+
             title="albedo",
             titlefont = (
                 color = "rgb(255,255,255)",
                 size = 15
-            )  
+            )
         )
     )
-    
+
     layout = Layout(
                 scene = attr(
                     xaxis = attr(
@@ -163,7 +163,7 @@ function plot_albedo_3d(X,Y,Z, albedo, surface_data)
             )
 
 
-    return Plot([fig1,fig2], layout)   
+    return Plot([fig1,fig2], layout)
 end
 
 function plot_heatcapacity_3d(X,Y,Z, heat_capacity, surface_data)
@@ -187,7 +187,7 @@ function plot_heatcapacity_3d(X,Y,Z, heat_capacity, surface_data)
             [1,"rgb(0,0,0)" ], # continent border
         ],
     )
-    
+
     fig2 = PlotlyJS.surface(
         x = 1.01 .* X,
         y = 1.01 .* Y,
@@ -197,10 +197,10 @@ function plot_heatcapacity_3d(X,Y,Z, heat_capacity, surface_data)
         opacity = 0.7,
         colorscale =[
             [0, "rgb(255,255,255)" ], # white
-            [1, "rgb(139,0,0)"], # red 
+            [1, "rgb(139,0,0)"], # red
         ],
         colorbar = (
-            autotick = false, 
+            autotick = false,
             tickcolor = 888,
             tickfont = (
                 color = "rgb(255,255,255)",
@@ -213,10 +213,10 @@ function plot_heatcapacity_3d(X,Y,Z, heat_capacity, surface_data)
                 color = "rgb(255,255,255)",
                 size = 20
                 ),
-            titleside = "right"   
+            titleside = "right"
         )
     )
-    
+
     layout = Layout(
                 scene = attr(
                     xaxis = attr(
@@ -241,15 +241,15 @@ function plot_heatcapacity_3d(X,Y,Z, heat_capacity, surface_data)
                 ),
     )
 
-    return Plot([fig1,fig2], layout)   
+    return Plot([fig1,fig2], layout)
 end
 
 function plot_solar_forcing_3d_anim(X,Y,Z,solar_forcing, surface_data)
 
     cmin, cmax = extrema(solar_forcing)
-    
+
     n_frames = size(solar_forcing, 3)
-    
+
     fig1 = PlotlyJS.surface(
         x = X,
         y = Y,
@@ -273,7 +273,7 @@ function plot_solar_forcing_3d_anim(X,Y,Z,solar_forcing, surface_data)
         cmax = cmax,
         cmin = cmin,
         colorbar = (
-            autotick = false, 
+            autotick = false,
             tickcolor = 888,
             tickfont = (
                 color = "rgb(255,255,255)",
@@ -284,11 +284,11 @@ function plot_solar_forcing_3d_anim(X,Y,Z,solar_forcing, surface_data)
                 color = "rgb(255,255,255)",
                 size = 20
             ),
-            titleside = "right"   
+            titleside = "right"
         )
     )
 
-    
+
 
     sliders = [
         attr(
@@ -298,7 +298,7 @@ function plot_solar_forcing_3d_anim(X,Y,Z,solar_forcing, surface_data)
                     args= [
                         [
                             "fr$k"
-                        ],                           
+                        ],
                         attr(
                             mode = "immediate",
                             frame = attr(
@@ -312,30 +312,30 @@ function plot_solar_forcing_3d_anim(X,Y,Z,solar_forcing, surface_data)
                     ],
                     label = "$k"
                 )
-            for k in 1:n_frames], 
+            for k in 1:n_frames],
             active = 17,
             transition = attr(
                 duration = 0
             ),
-            x=0, # slider starting position  
-            y=0, 
+            x=0, # slider starting position
+            y=0,
             currentvalue = attr(
                 font = attr(
                         size = 12
-                    ), 
-                prefix = "Step: ", 
-                visible = true, 
+                    ),
+                prefix = "Step: ",
+                visible = true,
                 xanchor = "center"
-            ),  
+            ),
             len = 1.0 #slider length
-        )    
+        )
     ];
-    
+
     updatemenus = [
         attr(
-            type = "buttons", 
+            type = "buttons",
             active = 0,
-            y = 0.0,  #(x,y) button position 
+            y = 0.0,  #(x,y) button position
             x = 1,
             buttons = [
                 attr(
@@ -345,7 +345,7 @@ function plot_solar_forcing_3d_anim(X,Y,Z,solar_forcing, surface_data)
                         nothing,
                         attr(
                             frame = attr(
-                                duration = 5, 
+                                duration = 5,
                                 redraw = true
                             ),
                             transition = attr(
@@ -368,7 +368,7 @@ function plot_solar_forcing_3d_anim(X,Y,Z,solar_forcing, surface_data)
         frames[k] = PlotlyJS.frame(
                         data = [
                             attr(
-                                surfacecolor = solar_forcing[:,:,k]',            
+                                surfacecolor = solar_forcing[:,:,k]',
                                 colorbar = attr(
                                     #title = "Day $day",
                                 )
@@ -380,7 +380,7 @@ function plot_solar_forcing_3d_anim(X,Y,Z,solar_forcing, surface_data)
                         name="fr$k",
                         traces=[1],
                     )
-    end    
+    end
 
     layout = Layout(
         scene = attr(
@@ -427,7 +427,7 @@ function plot_diffusioncoefficient_3d(X,Y,Z, diffusion_coefficient, surface_data
             [1,"rgb(0,0,0)" ], # continent border
         ],
     )
-    
+
     fig2 = PlotlyJS.surface(
         x = 1.01 .* X,
         y = 1.01 .* Y,
@@ -437,10 +437,10 @@ function plot_diffusioncoefficient_3d(X,Y,Z, diffusion_coefficient, surface_data
         opacity = 0.75,
         colorscale =[
             [0, "rgb(0,0,255)" ], # blue
-            [1, "rgb(255,255,0)"], # yellow 
+            [1, "rgb(255,255,0)"], # yellow
         ],
         colorbar = (
-            autotick = false, 
+            autotick = false,
             tickcolor = 888,
             tickfont = (
                 color = "rgb(255,255,255)",
@@ -451,10 +451,10 @@ function plot_diffusioncoefficient_3d(X,Y,Z, diffusion_coefficient, surface_data
                 color = "rgb(255,255,255)",
                 size = 20
                 ),
-            titleside = "right"   
+            titleside = "right"
         )
     )
-    
+
     layout = Layout(
                 scene = attr(
                     xaxis = attr(
@@ -481,7 +481,7 @@ function plot_diffusioncoefficient_3d(X,Y,Z, diffusion_coefficient, surface_data
             )
 
 
-    return Plot([fig1,fig2], layout)   
+    return Plot([fig1,fig2], layout)
 end
 
 function annual_temperature_pointwise(nlatitude, nlongitude, ntimesteps, heat_capacity, solar_forcing, radiative_cooling)
@@ -511,7 +511,7 @@ function plot_temperature_3d_anim(X,Y,Z,temp, surface_data)
     end
 
     n_frames = size(temp, 3)
-    
+
     fig1 = PlotlyJS.surface(
         x = X,
         y = Y,
@@ -563,7 +563,7 @@ function plot_temperature_3d_anim(X,Y,Z,temp, surface_data)
         cmax = cmax,
         cmin = cmin,
         colorbar = (
-            autotick = false, 
+            autotick = false,
             tickcolor = 888,
             tickfont = (
                 color = "rgb(255,255,255)",
@@ -574,11 +574,11 @@ function plot_temperature_3d_anim(X,Y,Z,temp, surface_data)
                 color = "rgb(255,255,255)",
                 size = 40
             ),
-            titleside = "right"   
+            titleside = "right"
         )
     )
 
-    
+
 
     sliders = [
         attr(
@@ -588,7 +588,7 @@ function plot_temperature_3d_anim(X,Y,Z,temp, surface_data)
                     args= [
                         [
                             "fr$k"
-                        ],                           
+                        ],
                         attr(
                             mode = "immediate",
                             frame = attr(
@@ -602,30 +602,30 @@ function plot_temperature_3d_anim(X,Y,Z,temp, surface_data)
                     ],
                     label = "$k"
                 )
-            for k in 1:n_frames], 
+            for k in 1:n_frames],
             active = 17,
             transition = attr(
                 duration = 0
             ),
-            x=0, # slider starting position  
-            y=0, 
+            x=0, # slider starting position
+            y=0,
             currentvalue = attr(
                 font = attr(
                         size = 12
-                    ), 
-                prefix = "Step: ", 
-                visible = true, 
+                    ),
+                prefix = "Step: ",
+                visible = true,
                 xanchor = "center"
-            ),  
+            ),
             len = 1.0 #slider length
-        )    
+        )
     ];
-    
+
     updatemenus = [
         attr(
-            type = "buttons", 
+            type = "buttons",
             active = 0,
-            y = 0.0,  #(x,y) button position 
+            y = 0.0,  #(x,y) button position
             x = 1,
             buttons = [
                 attr(
@@ -635,7 +635,7 @@ function plot_temperature_3d_anim(X,Y,Z,temp, surface_data)
                         nothing,
                         attr(
                             frame = attr(
-                                duration = 5, 
+                                duration = 5,
                                 redraw = true
                             ),
                             transition = attr(
@@ -658,7 +658,7 @@ function plot_temperature_3d_anim(X,Y,Z,temp, surface_data)
         frames[k] = PlotlyJS.frame(
                         data = [
                             attr(
-                                surfacecolor = temp[:,:,k]',            
+                                surfacecolor = temp[:,:,k]',
                                 colorbar = attr(
                                     #title = "Day $day",
                                 )
@@ -670,7 +670,7 @@ function plot_temperature_3d_anim(X,Y,Z,temp, surface_data)
                         name="fr$k",
                         traces=[1],
                     )
-    end    
+    end
 
     layout = Layout(
         scene = attr(
@@ -703,11 +703,11 @@ end
 
 
 
-geo = readdlm(joinpath(@__DIR__,"input","The_World128x65.dat"))
+geo = readdlm(joinpath(@__DIR__, "..", "milestones_julia","input","The_World128x65.dat"))
 
 albedo = calc_albedo(geo)
 heat_capacity = calc_heat_capacity(geo)
-true_lon = read_true_longitude(joinpath(@__DIR__,"input","True_Longitude.dat"))
+true_lon = read_true_longitude(joinpath(@__DIR__, "..", "milestones_julia", "input", "True_Longitude.dat"))
 solar_forcing = calc_solar_forcing(albedo,true_lon)
 X,Y,Z = parametrisation(geo)
 area = calc_area(geo) # Compute area-mean quantities
@@ -740,32 +740,32 @@ temperature,_ = compute_equilibrium_2d(timestep_euler_backward_2d(jacobian, 1/48
 # display(plot_temperature_3d_anim(X,Y,Z,temperature,outlines))
 
 earth = plot_earth(X,Y,Z,geo)
-open("./earth.html", "w") do io
+open(joinpath(@__DIR__, "..", "website", "_assets", "julia_plots_out", "earth.html"), "w") do io
     PlotlyBase.to_html(io, earth)
 end
 
 albedo_plot = plot_albedo_3d(X,Y,Z, albedo, outlines)
 # Plots.savefig(albedo_plot, "savealb.html")
-open("./albedo.html", "w") do io
+open(joinpath(@__DIR__, "..", "website", "_assets", "julia_plots_out", "albedo.html"), "w") do io
     PlotlyBase.to_html(io, albedo_plot)
 end
 
 solar_forcing_plot = plot_solar_forcing_3d_anim(X,Y,Z,solar_forcing, outlines)
-open("./sf.html", "w") do io
+open(joinpath(@__DIR__, "..", "website", "_assets", "julia_plots_out", "sf.html"), "w") do io
     PlotlyBase.to_html(io, solar_forcing_plot)
 end
 
 heat_capacity_plot = plot_heatcapacity_3d(X,Y,Z, heat_capacity, outlines)
-open("./heat_capacity.html", "w") do io
+open(joinpath(@__DIR__, "..", "website", "_assets", "julia_plots_out", "heat_capacity.html"), "w") do io
     PlotlyBase.to_html(io, heat_capacity_plot)
 end
 
 diff_coeff_plot = plot_diffusioncoefficient_3d(X,Y,Z, diffusion_coefficient, outlines)
-open("./diffusion_coeff.html", "w") do io
+open(joinpath(@__DIR__, "..", "website", "_assets", "julia_plots_out", "diffusion_coeff.html"), "w") do io
     PlotlyBase.to_html(io, diff_coeff_plot)
 end
 
 temperature_plot = plot_temperature_3d_anim(X,Y,Z,temperature,outlines)
-open("./temperature.html", "w") do io
+open(joinpath(@__DIR__, "..", "website", "_assets", "julia_plots_out", "temperature.html"), "w") do io
     PlotlyBase.to_html(io, temperature_plot)
 end

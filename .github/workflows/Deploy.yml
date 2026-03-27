@@ -58,7 +58,7 @@ jobs:
     - uses: julia-actions/cache@v2
     - name: Generate Plots
       run: |
-        cd julia_plots && julia --project=. -e 'using Pkg; Pkg.instantiate(); include("generate_plots.jl")'
+        cd julia_plots && julia --project=. -e 'using Pkg; Pkg.instantiate(); include("generate_3d_plots.jl")'
     - name: Generate Results
       run: |
         cd milestones_julia && julia --project=. -e 'using Pkg; Pkg.instantiate(); include("generate_results.jl")'

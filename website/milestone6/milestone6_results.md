@@ -24,7 +24,7 @@ Annual Temperature calculated with the 2D-EBM model:
 ![Annual temperature animation](/assets/milestone_results/milestone6_annual_temperature.gif)
 
 ~~~
-<iframe src="/assets/milestone6/temperature.html" seamless width=800 height=600></iframe>
+<iframe src="/assets/julia_plots_out/temperature.html" seamless width=800 height=600></iframe>
 ~~~
 ### Mean Temperature Plot using the 2D-EBM
 

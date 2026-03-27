@@ -6,4 +6,4 @@ package.json
 Manifest.toml
 website/_assets/milestone_results
 website/_assets/julia_plots_out
-milestones_julia/.CondaPkg
+**/.CondaPkg
