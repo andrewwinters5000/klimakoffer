@@ -56,9 +56,12 @@ jobs:
       with:
         version: '1' # Latest stable Julia release.
     - uses: julia-actions/cache@v2
+    - name: Generate Plots
+      run: |
+        cd julia_plots && julia --project=. -e 'using Pkg; Pkg.instantiate(); include("generate_plots.jl")'
     - name: Generate Results
       run: |
-        cd milestones_julia && julia --project=@. -e 'using Pkg; Pkg.instantiate(); include("generate_results.jl")'
+        cd milestones_julia && julia --project=. -e 'using Pkg; Pkg.instantiate(); include("generate_results.jl")'
     # NOTE
     #   The steps below ensure that NodeJS and Franklin are loaded then it
     #   installs highlight.js which is needed for the prerendering step
@@ -67,7 +70,7 @@ jobs:
     #   Julia packages which may be required to successfully build your site.
     #   The last line should be `optimize()` though you may want to give it
     #   specific arguments, see the documentation or ?optimize in the REPL.
-    - run: cd website && julia --project=@. -e '
+    - run: cd website && julia --project=. -e '
             using Pkg; Pkg.instantiate();
             using NodeJS; run(`$(npm_cmd()) install highlight.js`);
             using Franklin;

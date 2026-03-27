@@ -44,7 +44,7 @@ In his pioneering work, Budyko
 > [Budyko, M. I. (1969). The effect of solar radiation variations on the climate of the Earth. tellus, 21(5), 611-619.](https://www.tandfonline.com/doi/pdf/10.3402/tellusa.v21i5.10109)
 considered a simple 1D (latitude dependent) EBM that included a simple term that models heat transfer accross latitude zones. From satellite data one can reconstruct that the main heat transfer depends on the latitude and is polewards. The next figure, for instance, shows the heat transfer in the northern hemisphere. It is also worth noting that the heat transfer in the atmosphere is different compared to the ocean.
 
-\fig{/assets/milestone5/heat_transfer_north.png}
+\fig{/assets/julia_plots_out/heat_transfer_north.png}
 * Heat transfer in the northern hemisphere. Generated with data from "Maslin (2013). 'Climate: A Very Short Introduction'"
 
 The idea of Budyko was to include an algebraic term that is proportional to
