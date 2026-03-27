@@ -30,7 +30,7 @@ We provide a setup that you can use to implement the milestones. The zip file co
 
 [Download julia_skeleton.zip](/_assets/julia_skeleton.zip)
 
-### Pluto.jl Notebook
+## Pluto.jl Notebook
 
 TODO
 
@@ -42,7 +42,7 @@ We provide a setup that you can use to implement the milestones. The zip file co
 
 [Download python_skeleton.zip](/_assets/python_skeleton.zip)
 
-### Jupyter Notebook
+## Jupyter Notebook
 
 Here are the helpful links for using Jupyter Notebooks mentioned in the introductory video:
 
