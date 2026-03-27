@@ -30,6 +30,13 @@ jobs:
         for i in {1..6}; do
           cp "latex/milestone-$i/main.pdf" "website/_assets/milestone$i/description.pdf"
         done
+    - name: Copy Scripts
+      run: |
+        mkdir website/_assets/scripts
+        cp milestones_julia/* website/_assets/scripts
+        cp milestones_python/* website/_assets/scripts
+        mkdir website/_assets/scripts/input
+        cp milestones_julia/input website/_assets/scripts/input
     # NOTE: Python is necessary for the pre-rendering (minification) step
     - name: Install python
       uses: actions/setup-python@v2
