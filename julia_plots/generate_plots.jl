@@ -252,4 +252,4 @@ plot!(
     color = "red",
     label =""
 )
-savefig(p8, joinpath(@__DIR__, "..", "website", "_assets", "julia_plots_out", "diffusion.png"))
+savefig(p8, joinpath(@__DIR__, "..", "website", "_assets", "julia_plots_out", "diffusion_coefficient.png"))
