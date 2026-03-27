@@ -388,6 +388,6 @@ CV = Cohn-Vossen-Raum (Raum 313)
 
 ## Organization of the course
 
-* All announcements and internal communications will be done via [ILIAS](https://www.ilias.uni-koeln.de/ilias/goto_uk_crs_5096476.html)!
+* All announcements and internal communications will be done via [ILIAS](https://www.ilias.uni-koeln.de/ilias/goto_uk_crs_6744928.html)!
 * Make sure that you can log in there and check "general information".
-* If you have a question, please post in [ILIAS Forum](https://www.ilias.uni-koeln.de/ilias/goto_uk_frm_5121639.html).
+* If you have a question, please post in [ILIAS questions/comments section](https://www.ilias.uni-koeln.de/ilias/goto_uk_frm_6778388.html).
