@@ -19,20 +19,20 @@ jobs:
       with:
         work_in_root_file_dir: true
         root_file: |
-          latex/milestone-1/main.tex
-          latex/milestone-2/main.tex
-          latex/milestone-3/main.tex
-          latex/milestone-4/main.tex
-          latex/milestone-5/main.tex
-          latex/milestone-6/main.tex
-          latex/tikzpictures/bathtub.tex
+          latex/milestone-*/main.tex
+          latex/tikzpictures/*.tex
     - name: Convert tikz PDF to SVG
       run: |
         sudo apt update
         sudo apt install pdf2svg
         mkdir website/_assets/tikzpictures_out
         echo "Converting tikz PDF to SVG..."
-        pdf2svg latex/tikzpictures/bathtub.pdf website/_assets/tikzpictures_out/bathtub.svg
+        for file in latex/tikzpictures/*.pdf; do
+          # Skip if no PDF files are found
+          if [[ ! -e "$file" ]]; then continue; fi
+          filename=$(basename "$file" .pdf)
+          pdf2svg "${filename}.pdf" "website/_assets/tikzpictures_out/${filename}.svg"
+        done
     - name: Copy generated PDF files
       run: |
         for i in {1..6}; do
