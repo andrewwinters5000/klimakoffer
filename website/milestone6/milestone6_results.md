@@ -48,7 +48,7 @@ Annual Temperatures from 1959 to 2020 based on NASA CO2 data:
 
 Plot of the mean and average temperature calculated by using the 2D-EBM with Ziegler's parameters and then averaging over the results:
 
-\input{plot:4}{/assets/scripts/milestone6.jl}
+![Mean temperature plot for Ziegler's data](/assets/milestone_results/milestone6_ziegler.png)
 
 
 ## Files Download

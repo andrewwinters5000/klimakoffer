@@ -138,17 +138,19 @@ function calc_diffusion_operator!(diffusion_op, mesh, diffusion_coeff, temperatu
     return diffusion_op
 end
 
-function calc_operator_ebm_2d(temperature, mesh, diffusion_coeff, heat_capacity)
+function calc_operator_ebm_2d(temperature, mesh, diffusion_coeff, heat_capacity,
+                              radiative_cooling_feedback=2.15)
     diffusion_op = calc_diffusion_operator(mesh, diffusion_coeff, temperature)
 
-    return (diffusion_op .- 2.15 * temperature) ./ heat_capacity
+    return (diffusion_op .- radiative_cooling_feedback * temperature) ./ heat_capacity
 end
 
 # Inplace version to avoid allocations. Called from the Jacobian computation
-function calc_operator_ebm_2d!(operator, temperature, mesh, diffusion_coeff, heat_capacity)
+function calc_operator_ebm_2d!(operator, temperature, mesh, diffusion_coeff, heat_capacity,
+                               radiative_cooling_feedback=2.15)
     calc_diffusion_operator!(operator, mesh, diffusion_coeff, temperature)
 
-    operator .-= 2.15 * temperature
+    operator .-= radiative_cooling_feedback * temperature
     operator ./= heat_capacity
 
     return operator
@@ -246,7 +248,8 @@ function plot_diffusion_coefficient(diffusion_coeff)
     return p
 end
 
-function calc_jacobian_ebm_2d(mesh, diffusion_coeff, heat_capacity)
+function calc_jacobian_ebm_2d(mesh, diffusion_coeff, heat_capacity,
+                              radiative_cooling_feedback=2.15)
     jacobian = zeros((mesh.ndof, mesh.ndof))
     test_temperature = zeros(size(diffusion_coeff))
     op = similar(diffusion_coeff)
@@ -255,7 +258,8 @@ function calc_jacobian_ebm_2d(mesh, diffusion_coeff, heat_capacity)
     for i in 1:(mesh.n_longitude), j in 1:(mesh.n_latitude)
         test_temperature[j, i] = 1.0
         # Use inplace version to avoid a lot of allocations
-        calc_operator_ebm_2d!(op, test_temperature, mesh, diffusion_coeff, heat_capacity)
+        calc_operator_ebm_2d!(op, test_temperature, mesh, diffusion_coeff, heat_capacity,
+                              radiative_cooling_feedback)
 
         # Convert matrix to vector.
         # Note that this must be compatible with the loop order, so that `index` is correct.

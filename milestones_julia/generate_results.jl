@@ -38,10 +38,11 @@ savefig(plot_jacobian, joinpath(outdir, "milestone5_jacobian.png"))
 
 include("milestone6.jl")
 (plot_mean_temperature, plot_temperature_, plot_cologne, plot_temperature_co2,
- gif_temperature) = milestone6()
+ plot_ziegler, gif_temperature) = milestone6()
 savefig(plot_temperature_, joinpath(outdir, "milestone6_temperature.png"))
 savefig(plot_cologne, joinpath(outdir, "milestone6_cologne.png"))
 savefig(plot_temperature_co2, joinpath(outdir, "milestone6_temperature_co2.png"))
+savefig(plot_ziegler, joinpath(outdir, "milestone6_ziegler.png"))
 
 # Move GIF file to output directory
 mv(gif_temperature.filename, joinpath(outdir, "milestone6_annual_temperature.gif"),

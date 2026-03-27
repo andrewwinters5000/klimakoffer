@@ -93,6 +93,135 @@ function plot_co2_evolution(jacobian, mesh, diffusion_coeff, heat_capacity, sola
     return p
 end
 
+function calc_albedo_ziegler(geo_dat)
+    function legendre(latitude)
+        return 0.5 * (3 * sin(latitude)^2 - 1)
+    end
+
+    function albedo(surface_type, latitude)
+        if surface_type == 1
+            return 0.32 + 0.05 * legendre(latitude)
+        elseif surface_type == 2
+            return 0.6
+        elseif surface_type == 3
+            return 0.7
+        elseif surface_type == 5
+            return 0.289 + 0.08 * legendre(latitude)
+        else
+            error("Unknown surface type $surface_type.")
+        end
+    end
+
+    nlatitude, nlongitude = size(geo_dat)
+    y_lat = range(pi / 2, -pi / 2, length=nlatitude)
+
+    # Map surface type to albedo.
+    return [albedo(geo_dat[i, j], y_lat[i]) for i in 1:nlatitude, j in 1:nlongitude]
+end
+
+function calc_heat_capacity_ziegler(geo_dat)
+    sec_per_yr = 3.15576e7  # seconds per year
+
+    c_atmos = 0.79e6
+    c_ocean = 394.47e6
+    c_seaice = 4.83e6
+    c_land = 1.87e6
+    c_snow = 1.52e6
+
+    function heat_capacity(surface_type)
+        if surface_type == 1
+            capacity_surface = c_land
+        elseif surface_type == 2
+            capacity_surface = c_seaice
+        elseif surface_type == 3
+            capacity_surface = c_snow
+        elseif surface_type == 5
+            capacity_surface = c_ocean
+        else
+            error("Unknown surface type $surface_type.")
+        end
+
+        return (capacity_surface + c_atmos) / sec_per_yr
+    end
+
+    nlatitude, nlongitude = size(geo_dat)
+    return [heat_capacity(geo_dat[i, j]) for i in 1:nlatitude, j in 1:nlongitude]
+end
+
+function calc_diffusion_coefficients_ziegler(geo_dat)
+    nlatitude, nlongitude = size(geo_dat)
+
+    coeff_ocean_poles = 0.4
+    coeff_ocean_equator = 0.9
+    coeff_equator = 0.9
+    coeff_north_pole = 0.45
+    coeff_south_pole = 0.12
+
+    function diffusion_coefficient(i, j)
+        # Compute the i value of the equator
+        i_equator = div(nlatitude, 2) + 1
+
+        theta = pi * (i - 1) / (nlatitude - 1)
+        colat = sin(theta)^5
+
+        geo = geo_dat[i, j]
+        if geo == 5  # ocean
+            return coeff_ocean_poles + (coeff_ocean_equator - coeff_ocean_poles) * colat
+        else  # land, sea ice, etc
+            if i <= i_equator  # northern hemisphere
+                # on the equator colat=1 -> coefficients for norhern/southern hemisphere cancels out
+                return coeff_north_pole + (coeff_equator - coeff_north_pole) * colat
+            else  # southern hemisphere
+                return coeff_south_pole + (coeff_equator - coeff_south_pole) * colat
+            end
+        end
+    end
+
+    return [diffusion_coefficient(i, j) for i in 1:nlatitude, j in 1:nlongitude]
+end
+
+function simulation_ziegler(geo_dat, mesh, true_longitude)
+    albedo = calc_albedo_ziegler(geo_dat)
+    heat_capacity = calc_heat_capacity_ziegler(geo_dat)
+
+    solar_forcing = calc_solar_forcing(albedo, true_longitude)
+    ntimesteps = length(true_longitude)
+    diffusion_coeff = calc_diffusion_coefficients_ziegler(geo_dat)
+
+    co2_ppm = 315.0
+    radiative_cooling = calc_radiative_cooling_co2(co2_ppm, 315.0, 210.2)
+
+    jacobian = calc_jacobian_ebm_2d(mesh, diffusion_coeff, heat_capacity, 2.13)
+
+    temperature, area_mean_temp = compute_equilibrium_2d(timestep_euler_backward_2d(jacobian,
+                                                                                    1 / ntimesteps),
+                                                         mesh, diffusion_coeff, heat_capacity,
+                                                         solar_forcing,
+                                                         radiative_cooling)
+
+    # Copied from MS4
+    # Area mean of pointwise annual temperature
+    annual_mean_temperature_north = [calc_mean_north(temperature[:, :, t], mesh.area)
+                                     for t in 1:ntimesteps]
+    annual_mean_temperature_south = [calc_mean_south(temperature[:, :, t], mesh.area)
+                                     for t in 1:ntimesteps]
+    annual_mean_temperature_total = [calc_mean(temperature[:, :, t], mesh.area)
+                                     for t in 1:ntimesteps]
+
+    average_temperature_north = sum(annual_mean_temperature_north) / ntimesteps
+    average_temperature_south = sum(annual_mean_temperature_south) / ntimesteps
+    average_temperature_total = sum(annual_mean_temperature_total) / ntimesteps
+
+    p = plot_annual_temperature_north_south(annual_mean_temperature_north,
+                                            annual_mean_temperature_south,
+                                            annual_mean_temperature_total,
+                                            average_temperature_north,
+                                            average_temperature_south,
+                                            average_temperature_total)
+
+    return p
+end
+
 # Run code
 function milestone6()
     geo_dat = read_geography(joinpath(@__DIR__, "input", "The_World128x65.dat"))
@@ -155,6 +284,8 @@ function milestone6()
     plot_temperature_co2 = plot_co2_evolution(jacobian, mesh, diffusion_coeff,
                                               heat_capacity, solar_forcing)
 
+    plot_ziegler = simulation_ziegler(geo_dat, mesh, true_longitude)
+
     # Animate annual temperature
     anim = @animate for ts in 1:ntimesteps
         plot_temperature(temperature, geo_dat, ts)
@@ -167,8 +298,9 @@ function milestone6()
     display(plot_temperature_)
     display(plot_cologne)
     display(plot_temperature_co2)
+    display(plot_ziegler)
     display(gif_temperature)
 
     return plot_mean_temperature, plot_temperature_, plot_cologne,
-           plot_temperature_co2, gif_temperature
+           plot_temperature_co2, plot_ziegler, gif_temperature
 end
