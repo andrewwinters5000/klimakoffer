@@ -28,7 +28,7 @@ We recommend using [Visual Studio Code](https://code.visualstudio.com/) with ena
 
 We provide a setup that you can use to implement the milestones. The zip file contains Manifest.toml and Project.toml for installing the dependencies, a subfolder with the necessary input files and a skeleton for milestone 1.
 
-[(Download julia_skeleton.zip)](/assets/milestone1/julia_skeleton.zip)\\
+[Download julia_skeleton.zip](/_assets/julia_skeleton.zip)
 
 ## Pluto.jl Notebook:
 
@@ -40,7 +40,7 @@ We recommend using PyCharm Professional, which is [free for students](https://ww
 
 We provide a setup that you can use to implement the milestones. The zip file contains a requirement.txt file listing all dependecies, a subfolder with the necessary input files and a skeleton for milestone 1.
 
-[(Download python_skeleton.zip)](/assets/milestone1/python_skeleton.zip)\\
+[Download python_skeleton.zip](/_assets/python_skeleton.zip)
 
 ## Jupyter Notebook:
 
