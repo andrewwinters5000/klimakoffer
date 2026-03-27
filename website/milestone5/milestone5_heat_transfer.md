@@ -54,7 +54,7 @@ $$
 where $T(\lat)$ is the temperature at latitude $\lat$, $T_{avg}$ is the mean global surface temperature, and $D$ is a parameter that can be adjusted. The next figure shows a sketch of the model with energy fluxes across the latitude zones (rings), where the coefficient $D$ is denoted with $C$ in this figure.
 
 \fig{/assets/tikzpictures_out/heat_transfer_budyko.svg}
-* Figure from [https://pages.jh.edu/lhinnov1/paleoguide/tutorial2.html](https://pages.jh.edu/lhinnov1/paleoguide/tutorial2.html).
+<!-- * Figure from [https://pages.jh.edu/lhinnov1/paleoguide/tutorial2.html](https://pages.jh.edu/lhinnov1/paleoguide/tutorial2.html). -->
 
 
 Sellers,
