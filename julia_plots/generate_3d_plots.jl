@@ -2,8 +2,9 @@ using PlotlyJS
 using DelimitedFiles
 using LaTeXStrings
 
-include(joinpath(@__DIR__, "..", "milestones_julia", "milestone6.jl"))
+mkpath(joinpath(@__DIR__, "..", "website", "_assets", "julia_plots_out"))
 
+include(joinpath(@__DIR__, "..", "milestones_julia", "milestone6.jl"))
 
 function parametrisation(surface_data, radius=10)
 
