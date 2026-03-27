@@ -17,16 +17,16 @@ To do that, we will obtain a _discrete_ version of the spatial derivatives that 
 
 ## Finite Difference Discretization of First and Second-Order Derivatives
 
-The finite difference method is one of the simplest numerical methods to discretize derivatives. 
+The finite difference method is one of the simplest numerical methods to discretize derivatives.
 There are many ways to derive finite difference formulas, but we will focus on the method of the Taylor expansion, as it will give us information about the approximation errors.
 
 @@colbox-blue
 **Taylor series:** The Taylor series (or Taylor expansion) of a function is an infinite sum of polynomial terms that are expressed in terms of the function's derivatives at a point.
 For instance, the Taylor series of the function $f(x)$ around the point $x_0$ is defined as
 \begin{align}\label{eq:taylor}
-f(x) 
+f(x)
 &= f(x_0) + \deriv{f(x_0)}{x} (x-x_0) + \frac{1}{2!} \deriv{^2f(x_0)}{x^2} (x-x_0)^2 + \frac{1}{3!}\deriv{^3f(x_0)}{x^3} (x-x_0)^3 + \cdots
-\\ 
+\\
 &= f(x_0) + \deriv{f(x_0)}{x} \Delta x + \frac{1}{2!} \deriv{^2f(x_0)}{x^2} \Delta x^2 + \frac{1}{2!} \deriv{^3f(x_0)}{x^3} \Delta x^3 + \cdots
 \\
 &= \sum_{n=1}^{\infty} \frac{f^{(n)}(x_0)}{n!} \Delta x,
@@ -36,7 +36,7 @@ where $f^{(n)}(x_0)$ is a short-hand notation for the $n^{\text{th}}$ derivative
 
 Let us consider a uniform one-dimensional grid containing temperature values.
 
-\fig{/assets/milestone5/spatial_disc_1d.png}
+\fig{/assets/tikzpictures_out/spatial_discretization.svg}
 
 Using \eqref{eq:taylor}, we can write Taylor expansion for $T_{i+1}$ around $T_{i}$:
 $$\label{eq:taylortemp1}
@@ -49,8 +49,8 @@ By manipulating \eqref{eq:taylortemp1}, we can obtain an expression for the firs
 \\
 &= \frac{T_{i+1} - T_{i}}{\Delta x} + \mathcal{O}(\Delta x),
 \end{align}
-where $\mathcal{O}(\Delta x)$ indicates that the largest term is of the order of $\Delta x$. 
-Hence, if we truncated the Taylor series there, 
+where $\mathcal{O}(\Delta x)$ indicates that the largest term is of the order of $\Delta x$.
+Hence, if we truncated the Taylor series there,
 $$
 \deriv{T_i}{x} \approx \frac{T_{i+1} - T_{i}}{\Delta x},
 $$
@@ -105,7 +105,7 @@ $$
 * And many other possibilities.
 
 ## Application to the Diffusion Operator in Spherical Coordinates
- 
+
 Our [diffusion operator in spherical coordinates](/milestone5/milestone5_heat_transfer/#eqdiffterm) contains a term (Term 3) of the form
 $$
 \mathcal{L}_1(T) = \partialderiv{T}{x},
@@ -118,7 +118,7 @@ which is slightly more involved.
 
 One possibility to discretize $\mathcal{L}_2(T)$ is to apply the chain rule of differentiation at the continuous level,
 $$
-\mathcal{L}_2(T) = \partialderiv{}{x} \left( \diffcoeff \partialderiv{T}{x} \right) = 
+\mathcal{L}_2(T) = \partialderiv{}{x} \left( \diffcoeff \partialderiv{T}{x} \right) =
 \partialderiv{\diffcoeff}{x} \partialderiv{T}{x} +
 \diffcoeff \partialderiv{^2T}{x^2},
 $$
@@ -130,7 +130,7 @@ such that it is expressed in terms of first and second-order derivatives.
 
 We now have enough tools to obtain a discrete form for the [diffusion term of the $2D$ EBM](/milestone5/milestone5_heat_transfer/#eqdiffterm).
 Our goal is to obtain a finite difference scheme with the following properties:
-* The scheme must be **central**: To model the parabolic nature of the heat conduction term (see [Milestone 2 - Conservation and Balance](/milestone2/milestone2_conservation-and-balance/)), we require the scheme to be symmetric. 
+* The scheme must be **central**: To model the parabolic nature of the heat conduction term (see [Milestone 2 - Conservation and Balance](/milestone2/milestone2_conservation-and-balance/)), we require the scheme to be symmetric.
 * The scheme must be **compact**: To avoid wide stencils, we require the scheme to only use the information from neighboring nodes.
 * The scheme must be as **accurate** as possible: We will select a scheme of the highest order possible, such that our approximation is as accurate as possible given our constraints.
 
@@ -140,7 +140,7 @@ $$
 $$
 and
 \begin{align}
-\mathcal{L}_2(T_i) = \partialderiv{}{x} \left( \diffcoeff_i \partialderiv{T_i}{x} \right) =& 
+\mathcal{L}_2(T_i) = \partialderiv{}{x} \left( \diffcoeff_i \partialderiv{T_i}{x} \right) =&
 \partialderiv{\diffcoeff}{x} \partialderiv{T}{x} +
 \diffcoeff \partialderiv{^2T}{x^2}
 \\
@@ -152,21 +152,21 @@ and
 \end{align}
 which simplifies to
 \begin{align}
-\mathcal{L}_2(T_i)  
-\approx 
+\mathcal{L}_2(T_i)
+\approx
 \frac{1}{\Delta x^2}
 \biggl(
--2 \diffcoeff_i T_i 
+-2 \diffcoeff_i T_i
 &+ \Bigl[\diffcoeff_i + \frac{1}{4} \left( \diffcoeff_{i+1} - \diffcoeff_{i-1} \right)\Bigr] T_{i+1}
 \\
-&+ 
+&+
 \Bigl[\diffcoeff_i - \frac{1}{4} \left( \diffcoeff_{i+1} - \diffcoeff_{i-1} \right)\Bigr] T_{i-1}
 \biggr).
 \end{align}
 
 Garhering everything, and introducing $h = \Delta \lat = \Delta \long$ as the uniform mesh spacing, the central second-order finite-difference discretization of the different terms of the [diffusion operator in spherical coordinates](/milestone5/milestone5_heat_transfer/#eqdiffterm) reads
 $$\label{eq:diffop_innernodes}
-\diffop_{j,i} = 
+\diffop_{j,i} =
 \underbrace{
 \left[\csc^{2}(\colat)\frac{\partial}{\partial \long}\biggl(\diffcoeff (\colat,\long)\frac{\partial T}{\partial \long}\Bigr)\right]_{j,i}
 }_{\text{Term~1}}
@@ -187,12 +187,12 @@ with the terms
 * Term 1:
 \begin{align}\label{eq:disc_term1}
 \left[\csc^{2}(\colat)\frac{\partial}{\partial \long}\biggl(\diffcoeff (\colat,\long)\frac{\partial T}{\partial \long}\Bigr)\right]_{j,i}
-\approx 
+\approx
 \frac{\csc^{2}(\colat_{j,i})}{h^2}
 \biggl(-2\diffcoeff_{j,i}T_{j,i}
 &
 +  \Bigl[\diffcoeff_{j,i} - \frac{1}{4}(\diffcoeff_{j,i+1} - \diffcoeff_{j,i-1})\Bigr]T_{j,i-1} \\
-& 
+&
 + \Bigl[\diffcoeff_{j,i} + \frac{1}{4}(\diffcoeff_{j,i+1} - \diffcoeff_{j,i-1})\Bigr] T_{j,i+1}\biggr)
 \end{align}
 
@@ -201,7 +201,7 @@ with the terms
 \left[
 \frac{\partial}{\partial \colat}\Bigl(\diffcoeff (\colat,\long)\frac{\partial T}{\partial \colat}\Bigr)
 \right]_{j,i}
- \approx \frac{1}{h^{2}}\biggl(-2\diffcoeff_{j,i}T_{j,i} 
+ \approx \frac{1}{h^{2}}\biggl(-2\diffcoeff_{j,i}T_{j,i}
 & + \Bigl[\diffcoeff_{j,i} - \frac{1}{4}(\diffcoeff_{j+1,i} - \diffcoeff_{j-1,i})\Bigr] T_{j-1,i}\\
 & + \Bigl[\diffcoeff_{j,i} + \frac{1}{4}(\diffcoeff_{j+1,i} - \diffcoeff_{j-1,i})\Bigr] T_{j+1,i}\biggr)
 \end{align}
@@ -229,9 +229,9 @@ To deal with the pole problem, we use the techniques proposed in the following p
 
 We start by considering the [diffusion operator in spherical coordinates](/milestone5/milestone5_heat_transfer/#eqdiffterm), but we combine Terms 2 and 3 to obtain
 \begin{align}\label{eq:difftermpole}
-\diffop(\colat,\long) \coloneqq 
-\Nabla \cdot (D\Nabla T) = 
-    \csc^{2}(\colat) \frac{\partial}{\partial \long}\Bigl(\diffcoeff (\colat,\long)\frac{\partial T}{\partial \long}\Bigr) 
+\diffop(\colat,\long) \coloneqq
+\Nabla \cdot (D\Nabla T) =
+    \csc^{2}(\colat) \frac{\partial}{\partial \long}\Bigl(\diffcoeff (\colat,\long)\frac{\partial T}{\partial \long}\Bigr)
     +
     \csc(\colat) \frac{\partial }{\partial \colat} \left( \diffcoeff (\colat,\long) \sin (\colat) \partialderiv{T}{\colat} \right).
 \end{align}
@@ -246,7 +246,7 @@ To avoid the singularity at the pole, we will now consider an integral form of \
 \begin{align}\label{eq:difftermpole_weak}
 \int_0^{\frac{h}{2}} \int_0^{2\pi}\diffop(\colat,\long)R_E^2 \sin \colat \d \long \d \colat =&
     \int_0^{\frac{h}{2}}  \int_0^{2\pi}
-    \csc(\colat) \frac{\partial}{\partial \long}\Bigl(\diffcoeff (\colat,\long)\frac{\partial T}{\partial \long}\Bigr) 
+    \csc(\colat) \frac{\partial}{\partial \long}\Bigl(\diffcoeff (\colat,\long)\frac{\partial T}{\partial \long}\Bigr)
     R_E^2  \d \long \d \colat
     \\
     &+
@@ -258,7 +258,7 @@ To avoid the singularity at the pole, we will now consider an integral form of \
 @@colbox-blue
 **Remark:** In \eqref{eq:difftermpole_weak}, we have used the fact that the differential of area in spherical coordinates is defined as
 $$
-\d S = 
+\d S =
 \left| \partialderiv{\mathbf{r}}{\colat} \times \partialderiv{\mathbf{r}}{\varphi}  \right| \d \long \d \colat
 =
 R_E^2 \sin \colat \d \long \d \colat,
@@ -282,18 +282,18 @@ R_E^2 \sin \colat \d \varphi \d \colat.
 We can show that the first integral in the right-hand side of \eqref{eq:difftermpole_weak} vanishes using the fundamental theorem of calculus:
 \begin{align}\label{eq:intform1}
 \int_0^{\frac{h}{2}}  \int_0^{2\pi}
-    \csc(\colat) \frac{\partial}{\partial \long}\Bigl(\diffcoeff (\colat,\long)\frac{\partial T}{\partial \long}\Bigr) 
+    \csc(\colat) \frac{\partial}{\partial \long}\Bigl(\diffcoeff (\colat,\long)\frac{\partial T}{\partial \long}\Bigr)
     R_E^2  \d \long \d \colat
 =&
 R_E^2 \int_0^{\frac{h}{2}} \csc(\colat)
     \int_0^{2\pi}
-    \frac{\partial}{\partial \long}\Bigl(\diffcoeff (\colat,\long)\frac{\partial T}{\partial \long}\Bigr) \d \long 
+    \frac{\partial}{\partial \long}\Bigl(\diffcoeff (\colat,\long)\frac{\partial T}{\partial \long}\Bigr) \d \long
     \d \colat
 \\
 =&
 R_E^2 \int_0^{\frac{h}{2}} \csc(\colat)
     \underbrace{\left[
-    \diffcoeff (\colat,\long)\frac{\partial T}{\partial \long} \right]_0^{2\pi}}_{=0} 
+    \diffcoeff (\colat,\long)\frac{\partial T}{\partial \long} \right]_0^{2\pi}}_{=0}
     \d \colat
 \\
 =& 0.
@@ -306,20 +306,20 @@ R_E^2 \int_0^{\frac{h}{2}} \csc(\colat)
 Similarly, we can use the fundamental theorem of calculus to integrate the second term in the right-hand side of \eqref{eq:difftermpole_weak} over the colatitude:
 \begin{align}
 \int_0^{\frac{h}{2}} \int_0^{2\pi} \diffop(\colat,\long) R_E^2 \sin \colat \d \long \d \colat =&
-    R_E^2 \int_0^{2\pi} \int_0^{\frac{h}{2}} 
+    R_E^2 \int_0^{2\pi} \int_0^{\frac{h}{2}}
      \frac{\partial }{\partial \colat} \left( \diffcoeff (\colat,\long) \sin (\colat) \partialderiv{T}{\colat} \right)
      \d \colat \d \long
 \\
-=& 
+=&
 R_E^2
-\int_0^{2\pi} 
-\left[  \diffcoeff (\colat,\long) \sin (\colat) \partialderiv{T}{\colat} \right]_0^{\frac{h}{2}} 
+\int_0^{2\pi}
+\left[  \diffcoeff (\colat,\long) \sin (\colat) \partialderiv{T}{\colat} \right]_0^{\frac{h}{2}}
 \d \long
 \\
-=& 
+=&
 R_E^2
-\int_0^{2\pi} 
-\diffcoeff \left( \frac{h}{2} ,\long \right) \sin \left( \frac{h}{2} \right) \partialderiv{T}{\colat} \bigg\rvert_{\colat=\frac{h}{2}}  
+\int_0^{2\pi}
+\diffcoeff \left( \frac{h}{2} ,\long \right) \sin \left( \frac{h}{2} \right) \partialderiv{T}{\colat} \bigg\rvert_{\colat=\frac{h}{2}}
 \d \long.
 \end{align}
 
@@ -346,18 +346,18 @@ Recall that the first entry of the array $\texttt{area}$ contains the total area
 We then obtain
 \begin{align}\label{eq:difftermpole_weak2}
 \diffop_{1,i} (\texttt{area[1]}) (4\pi R_E^2)
-=& 
+=&
 R_E^2
-\int_0^{2\pi} 
-\diffcoeff \left( \frac{h}{2},\long \right) \sin \left( \frac{h}{2} \right) \partialderiv{T}{\colat} \bigg\rvert_{\colat=\frac{h}{2}}  
+\int_0^{2\pi}
+\diffcoeff \left( \frac{h}{2},\long \right) \sin \left( \frac{h}{2} \right) \partialderiv{T}{\colat} \bigg\rvert_{\colat=\frac{h}{2}}
 \d \long.
 \end{align}
 
 Now, we approximate the derivative of temperature with respect to colatitude at each discrete longitude, $\long_i$, with a central finite-difference approximation of second-order accuracy,
 $$
-\left[ 
-    \partialderiv{T}{\colat} 
-\right]_{\colat=\frac{h}{2},i} \approx 
+\left[
+    \partialderiv{T}{\colat}
+\right]_{\colat=\frac{h}{2},i} \approx
 \frac{T_{2,i}-T_{1,i}}{h},
 $$
 and the diffusion coefficient at $\colat=\frac{h}{2}$ with a simple average,
@@ -375,7 +375,7 @@ $$
 
 Finally, we approximate the integral on the right-hand side of \eqref{eq:difftermpole_weak2} with a rectangular quadrature rule to obtain
 $$\label{eq:diffop_NP}
-\diffop_{1,i} 
+\diffop_{1,i}
 =
 \frac{\sin \left( h/2 \right)}{4\pi \, \texttt{area[1]}}
 \sum_{k=1}^{\nlong}
@@ -385,7 +385,7 @@ $$
 
 Following a similar procedure, we obtain for the south pole
 $$\label{eq:diffop_SP}
-\diffop_{\nlat,i} 
+\diffop_{\nlat,i}
 =
 \frac{\sin \left( h/2 \right)}{4\pi \, \texttt{area[\nlat]}}
 \sum_{k=1}^{\nlong}
@@ -403,7 +403,7 @@ $$
 
 With the spatial discretization that we derived above, we can rewrite the PDE that describes our [$2D$ EBM in spherical coordinates](/milestone5/milestone5_heat_transfer/#eqebm_spherical) as an ODE for each degree of freedom $(j,i)$:
 $$\label{eq:semidisc_ebm_point}
-\deriv{T_{j,i}}{t} = 
+\deriv{T_{j,i}}{t} =
 \underbrace{
     \frac{L_{j,i}}{C_{j,i}} - \frac{B}{C_{j,i}} T_{j,i}
  }_{R_{j,i}(T)}
@@ -418,7 +418,7 @@ In equation \eqref{eq:semidisc_ebm_point}, $C_{j,i}$ is the point-wise heat capa
 
 We can rewrite \eqref{eq:semidisc_ebm_point} in matrix form as
 $$\label{eq:semidisc_ebm_matrix}
-\dot{\mat{T}} = 
+\dot{\mat{T}} =
 \mat{R}(\mat{T})
 +
 \mat{F}(t),

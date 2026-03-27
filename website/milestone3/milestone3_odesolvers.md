@@ -84,7 +84,7 @@ The problem is of course that the solution $y(t)$ is needed to compute the right
 We first consider a discretization of the
 time axis into small time steps $\Delta t$
 
-\fig{/assets/milestone3/TimeGrid.png}
+\fig{/assets/tikzpictures_out/time_discretization.svg}
 
 We start with the known initial value
 $$
@@ -96,7 +96,7 @@ y(t_1) - y_0 = \int_{t_0}^{t_1} f(y,t) \d t,
 $$
 and make the simplest approximation to the integral via a rectangular quadrature rule:
 
-\fig{/assets/milestone3/EulerIntegral.png}
+\fig{/assets/tikzpictures_out/integral_approximation.svg}
 
 We can use the left-sided rule,
 $$
@@ -123,7 +123,7 @@ Hence, an algebraic equation needs to be solved for every time step. This equati
 These two methods are the simplest variants of an ODE solver and are formally first-order accurate approximations (can be shown via Taylor expansion). This
 means that in general the solutions of the Euler methods are **not** exact solutions of the ODE, but have an (numerical) error.
 First-order accuracy means that the error of the numerical approximation depends **linearly** on the time-step size $\Delta t = t_{k+1} - t_k$, i.e., the error behaves like $error\sim \mathcal{O}(\Delta t^1)$. Hence, by decreasing the time-step size, the error gets smaller. However, at the same time, the number of
-time steps $\ntime$ gets larger, i.e., the amount of computations increases. 
+time steps $\ntime$ gets larger, i.e., the amount of computations increases.
 As a consequence, we aim to choose the time-step size as large as possible, but small enough to obtain
 the desired accuracy in our numerical simulation.
 
@@ -160,7 +160,8 @@ y(t) &= e^{at} e^{bti}  \\
 \end{align}
 which shows that the real part corresponds to the amplitude of the solution (which grows in time for $a>0$ and decreases for $a<0$) and that the imaginary part is the oscillatory part.
 
-\fig{/assets/milestone3/ODEsolution.png}
+\fig{/assets/tikzpictures_out/ode_solution1.svg}
+\fig{/assets/tikzpictures_out/ode_solution2.svg}
 
 We can consider a perturbed initial condition,
 $$
@@ -199,7 +200,7 @@ $$
 which shows that $|1 + \Delta t \lambda|$ is the amplification factor of the explicit Euler method.
 We can investigate for which values of $\Delta t$ this factor is smaller than $1$ to obtain:
 
-\fig{/assets/milestone3/Stability_explicit_Euler.png}
+\fig{/assets/tikzpictures_out/euler_explicit.svg}
 
 > We need that the product $(\Delta t \lambda)$ is within the marked red circle to keep the numerical amplification factor smaller than $1$!
 
@@ -225,7 +226,7 @@ are sometimes also referred to as _stiff problems_.
 The advantage of the explicit Euler method is the
 simplicity and the computationally cheap algorithm.
 The downside is that the size of the time
-step can be very low due to numerical 
+step can be very low due to numerical
 stability issues.
 
 If we consider now the **implicit** Euler method for our simple ODE \eqref{eq:simpleODE}, we obtain
@@ -238,7 +239,7 @@ In this simple case, we can directly solve the implicit equation!
 The amplification factor is now $\left| \frac{1}{1- \lambda \Delta t} \right|$, which gives the stability region of
 the implicit Euler method:
 
-\fig{/assets/milestone3/Stability_implicit_Euler.png}
+\fig{/assets/tikzpictures_out/euler_implicit.svg}
 
 This shows that the implicit Euler scheme
 is stable for all values of $\lambda \Delta t$, except for the
@@ -267,6 +268,6 @@ or implicit Euler in time.
 
 The only open question is how we can reach equilibrium in time for our simulation.
 We need to realize that the source term is periodic in time (with a period of one year).
-Hence, we are looking for a numerical solution that changes within the year, but then repeats itself for every following year afterwards. Once we have reached such an annual state, we consider that our simulation of the climate system has reached _equilibrium_ and no further change of the annual temperature will occur unless the problem definition (e.g. the parametrizations) is changed again. 
+Hence, we are looking for a numerical solution that changes within the year, but then repeats itself for every following year afterwards. Once we have reached such an annual state, we consider that our simulation of the climate system has reached _equilibrium_ and no further change of the annual temperature will occur unless the problem definition (e.g. the parametrizations) is changed again.
 
 In practice, we have to compare the yearly temperature solutions with each other, until the difference from one year to the next is smaller than a _given tolerance_.  Among the different choices of norms to compute the yearly solutions, the simplest option is to compute the Euclidean norm of the data vectors in time.
