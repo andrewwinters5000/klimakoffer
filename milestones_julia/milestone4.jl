@@ -138,18 +138,21 @@ function milestone4()
     radiative_cooling = calc_radiative_cooling_co2(co2_ppm)
 
     # Compute equilibrium for all three means
-    annual_temperature_north_, average_temperature_north_ = compute_equilibrium(timestep_euler_forward,
-                                                                                mean_heat_capacity_north,
-                                                                                mean_solar_forcing_north,
-                                                                                radiative_cooling)
-    annual_temperature_south_, average_temperature_south_ = compute_equilibrium(timestep_euler_forward,
-                                                                                mean_heat_capacity_south,
-                                                                                mean_solar_forcing_south,
-                                                                                radiative_cooling)
-    annual_temperature_total_, average_temperature_total_ = compute_equilibrium(timestep_euler_forward,
-                                                                                mean_heat_capacity_total,
-                                                                                mean_solar_forcing_total,
-                                                                                radiative_cooling)
+    (annual_temperature_north_,
+     average_temperature_north_) = compute_equilibrium(timestep_euler_forward,
+                                                       mean_heat_capacity_north,
+                                                       mean_solar_forcing_north,
+                                                       radiative_cooling)
+    (annual_temperature_south_,
+     average_temperature_south_) = compute_equilibrium(timestep_euler_forward,
+                                                       mean_heat_capacity_south,
+                                                       mean_solar_forcing_south,
+                                                       radiative_cooling)
+    (annual_temperature_total_,
+     average_temperature_total_) = compute_equilibrium(timestep_euler_forward,
+                                                       mean_heat_capacity_total,
+                                                       mean_solar_forcing_total,
+                                                       radiative_cooling)
 
     plot_mean = plot_annual_temperature_north_south(annual_temperature_north_,
                                                     annual_temperature_south_,
@@ -163,11 +166,12 @@ function milestone4()
                                                      ntimesteps)
     for j in 1:nlongitude, i in 1:nlatitude
         # I/O in Julia is pretty slow, so this takes forever with `verbose=true`.
-        annual_temperature, _ = compute_equilibrium(timestep_euler_forward,
-                                                    heat_capacity[i, j],
-                                                    solar_forcing[i, j, :],
-                                                    radiative_cooling,
-                                                    verbose=false)
+        (annual_temperature,
+         _) = compute_equilibrium(timestep_euler_forward,
+                                  heat_capacity[i, j],
+                                  solar_forcing[i, j, :],
+                                  radiative_cooling,
+                                  verbose=false)
 
         annual_temperature_pointwise[i, j, :] = annual_temperature
     end

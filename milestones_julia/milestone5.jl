@@ -25,18 +25,18 @@ struct Mesh
         csc2 = [1 / sin(h * (j - 1))^2 for j in 2:(n_latitude - 1)]
         cot = [1 / tan(h * (j - 1)) for j in 2:(n_latitude - 1)]
 
-        new(n_latitude, n_longitude, ndof, h, area, geom, csc2, cot)
+        return new(n_latitude, n_longitude, ndof, h, area, geom, csc2, cot)
     end
 end
 
 function calc_diffusion_coefficients(geo_dat)
     nlatitude, nlongitude = size(geo_dat)
 
-    coeff_ocean_poles = 0.40
+    coeff_ocean_poles = 0.4
     coeff_ocean_equator = 0.65
     coeff_equator = 0.65
     coeff_north_pole = 0.28
-    coeff_south_pole = 0.20
+    coeff_south_pole = 0.2
 
     function diffusion_coefficient(j, i)
         # Compute the j value of the equator
@@ -64,7 +64,7 @@ end
 function calc_diffusion_operator(mesh, diffusion_coeff, temperature)
     diffusion_op = similar(diffusion_coeff)
 
-    calc_diffusion_operator!(diffusion_op, mesh, diffusion_coeff, temperature)
+    return calc_diffusion_operator!(diffusion_op, mesh, diffusion_coeff, temperature)
 end
 
 # Inplace version to avoid allocations
@@ -178,16 +178,16 @@ function timestep_euler_forward_2d(temperature, t, delta_t,
         t_old = t - 1
     end
 
-    temperature[:, :, t] = temperature[:, :, t_old] +
-                           delta_t * calc_rhs_ebm_2d(temperature[:, :, t_old], mesh,
-                                           diffusion_coeff, heat_capacity,
-                                           solar_forcing[:, :, t_old],
-                                           radiative_cooling)
+    return temperature[:, :, t] = temperature[:, :, t_old] +
+                                  delta_t * calc_rhs_ebm_2d(temperature[:, :, t_old], mesh,
+                                                  diffusion_coeff, heat_capacity,
+                                                  solar_forcing[:, :, t_old],
+                                                  radiative_cooling)
 end
 
 function compute_equilibrium_2d(timestep_function, mesh, diffusion_coeff, heat_capacity,
                                 solar_forcing, radiative_cooling;
-                                max_iterations=100, rel_error=2e-5, verbose=true,
+                                max_iterations=100, rel_error=2.0e-5, verbose=true,
                                 initial_temperature=zeros((mesh.n_latitude,
                                                            mesh.n_longitude,
                                                            size(solar_forcing, 3))))

@@ -27,9 +27,9 @@ function timestep_euler_backward_2d(jacobian, delta_t)
                                                        solar_forcing[:, :, t],
                                                        radiative_cooling)
 
-        @views temperature[:, :, t] = reshape(A \ vec(temperature[:, :, t_old] +
-                                                  delta_t * source_terms),
-                                              (mesh.n_latitude, mesh.n_longitude))
+        return @views temperature[:, :, t] = reshape(A \ vec(temperature[:, :, t_old] +
+                                                         delta_t * source_terms),
+                                                     (mesh.n_latitude, mesh.n_longitude))
     end
 
     return timestep_function
@@ -51,17 +51,19 @@ function co2_evolution(jacobian, mesh, diffusion_coeff, heat_capacity, solar_for
 
     timestep_function = timestep_euler_backward_2d(jacobian, 1 / ntimesteps)
 
-    temperature_grid = 15 * ones((mesh.n_latitude, mesh.n_longitude, size(solar_forcing, 3)))
+    temperature_grid = 15 *
+                       ones((mesh.n_latitude, mesh.n_longitude, size(solar_forcing, 3)))
 
     for y in 1:n_years
         radiative_cooling = calc_radiative_cooling_co2(average_co2[y])
-        temperature_grid, area_mean_temp = compute_equilibrium_2d(timestep_function,
-                                                                  mesh, diffusion_coeff,
-                                                                  heat_capacity,
-                                                                  solar_forcing,
-                                                                  radiative_cooling,
-                                                                  rel_error=1e-2,
-                                                                  initial_temperature=temperature_grid)
+        (temperature_grid,
+         area_mean_temp) = compute_equilibrium_2d(timestep_function,
+                                                  mesh, diffusion_coeff,
+                                                  heat_capacity,
+                                                  solar_forcing,
+                                                  radiative_cooling,
+                                                  rel_error=1.0e-2,
+                                                  initial_temperature=temperature_grid)
         annual_temperatures[(ntimesteps * (y - 1) + 1):(ntimesteps * y)] = area_mean_temp
         average_temperatures[y] = sum(area_mean_temp) / ntimesteps
     end
@@ -74,12 +76,14 @@ end
 
 function plot_co2_evolution(jacobian, mesh, diffusion_coeff, heat_capacity, solar_forcing)
     annual_temperatures, average_temperatures,
-    first_year, last_year = co2_evolution(jacobian, mesh, diffusion_coeff,
-                                          heat_capacity, solar_forcing)
+    (first_year,
+     last_year) = co2_evolution(jacobian, mesh, diffusion_coeff,
+                                heat_capacity, solar_forcing)
 
     n_timesteps = length(annual_temperatures)
 
-    average_temperatures_per_month = [average_temperatures[floor(Int, (t - 1) / 48) + 1]
+    average_temperatures_per_month = [average_temperatures[floor(Int,
+                                                                                      (t - 1) / 48) + 1]
                                       for t in 1:n_timesteps]
 
     labels = first_year:10:last_year
@@ -193,11 +197,12 @@ function simulation_ziegler(geo_dat, mesh, true_longitude)
 
     jacobian = calc_jacobian_ebm_2d(mesh, diffusion_coeff, heat_capacity, 2.13)
 
-    temperature, area_mean_temp = compute_equilibrium_2d(timestep_euler_backward_2d(jacobian,
-                                                                                    1 / ntimesteps),
-                                                         mesh, diffusion_coeff, heat_capacity,
-                                                         solar_forcing,
-                                                         radiative_cooling)
+    (temperature,
+     area_mean_temp) = compute_equilibrium_2d(timestep_euler_backward_2d(jacobian,
+                                                                         1 / ntimesteps),
+                                              mesh, diffusion_coeff, heat_capacity,
+                                              solar_forcing,
+                                              radiative_cooling)
 
     # Copied from MS4
     # Area mean of pointwise annual temperature
@@ -243,11 +248,12 @@ function milestone6()
 
     jacobian = calc_jacobian_ebm_2d(mesh, diffusion_coeff, heat_capacity)
 
-    temperature, _ = compute_equilibrium_2d(timestep_euler_backward_2d(jacobian,
-                                                                       1 / ntimesteps),
-                                            mesh, diffusion_coeff, heat_capacity,
-                                            solar_forcing,
-                                            radiative_cooling)
+    (temperature,
+     _) = compute_equilibrium_2d(timestep_euler_backward_2d(jacobian,
+                                                            1 / ntimesteps),
+                                 mesh, diffusion_coeff, heat_capacity,
+                                 solar_forcing,
+                                 radiative_cooling)
 
     plot_mean_temperature = plot_temperature(temperature, geo_dat, 1)
 

@@ -12,7 +12,7 @@ function calc_area(geo_dat)
     area[1] = area[end] = 0.5 * (1 - cos(0.5 * delta_theta))
 
     # Inner cells
-    for j in 2:nlatitude-1
+    for j in 2:(nlatitude - 1)
         area[j] = sin(0.5 * delta_theta) * sin(delta_theta * (j - 1)) / nlongitude
     end
 
@@ -163,18 +163,20 @@ function milestone3()
     radiative_cooling_ = calc_radiative_cooling_co2(co2_ppm)
 
     # Compute and plot temperature with Euler forward
-    annual_temperature_, average_temperature_ = compute_equilibrium(timestep_euler_forward,
-                                                                    mean_heat_capacity_,
-                                                                    mean_solar_forcing_,
-                                                                    radiative_cooling_)
+    (annual_temperature_,
+     average_temperature_) = compute_equilibrium(timestep_euler_forward,
+                                                 mean_heat_capacity_,
+                                                 mean_solar_forcing_,
+                                                 radiative_cooling_)
     plot_forward = plot_annual_temperature(annual_temperature_, average_temperature_,
                                            "Annual temperature with CO2 = $co2_ppm [ppm]")
 
     # Compute and plot temperature with Euler backward
-    annual_temperature_, average_temperature_ = compute_equilibrium(timestep_euler_backward,
-                                                                    mean_heat_capacity_,
-                                                                    mean_solar_forcing_,
-                                                                    radiative_cooling_)
+    (annual_temperature_,
+     average_temperature_) = compute_equilibrium(timestep_euler_backward,
+                                                 mean_heat_capacity_,
+                                                 mean_solar_forcing_,
+                                                 radiative_cooling_)
     plot_backward = plot_annual_temperature(annual_temperature_, average_temperature_,
                                             "Annual temperature with CO2 = $co2_ppm [ppm]")
 
