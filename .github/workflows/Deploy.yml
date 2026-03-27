@@ -26,12 +26,12 @@ jobs:
         sudo apt update
         sudo apt install pdf2svg
         mkdir website/_assets/tikzpictures_out
-        echo "Converting tikz PDF to SVG..."
         for file in latex/tikzpictures/*.pdf; do
           # Skip if no PDF files are found
           if [[ ! -e "$file" ]]; then continue; fi
           filename=$(basename "$file" .pdf)
-          pdf2svg "${filename}.pdf" "website/_assets/tikzpictures_out/${filename}.svg"
+          echo "Converting $filename.pdf to SVG..."
+          pdf2svg "latex/tikzpictures/${filename}.pdf" "website/_assets/tikzpictures_out/${filename}.svg"
         done
     - name: Copy generated PDF files
       run: |
