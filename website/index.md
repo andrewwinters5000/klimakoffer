@@ -18,4 +18,4 @@ Bachelor (final year) and master (early) students of science, technology, engine
 ## Disclaimer
 
 The whole course material is open source and can be freely used for educational
-purpose. In case of any questions, do not hesitate to contact us.
+purpose: [https://github.com/numsim-group/klimakoffer](https://github.com/numsim-group/klimakoffer).
