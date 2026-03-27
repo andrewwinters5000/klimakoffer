@@ -30,19 +30,19 @@ Annual Temperature calculated with the 2D-EBM model:
 
 Plot of the mean and average temperature calculated by using the 2D-EBM and then averaging over the results:
 
-[Mean temperature plot](/assets/milestone_results/milestone6_temperature.png)
+![Mean temperature plot](/assets/milestone_results/milestone6_temperature.png)
 
 ### Cologne Temperature using the 2D-EBM
 
 Cologne temperature calculated using the 2D-EBM model:
 
-[Cologne temperature plot](/assets/milestone_results/milestone6_cologne.png)
+![Cologne temperature plot](/assets/milestone_results/milestone6_cologne.png)
 
 ### Temperature for the NASA CO2 Data
 
 Annual Temperatures from 1959 to 2020 based on NASA CO2 data:
 
-[Temperature for NASA CO2 data](/assets/milestone_results/milestone6_temperature_co2.png)
+![Temperature for NASA CO2 data](/assets/milestone_results/milestone6_temperature_co2.png)
 
 ### Mean Temperature Plot for Ziegler's data
 
