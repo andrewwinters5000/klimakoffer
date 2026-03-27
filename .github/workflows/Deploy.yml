@@ -14,10 +14,6 @@ jobs:
       uses: actions/checkout@v2
       with:
         persist-credentials: false
-    - name: Install pdf2svg
-      run: |
-        sudo apt update
-        sudo apt install pdf2svg
     - name: Compile LaTeX documents
       uses: xu-cheng/latex-action@v4
       with:
@@ -30,15 +26,17 @@ jobs:
           latex/milestone-5/main.tex
           latex/milestone-6/main.tex
           latex/tikzpictures/bathtub.tex
-        post_compile: |
-          pdf2svg latex/tikzpictures/bathtub.pdf latex/tikzpictures/bathtub.svg
-    - name: Copy generated PDF and SVG files
+    - name: Convert tikz PDF to SVG
+      run: |
+        sudo apt update
+        sudo apt install pdf2svg
+        mkdir website/_assets/tikzpictures_out
+        pdf2svg latex/tikzpictures/bathtub.pdf website/_assets/tikzpictures_out/bathtub.svg
+    - name: Copy generated PDF files
       run: |
         for i in {1..6}; do
           cp "latex/milestone-$i/main.pdf" "website/_assets/milestone$i/description.pdf"
         done
-        mkdir website/_assets/tikzpictures_out
-        cp latex/tikzpictures/bathtub.svg website/_assets/tikzpictures_out/bathtub.svg
     - name: Copy Scripts
       run: |
         mkdir website/_assets/scripts
