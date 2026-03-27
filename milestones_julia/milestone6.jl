@@ -296,6 +296,7 @@ function milestone6()
         plot_temperature(temperature, geo_dat, ts)
     end
 
+    plot_temperature_day_80 = plot_temperature(temperature, geo_dat, 1)
     gif_temperature = gif(anim, joinpath(@__DIR__, "annual_temperature.gif"), fps=7)
 
     # Show the plots
@@ -307,5 +308,5 @@ function milestone6()
     display(gif_temperature)
 
     return plot_mean_temperature, plot_temperature_, plot_cologne,
-           plot_temperature_co2, plot_ziegler, gif_temperature
+           plot_temperature_co2, plot_ziegler, plot_temperature_day_80, gif_temperature
 end

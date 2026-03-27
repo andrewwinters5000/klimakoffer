@@ -212,6 +212,7 @@ function milestone4()
         plot_temperature(annual_temperature_pointwise, geo_dat, ts)
     end
 
+    plot_temperature_day_80 = plot_temperature(annual_temperature_pointwise, geo_dat, 1)
     gif_annual_temperature = gif(anim, joinpath(@__DIR__, "annual_temperature.gif"), fps=7)
 
     # Show all plots and the animation
@@ -220,5 +221,6 @@ function milestone4()
     display(plot_cologne)
     display(gif_annual_temperature)
 
-    return plot_mean, plot_pointwise, plot_cologne, gif_annual_temperature
+    return plot_mean, plot_pointwise, plot_cologne, plot_temperature_day_80,
+           gif_annual_temperature
 end

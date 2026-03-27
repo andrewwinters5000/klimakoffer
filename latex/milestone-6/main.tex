@@ -11,7 +11,7 @@
 \usepackage{libertine}
 \usepackage[pdftex]{hyperref}
 \usepackage{refcount}
-\usepackage{framed} 
+\usepackage{framed}
 \usepackage{xcolor}
 \usepackage{multicol}
 \usepackage{enumitem}
@@ -50,7 +50,7 @@ An Introduction to Climate Modeling}\\
 \section{Fixing Stability in the spatial 2D Energy Balance Model}
 \begin{enumerate}
 
-\item In the previous milestone you have implemented the spatial operator of the diffusive EBM for two spatial dimensions. The investigations of the eigenvalues revealed that the stable time step of the explicit Euler method is prohibitively small. Hence, we focus on the implicit Euler method. Adapt the function\\ 
+\item In the previous milestone you have implemented the spatial operator of the diffusive EBM for two spatial dimensions. The investigations of the eigenvalues revealed that the stable time step of the explicit Euler method is prohibitively small. Hence, we focus on the implicit Euler method. Adapt the function\\
 csmall\texttt{\detokenize{calc_equilibrium_2d }}\normalsize to use the backward Euler instead of the forward Euler time integration method. Visualize the results as an animation.
 
 \item  Use the functions \small\texttt{\detokenize{calc_area_mean}}\normalsize, \small\texttt{\detokenize{calc_area_mean_north }}\normalsize and \small\texttt{\detokenize{calc_area_mean_south }}\normalsize  from previous milestones to compute the mean temperature values from the EBM in two space dimensions. Compare them with the results in milestone 4. Compare also the results for the temperature in Cologne. What is noticeable?
@@ -73,22 +73,22 @@ Compare your results with the temperatures calculated in 1.
 \section{Control Solutions}
 
 \begin{figure}[!htb]
-\includegraphics[width=0.6\linewidth,center]{figs/annual_temperature_milestone_6.png}
+\includegraphics[width=0.6\linewidth,center]{../../website/_assets/milestone_results/milestone6_temperature.png}
 \caption{2D EBM results for the mean temperatures}
 \end{figure}
 
 \begin{figure}[!htb]
-\includegraphics[width=0.6\linewidth,center]{figs/temperature_cologne_milestone_6.png}
+\includegraphics[width=0.6\linewidth,center]{../../website/_assets/milestone_results/milestone6_cologne.png}
 \caption{2D EBM results for the temperature in Cologne}
 \end{figure}
 
 \begin{figure}[!htb]
-\includegraphics[width=0.6\linewidth,center]{figs/annual_temperature_day_80.png}
+\includegraphics[width=0.6\linewidth,center]{../../website/_assets/milestone_results/milestone6_temperature_day_80.png}
 \caption{2D EBM results for the temperatures on day 80}
 \end{figure}
 
 \begin{figure}[!htb]
-\includegraphics[width=0.7\linewidth,center]{figs/annual_temperatures_nasa.png}
+\includegraphics[width=0.7\linewidth,center]{../../website/_assets/milestone_results/milestone6_temperature_co2.png}
 \caption{2D EBM based on NASA data}
 \end{figure}
 
