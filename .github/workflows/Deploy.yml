@@ -33,10 +33,8 @@ jobs:
     - name: Copy Scripts
       run: |
         mkdir website/_assets/scripts
-        cp milestones_julia/* website/_assets/scripts
-        cp milestones_python/* website/_assets/scripts
-        mkdir website/_assets/scripts/input
-        cp milestones_julia/input website/_assets/scripts/input
+        cp -r milestones_julia/* website/_assets/scripts
+        cp -r milestones_python/* website/_assets/scripts
     # NOTE: Python is necessary for the pre-rendering (minification) step
     - name: Install python
       uses: actions/setup-python@v2
