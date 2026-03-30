@@ -26,6 +26,8 @@ Calculated with the forward Euler method. Plot for the backward Euler is almost 
 
 ![Annual temperature plot](/assets/milestone_results/milestone3_forward.png)
 
+\warn{We strongly suggest to first work on the solutions on your own/within your group without checking directly for the reference solutions.}    
+
 ## Files Download
 
 The Julia and Python implementations of milestone 3 can be downloaded here:

@@ -30,6 +30,8 @@ Plot of the upper left corner of the sparsity pattern of the Jacobian. Only a th
 
 ![Sparsity pattern of the Jacobian](/assets/milestone_results/milestone5_jacobian.png)
 
+\warn{We strongly suggest to first work on the solutions on your own/within your group without checking directly for the reference solutions.}
+
 ## Files Download
 
 The Python implementation of milestone 5 can be downloaded here (Julia version will be added soon):

@@ -19,6 +19,8 @@ This is an example for the expected result:
 ![Geography plot](/assets/milestone_results/milestone1_geo.png)
 
 
+\warn{We strongly suggest to first work on the solutions on your own/within your group without checking directly for the reference solutions.}
+
 
 ## Files Download
 

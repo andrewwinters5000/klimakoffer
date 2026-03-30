@@ -50,6 +50,7 @@ Plot of the mean and average temperature calculated by using the 2D-EBM with Zie
 
 ![Mean temperature plot for Ziegler's data](/assets/milestone_results/milestone6_ziegler.png)
 
+\warn{We strongly suggest to first work on the solutions on your own/within your group without checking directly for the reference solutions.}
 
 ## Files Download
 

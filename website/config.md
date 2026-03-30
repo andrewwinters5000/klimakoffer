@@ -38,5 +38,8 @@ Add here global latex commands to use throughout your pages.
 \newcommand{\col}[2]{~~~<span style="color:~~~#1~~~">~~~!#2~~~</span>~~~}
 \newcommand{\diffop}{L}
 \newcommand{\diffcoeff}{\widetilde D}
+<!-- warning from https://github.com/JuliaDocs/Franklin.jl/blob/master/docs/config.md
+-->
+\newcommand{\warn}[1]{@@warning @@title ⚠ Warning!@@ @@content #1 @@ @@}
 <!-- Name of repository for GitHub pages -->
 @def prepath = "klimakoffer"

@@ -27,7 +27,7 @@ This is an example for the expected results:
 ![Solar forcing animation](/assets/milestone_results/milestone2_solar_forcing.gif)
 
 
-
+\warn{We strongly suggest to first work on the solutions on your own/within your group without checking directly for the reference solutions.}
 
 ## Files Download
 
