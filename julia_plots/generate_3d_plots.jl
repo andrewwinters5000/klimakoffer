@@ -278,12 +278,12 @@ function plot_solar_forcing_3d_anim(X,Y,Z,solar_forcing, surface_data)
             tickcolor = 888,
             tickfont = (
                 color = "rgb(255,255,255)",
-                size = 20
+                size = 15
             ),
             title="[ W / m² ]",
             titlefont = (
                 color = "rgb(255,255,255)",
-                size = 20
+                size = 15
             ),
             titleside = "right"
         )
@@ -450,7 +450,7 @@ function plot_diffusioncoefficient_3d(X,Y,Z, diffusion_coefficient, surface_data
             title="[ W / K ]",
             titlefont = (
                 color = "rgb(255,255,255)",
-                size = 20
+                size = 15
                 ),
             titleside = "right"
         )
@@ -568,12 +568,12 @@ function plot_temperature_3d_anim(X,Y,Z,temp, surface_data)
             tickcolor = 888,
             tickfont = (
                 color = "rgb(255,255,255)",
-                size = 40
+                size = 15
             ),
             title="[ ° C ]",
             titlefont = (
                 color = "rgb(255,255,255)",
-                size = 40
+                size = 15
             ),
             titleside = "right"
         )
@@ -694,7 +694,7 @@ function plot_temperature_3d_anim(X,Y,Z,temp, surface_data)
         ),
         titlefont = (
             color = "rgb(255,255,255)",
-            size = 80
+            size = 40
             ),
         updatemenus = updatemenus
     )
