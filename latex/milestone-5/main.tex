@@ -180,7 +180,7 @@ To bring \small\texttt{\detokenize{calc_diffusion_coefficients}} \normalsize int
 Note that this only works when the function parameters are of certain types, mostly Numpy types.
 Therefore, this function cannot take the mesh as a parameter and has to take the mesh's fields directly.
 
-\item[5.] Examine the sparsity pattern of the Jacobian matrix. What does the matrix look like?
+\item[5.] Examine the sparsity pattern of the Jacobian matrix. What does the matrix look like? Be aware that \texttt{spy} of Plots.jl can be very slow for large matrices when using the PythonPlot backend. If you want to examine the whole Jacobian, use the GR backend instead.
 
 \item[6.] Compute the eigenvalues of the Jacobian matrix. Determine a practical approximation to the largest time step for which the scheme is stable using the forward Euler time integration scheme.
 \end{enumerate}
@@ -196,6 +196,11 @@ Therefore, this function cannot take the mesh as a parameter and has to take the
 \begin{figure}[!htb]
 \includegraphics[width=0.6\linewidth,center]{../../website/_assets/milestone_results/milestone5_jacobian.png}
 \caption{Sparsity pattern of the upper left part of the system matrix}
+\end{figure}
+
+\begin{figure}[!htb]
+\includegraphics[width=0.6\linewidth,center]{../../website/_assets/milestone_results/milestone5_jacobian_row_major.png}
+\caption{Sparsity pattern of the upper left part of the system matrix in a row-major language like Python}
 \end{figure}
 
 

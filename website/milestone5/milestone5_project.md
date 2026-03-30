@@ -124,16 +124,8 @@ To bring *calc\_diffusion\_coefficients* into the microsecond range, we recommen
 Note that this only works when the function parameters are of certain types, mostly Numpy types.
 Therefore, this function cannot take the mesh as a parameter and has to take the mesh's fields directly.
 
-5. Examine the sparsity pattern of the Jacobian matrix. What does the matrix look like?
+5. Examine the sparsity pattern of the Jacobian matrix. What does the matrix look like? Be aware that `spy` of Plots.jl can be very slow for large matrices when using the PythonPlot backend. If you want to examine the whole Jacobian, use the GR backend instead.
 
 6. Compute the eigenvalues of the Jacobian matrix. Determine a practical approximation to the largest time step for which the scheme is stable using the forward Euler time integration scheme.
 
 [^1]: K. Zhuang, G.R. North, M.J. Stevens, _A NetCDF version of the two-dimensional energy balance model based on the full multigrid algorithm_, SoftwareX, Vol. 6, pp. 198-202, July 7, 2017.
-
-
-
-
-
-
-
-

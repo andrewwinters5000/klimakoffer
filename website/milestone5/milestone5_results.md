@@ -30,6 +30,10 @@ Plot of the upper left corner of the sparsity pattern of the Jacobian. Only a th
 
 ![Sparsity pattern of the Jacobian](/assets/milestone_results/milestone5_jacobian.png)
 
+In a row-major language like Python, the sparsity pattern looks different:
+
+![Sparsity pattern of the Jacobian in a row-major language like Python](/assets/milestone_results/milestone5_jacobian_row_major.png)
+
 \warn{We strongly suggest to first work on the solutions on your own/within your group without checking directly for the reference solutions.}
 
 ## Files Download
