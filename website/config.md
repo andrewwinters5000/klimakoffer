@@ -15,7 +15,7 @@ ignore = ["node_modules/"]
 generate_rss = false
 website_title = "An Introduction to Climate Modeling"
 website_descr = "In this course, you will learn how to implement an energy balance model for climate simulations"
-website_url   = "https://numsim-group.github.io/klimakoffer/"
+website_url   = "https://andrewwinters5000.github.io/klimakoffer/"
 +++
 
 <!--
@@ -44,4 +44,4 @@ Add here global latex commands to use throughout your pages.
 
 <!-- Name of repository for GitHub pages -->
 @def prepath     = get(ENV, "PREVIEW_FRANKLIN_PREPATH", "klimakoffer")
-@def website_url = get(ENV, "PREVIEW_FRANKLIN_WEBSITE_URL", "numsim-group.github.io")
+@def website_url = get(ENV, "PREVIEW_FRANKLIN_WEBSITE_URL", "andrewwinters5000.github.io")
