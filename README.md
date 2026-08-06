@@ -3,6 +3,7 @@
 
 This repository contains the course material and source code for a "build your own climate model" course in Julia or python.
 
+
 ## Authors
 This repository is a fork of [KlimaKoffer](https://github.com/numsim-group/klimakoffer) that is maintained independently and may differ from the upstream version.
 
