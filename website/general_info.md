@@ -15,6 +15,8 @@ tags = ["syntax", "code"]
 
 ## Goals for this Course
 
+THIS IS DUMMY TEXT TO MAKE SURE I AM COMPILING THE NEW WEBSITE FILES
+
 * Implement your own (simple) climate model from scratch. We teach you everything(!) that is necessary.
 * Get an idea about climate physics.
 * Get an idea how to describe the physics with ODEs and PDEs.
