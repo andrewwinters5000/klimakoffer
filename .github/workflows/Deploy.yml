@@ -35,6 +35,10 @@ jobs:
       with:
         version: '1' # Latest stable Julia release.
     - uses: julia-actions/cache@v2
+    - name: Remove stale CondaPkg environments
+      run: |
+        rm -rf julia_plots/.CondaPkg
+        rm -rf milestones_julia/.CondaPkg
     - name: Generate Plots
       run: |
         cd julia_plots && julia --project=. -e 'using Pkg; Pkg.instantiate(); include("generate_all.jl")'

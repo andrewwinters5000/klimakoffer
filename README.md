@@ -1,6 +1,5 @@
 # Matematisk modellering för hållbar utveckling
-***Mathematical Modelling for Sustainable Development***
-***TAMS48***
+***TAMS48 Mathematical Modelling for Sustainable Development***
 
 This repository contains the course material and source code for a "build your own climate model" course in Julia or python.
 
