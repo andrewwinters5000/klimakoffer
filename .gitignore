@@ -7,3 +7,10 @@ Manifest.toml
 website/_assets/milestone_results
 website/_assets/julia_plots_out
 **/.CondaPkg
+
+*.pdf
+*.md
+*.aux
+*.log
+*.out
+*.synctex.gz
