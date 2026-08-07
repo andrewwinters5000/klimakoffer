@@ -191,7 +191,7 @@ include(<span class=hljs-string >&quot;milestone1.jl&quot;</span>)
 
 <span class=hljs-comment ># Run code</span>
 <span class=hljs-keyword >function</span> milestone2()
-    geo_dat = read_geography(joinpath(<span class=hljs-meta >@__DIR__</span>, <span class=hljs-string >&quot;input&quot;</span>, <span class=hljs-string >&quot;The_World128x65.dat&quot;</span>))
+    geo_dat = read_geography(joinpath(<span class=hljs-meta >@__DIR__</span>, <span class=hljs-string >&quot;input&quot;</span>, <span class=hljs-string >&quot;The_World65x128.dat&quot;</span>))
 
     <span class=hljs-comment ># Plot albedo</span>
     albedo = calc_albedo(geo_dat)
@@ -403,7 +403,7 @@ include(<span class=hljs-string >&quot;milestone1.jl&quot;</span>)
 
 <span class=hljs-comment ># Run code</span>
 <span class=hljs-keyword >if</span> __name__ == <span class=hljs-string >&#x27;__main__&#x27;</span>:
-    geo_dat_ = read_geography(<span class=hljs-string >&quot;input/The_World128x65.dat&quot;</span>)
+    geo_dat_ = read_geography(<span class=hljs-string >&quot;input/The_World65x128.dat&quot;</span>)
 
     <span class=hljs-comment ># Plot albedo</span>
     albedo_ = calc_albedo(geo_dat_)
