@@ -13,9 +13,14 @@ tags = ["syntax", "code"]
 
 \toc
 
-## Goals for this Course
+TODO:
 
-THIS IS DUMMY TEXT TO MAKE SURE I AM COMPILING THE NEW WEBSITE FILES
+  1. Update the learning goals, structure, and examination
+  2. Proper LiU schedule
+  3. Organization should point to Lisam (mayeb?).
+  4. The footer of some webpages could be adjusted to include Martin and my name
+
+## Goals for this Course
 
 * Implement your own (simple) climate model from scratch. We teach you everything(!) that is necessary.
 * Get an idea about climate physics.
