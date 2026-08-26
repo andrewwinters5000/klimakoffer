@@ -254,10 +254,10 @@ if __name__ == '__main__':
 
     # Compute temperature in Linköping.
     # Linköping lies approximately in the middle of these four grid points.
-    annual_temperature_linkoping = (annual_temperature_pointwise[9, 67, :] +
-                                    annual_temperature_pointwise[9, 68, :] +
-                                    annual_temperature_pointwise[10, 67, :] +
-                                    annual_temperature_pointwise[10, 68, :]) / 4
+    annual_temperature_linkoping = (temperature_[9, 67, :] +
+                                    temperature_[9, 68, :] +
+                                    temperature_[10, 67, :] +
+                                    temperature_[10, 68, :]) / 4
     average_temperature_linkoping = np.sum(annual_temperature_linkoping) / ntimesteps_
 
     plot_annual_temperature(annual_temperature_linkoping, average_temperature_linkoping,
