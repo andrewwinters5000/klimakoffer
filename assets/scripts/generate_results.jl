@@ -34,12 +34,12 @@ plot_forward, plot_backward = milestone3()
 savefig(plot_forward, joinpath(outdir, "milestone3_forward.png"))
 
 include("milestone4.jl")
-(plot_mean, plot_pointwise, plot_cologne, plot_temperature_day_80,
+(plot_mean, plot_pointwise, plot_linkoping, plot_temperature_day_80,
  gif_annual_temperature) = milestone4()
 
 savefig(plot_mean, joinpath(outdir, "milestone4_mean.png"))
 savefig(plot_pointwise, joinpath(outdir, "milestone4_pointwise.png"))
-savefig(plot_cologne, joinpath(outdir, "milestone4_cologne.png"))
+savefig(plot_linkoping, joinpath(outdir, "milestone4_linkoping.png"))
 savefig(plot_temperature_day_80, joinpath(outdir, "milestone4_temperature_day_80.png"))
 
 # Move GIF file to output directory
@@ -112,10 +112,10 @@ plot_jacobian_row_major_ = plot_jacobian_row_major()
 savefig(plot_jacobian_row_major_, joinpath(outdir, "milestone5_jacobian_row_major.png"))
 
 include("milestone6.jl")
-(plot_mean_temperature, plot_temperature_, plot_cologne, plot_temperature_co2,
+(plot_mean_temperature, plot_temperature_, plot_linkoping, plot_temperature_co2,
  plot_ziegler, plot_temperature_day_80, gif_temperature) = milestone6()
 savefig(plot_temperature_, joinpath(outdir, "milestone6_temperature.png"))
-savefig(plot_cologne, joinpath(outdir, "milestone6_cologne.png"))
+savefig(plot_linkoping, joinpath(outdir, "milestone6_linkoping.png"))
 savefig(plot_temperature_co2, joinpath(outdir, "milestone6_temperature_co2.png"))
 savefig(plot_ziegler, joinpath(outdir, "milestone6_ziegler.png"))
 savefig(plot_temperature_day_80, joinpath(outdir, "milestone6_temperature_day_80.png"))

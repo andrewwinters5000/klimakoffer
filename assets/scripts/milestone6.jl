@@ -276,15 +276,17 @@ function milestone6()
                                                             average_temperature_south,
                                                             average_temperature_total)
 
-    # Compute temperature in Cologne.
-    # Cologne lies about halfway between these two grid points.
-    annual_temperature_cologne = (temperature[15, 68, :] +
-                                  temperature[15, 69, :]) / 2
-    average_temperature_cologne = sum(annual_temperature_cologne) / ntimesteps
+    # Compute temperature in Linköping.
+    # Linköping lies approximately in the middle of these four grid points.
+    annual_temperature_linkoping = (temperature[10, 68, :] +
+                                    temperature[10, 69, :] +
+                                    temperature[11, 68, :] +
+                                    temperature[11, 69, :]) / 4
+    average_temperature_linkoping = sum(annual_temperature_linkoping) / ntimesteps
 
-    plot_cologne = plot_annual_temperature(annual_temperature_cologne,
-                                           average_temperature_cologne,
-                                           "Annual temperature with CO2 = $co2_ppm [ppm] in Cologne")
+    plot_linkoping = plot_annual_temperature(annual_temperature_linkoping,
+                                            average_temperature_linkoping,
+                                            "Annual temperature with CO2 = $co2_ppm [ppm] in Linköping")
 
     plot_temperature_co2 = plot_co2_evolution(jacobian, mesh, diffusion_coeff,
                                               heat_capacity, solar_forcing)
@@ -302,11 +304,11 @@ function milestone6()
     # Show the plots
     display(plot_mean_temperature)
     display(plot_temperature_)
-    display(plot_cologne)
+    display(plot_linkoping)
     display(plot_temperature_co2)
     display(plot_ziegler)
     display(gif_temperature)
 
-    return plot_mean_temperature, plot_temperature_, plot_cologne,
+    return plot_mean_temperature, plot_temperature_, plot_linkoping,
            plot_temperature_co2, plot_ziegler, plot_temperature_day_80, gif_temperature
 end
