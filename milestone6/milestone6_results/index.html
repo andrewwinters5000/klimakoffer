@@ -278,10 +278,10 @@ include(<span class=hljs-string >&quot;milestone5.jl&quot;</span>)
 
     <span class=hljs-comment ># Compute temperature in Linköping.</span>
     <span class=hljs-comment ># Linköping lies approximately in the middle of these four grid points.</span>
-    annual_temperature_linkoping = (temperature[<span class=hljs-number >10</span>, <span class=hljs-number >68</span>, :] +
-                                    temperature[<span class=hljs-number >10</span>, <span class=hljs-number >69</span>, :])/<span class=hljs-number >2</span><span class=hljs-comment ># +</span>
-                                    <span class=hljs-comment ># temperature[11, 68, :] +</span>
-                                    <span class=hljs-comment ># temperature[11, 69, :]) / 4</span>
+    annual_temperature_linkoping = (temperature[<span class=hljs-number >9</span>, <span class=hljs-number >68</span>, :] +
+                                    temperature[<span class=hljs-number >9</span>, <span class=hljs-number >69</span>, :] +
+                                    temperature[<span class=hljs-number >10</span>, <span class=hljs-number >68</span>, :] +
+                                    temperature[<span class=hljs-number >10</span>, <span class=hljs-number >69</span>, :]) / <span class=hljs-number >4</span>
     average_temperature_linkoping = sum(annual_temperature_linkoping) / ntimesteps
 
     plot_linkoping = plot_annual_temperature(annual_temperature_linkoping,
