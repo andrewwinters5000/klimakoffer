@@ -278,12 +278,10 @@ function milestone6()
 
     # Compute temperature in Linköping.
     # Linköping lies approximately in the middle of these four grid points.
-    # annual_temperature_linkoping = (temperature[10, 68, :] +
-    #                                 temperature[10, 69, :] +
-    #                                 temperature[11, 68, :] +
-    #                                 temperature[11, 69, :]) / 4
     annual_temperature_linkoping = (temperature[10, 68, :] +
-                                    temperature[11, 68, :]) / 2
+                                    temperature[10, 69, :])/2# +
+                                    # temperature[11, 68, :] +
+                                    # temperature[11, 69, :]) / 4
     average_temperature_linkoping = sum(annual_temperature_linkoping) / ntimesteps
 
     plot_linkoping = plot_annual_temperature(annual_temperature_linkoping,
