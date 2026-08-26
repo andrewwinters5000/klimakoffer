@@ -197,15 +197,17 @@ function milestone4()
                                                          average_temperature_south_,
                                                          average_temperature_total_)
 
-    # Compute temperature in Cologne.
-    # Cologne lies about halfway between these two grid points.
-    annual_temperature_cologne = (annual_temperature_pointwise[15, 68, :] +
-                                  annual_temperature_pointwise[15, 69, :]) / 2
-    average_temperature_cologne = sum(annual_temperature_cologne) / ntimesteps
+    # Compute temperature in Linköping.
+    # Linköping lies approximately in the middle of these four grid points.
+    annual_temperature_linkoping = (annual_temperature_pointwise[10, 68, :] +
+                                    annual_temperature_pointwise[10, 69, :] +
+                                    annual_temperature_pointwise[11, 68, :] +
+                                    annual_temperature_pointwise[11, 69, :]) / 4
+    average_temperature_linkoping = sum(annual_temperature_linkoping) / ntimesteps
 
-    plot_cologne = plot_annual_temperature(annual_temperature_cologne,
-                                           average_temperature_cologne,
-                                           "Annual temperature with CO2 = $co2_ppm [ppm] in Cologne")
+    plot_linkoping = plot_annual_temperature(annual_temperature_linkoping,
+                                            average_temperature_linkoping,
+                                            "Annual temperature with CO2 = $co2_ppm [ppm] in Linköping")
 
     # Animate annual temperature
     anim = @animate for ts in 1:ntimesteps
@@ -218,9 +220,9 @@ function milestone4()
     # Show all plots and the animation
     display(plot_mean)
     display(plot_pointwise)
-    display(plot_cologne)
+    display(plot_linkoping)
     display(gif_annual_temperature)
 
-    return plot_mean, plot_pointwise, plot_cologne, plot_temperature_day_80,
+    return plot_mean, plot_pointwise, plot_linkoping, plot_temperature_day_80,
            gif_annual_temperature
 end

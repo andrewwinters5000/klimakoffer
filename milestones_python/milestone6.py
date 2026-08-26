@@ -252,14 +252,16 @@ if __name__ == '__main__':
                                         annual_mean_temperature_total_, average_temperature_north_,
                                         average_temperature_south_, average_temperature_total_)
 
-    # Compute temperature in Cologne.
-    # Cologne lies about halfway between these two grid points.
-    annual_temperature_cologne = (temperature_[14, 67, :] +
-                                  temperature_[14, 68, :]) / 2
-    average_temperature_cologne = np.sum(annual_temperature_cologne) / ntimesteps_
+    # Compute temperature in Linköping.
+    # Linköping lies approximately in the middle of these four grid points.
+    annual_temperature_linkoping = (annual_temperature_pointwise[9, 67, :] +
+                                    annual_temperature_pointwise[9, 68, :] +
+                                    annual_temperature_pointwise[10, 67, :] +
+                                    annual_temperature_pointwise[10, 68, :]) / 4
+    average_temperature_linkoping = np.sum(annual_temperature_linkoping) / ntimesteps_
 
-    plot_annual_temperature(annual_temperature_cologne, average_temperature_cologne,
-                            f"Annual temperature_ with CO2 = {co2_ppm_} [ppm] in Cologne")
+    plot_annual_temperature(annual_temperature_linkoping, average_temperature_linkoping,
+                            f"Annual temperature with CO2 = {co2_ppm} [ppm] in Linköping")
 
     plot_co2_evolution(jacobian_, mesh_, diffusion_coeff_, heat_capacity_, solar_forcing_)
 

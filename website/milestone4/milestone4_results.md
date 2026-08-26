@@ -29,11 +29,11 @@ Plot of the mean and average temperature calculated by using a 0D-EBM for every 
 
 ![Pointwise temperature plot](/assets/milestone_results/milestone4_pointwise.png)
 
-### Cologne Temperature
+### Linköping Temperature
 
-Cologne temperature calculated via the pointwise 0D-EBM
+Linköping temperature calculated via the pointwise 0D-EBM
 
-![Cologne temperature plot](/assets/milestone_results/milestone4_cologne.png)
+![Linköping temperature plot](/assets/milestone_results/milestone4_linkoping.png)
 
 ### Annual Temperature Animation
 Annual temperature with the pointwise 0D-EBM:

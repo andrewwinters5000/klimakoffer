@@ -104,7 +104,7 @@ answers that are scientifically robust.
 
 **Comment**: For the interested student, we
 recommend to attend other specialized courses
-available at UoC or read detailed
+available at LiU or read detailed
 lecture notes such as for instance: [Stocker, "Introduction to Climate Modeling". Universität Bern](https://climatehomes.unibe.ch/~stocker/papers/stocker18icm.pdf), published by [Springer (closed access, not available on the university network)](https://link.springer.com/book/10.1007/978-3-642-00773-6).
 
 With this introductory discussion on the climate

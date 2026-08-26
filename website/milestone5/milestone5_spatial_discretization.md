@@ -223,7 +223,7 @@ In fact, \eqref{eq:disc_term1} and \eqref{eq:disc_term3} are not well defined fo
 
 To deal with the pole problem, we use the techniques proposed in the following papers:
 
-> Bates, J. R., Semazzi, F. H. M., Higgins, R. W., & Barros, S. R. (1990). Integration of the shallow water equations on the sphere using a vector semi-Lagrangian scheme with a multigrid solver. Monthly Weather Review, 118(8), 1615-1627.
+> [Bates, J. R., Semazzi, F. H. M., Higgins, R. W., & Barros, S. R. (1990). Integration of the shallow water equations on the sphere using a vector semi-Lagrangian scheme with a multigrid solver. Monthly Weather Review, 118(8), 1615-1627.](https://journals.ametsoc.org/view/journals/mwre/118/8/1520-0493_1990_118_1615_iotswe_2_0_co_2.xml)
 
 > [Barros, S. R., & Garcia, C. I. (2004). A global semi-implicit semi-Lagrangian shallow-water model on locally refined grids. Monthly weather review, 132(1), 53-65.](https://journals.ametsoc.org/downloadpdf/journals/mwre/132/1/1520-0493_2004_132_0053_agsssm_2.0.co_2.xml)
 

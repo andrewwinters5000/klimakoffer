@@ -32,11 +32,11 @@ Plot of the mean and average temperature calculated by using the 2D-EBM and then
 
 ![Mean temperature plot](/assets/milestone_results/milestone6_temperature.png)
 
-### Cologne Temperature using the 2D-EBM
+### Linköping Temperature using the 2D-EBM
 
-Cologne temperature calculated using the 2D-EBM model:
+Linköping temperature calculated using the 2D-EBM model:
 
-![Cologne temperature plot](/assets/milestone_results/milestone6_cologne.png)
+![Linköping temperature plot](/assets/milestone_results/milestone6_linkoping.png)
 
 ### Temperature for the NASA CO2 Data
 

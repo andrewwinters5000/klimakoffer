@@ -29,8 +29,13 @@
 University of Cologne\\}
 \small Prof. Dr. Gregor Gassner \\
 \end{minipage}
-\hfill
 \begin{minipage}{.3\textwidth}
+{\scshape Department of Mathematics \\
+Link\"{o}ping University\\}
+\small Andrew R. Winters \\
+\end{minipage}
+\hfill
+\begin{minipage}{.15\textwidth}
 \begin{flushright}
 %\includegraphics[width=3cm]{figs/logo-uni-koeln.jpg}\\
 \today
@@ -72,19 +77,19 @@ A (c) = 210.3-5.35 \log\left(\frac{c}{c_0}\right).
 
 
 
-% \section{Bonus}
+ \section{Bonus}
 
-% \begin{enumerate}
-% \item Calculate the temperature evolution with a function \small\texttt{\detokenize{calc_evolution}} \normalsize similar to the function in task 4. This time use for the parameter $A$ transient $CO_2$ concentrations, which you can take from the input file \small\texttt{\detokenize{co2_mm_mlo.txt}} \normalsize containing NASA $CO_2$-Data from 1958 to 2021, which means that you have to solve following equation with the backward Euler method:
+ \begin{enumerate}
+ \item Calculate the temperature evolution with a function \small\texttt{\detokenize{calc_evolution}} \normalsize similar to the function in task 4. This time for the parameter $A$ use transient $CO_2$ concentrations that you can take from the input file \small\texttt{\detokenize{co2_nasa.txt}} \normalsize containing NASA $CO_2$-Data from 1958 to 2021, which means that you have to solve following equation with the backward Euler method:
 
-% \begin{align}
-% C\frac{\partial T(t)}{\partial t}+A(t)+BT(t)=QS(t)(1-a),
-% \label{EBM2}
-% \end{align}
+ \begin{align}
+ C\frac{\partial T(t)}{\partial t}+A(t)+BT(t)=QS(t)(1-a),
+ \label{EBM2}
+ \end{align}
 
-% Thereafter plot your results.
+ Thereafter plot your results.
 
-% \end{enumerate}
+ \end{enumerate}
 
 \pagebreak
 

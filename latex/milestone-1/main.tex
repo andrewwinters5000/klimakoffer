@@ -19,6 +19,7 @@
 \usepackage{gensymb}
 \usepackage[export]{adjustbox}
 
+\DeclareMathOperator{\sinc}{sinc}
 
 \topmargin-.5in \textheight9in \oddsidemargin0in \textwidth6.5in
 
@@ -30,8 +31,13 @@
 University of Cologne\\}
 \small Prof. Dr. Gregor Gassner \\
 \end{minipage}
-\hfill
 \begin{minipage}{.3\textwidth}
+{\scshape Department of Mathematics \\
+Link\"{o}ping University\\}
+\small Andrew R. Winters \\
+\end{minipage}
+\hfill
+\begin{minipage}{.15\textwidth}
 \begin{flushright}
 %\includegraphics[width=3cm]{figs/logo-uni-koeln.jpg}\\
 \today
@@ -79,16 +85,37 @@ This function should return two matrices $X = x_{ij}$ and $Y = y_{ij}$, where $x
 \end{enumerate}
 
 
-%\newpage
+\newpage
 
-%\section{Bonus}
-%
-%\begin{enumerate}
-%\item Implement the Winkel Tripel projection as an alternative to the Robinson projection.
+\section{Bonus}
+
+\begin{enumerate}
+\item Implement the Winkel tripel projection as an alternative to the Robinson projection.
+The Winkel tripel projection is given by
+\[
+\begin{aligned}
+	x\left(\theta, \varphi \right) &= \frac{1}{2}\left(\varphi \cos\left(\theta_1\right) + \frac{2\cos(\theta)\sin\left(0.5 \varphi\right)}{\sinc(\alpha)}\right),\\[0.1cm]
+	y\left( \theta, \varphi \right) &= \frac{1}{2}\left(\theta + \frac{\sin(\theta)}{\sinc(\alpha)}\right),\\[0.1cm]
+	\alpha(\theta, \varphi) &= \arccos\left(\cos(\theta)\cos(0.5 \varphi)\right),
+\end{aligned}
+\]
+where $\theta_1$ is the standard parallel and $\sinc$ is the unnormalized sine function which are
+\[
+\theta_1 = \arccos\left(\frac{2}{\pi}\right)
+\quad
+\text{and}
+\quad
+\sinc(x) = 
+\begin{cases}
+\frac{\sin(x)}{x} & x \ne 0 \\[0.1cm]
+1 & x = 0
+\end{cases},
+\]
+respectively.
 %\item Implement a 3D visualization.
-%\item Write a function to read in NASA satellite images, which categorizes the earth surface types $g_{ij} \in \{1;2;3;5\}$ based on RGB color values.
+\item Write a function to read in NASA satellite images, e.g., from the Blue Marble Next Generation\footnote{NASA's Goddard Space Flight Center, 2004, \url{https://svs.gsfc.nasa.gov/12564}}, which categorizes the earth surface types $g_{ij} \in \{1;2;3;5\}$ based on RGB color values.
 %Plot a map mesh design based on the satellite image using a projection method of your choice.
-%\end{enumerate}
+\end{enumerate}
 
 \section{Control Solutions}
 
