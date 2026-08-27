@@ -206,8 +206,8 @@ function milestone4()
     average_temperature_linkoping = sum(annual_temperature_linkoping) / ntimesteps
 
     plot_linkoping = plot_annual_temperature(annual_temperature_linkoping,
-                                            average_temperature_linkoping,
-                                            "Annual temperature with CO2 = $co2_ppm [ppm] in Linköping")
+                                             average_temperature_linkoping,
+                                             "Annual temperature with CO2 = $co2_ppm [ppm] in Linköping")
 
     # Animate annual temperature
     anim = @animate for ts in 1:ntimesteps
