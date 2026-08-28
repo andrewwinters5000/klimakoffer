@@ -123,3 +123,18 @@ Discuss the implications of nonlinear feedbacks for climate sensitivity and the 
 References:
 - Deblonde, G., Peltier, W. R., & Hyde, W. T. (1992). Simulations of continental ice sheet growth over the last glacial-interglacial cycle: experiments with a one level seasonal energy balance model including seasonal ice albedo feedback. Global and planetary change, 6(1), 37-55. doi: [10.1016/0031-0182(92)90255-4](https://doi.org/10.1016/0031-0182(92)90255-4)
 - North, G. R., Cahalan, R. F., & Coakley Jr, J. A. (1981). Energy balance climate models. Reviews of Geophysics, 19(1), 91-121. doi: [10.1029/RG019i001p00091](https://doi.org/10.1029/RG019i001p00091)
+
+## Spatially varying climate parameters
+
+The baseline EBM uses spatially prescribed properties of the Earth's surface and atmosphere. Investigate how spatial heterogeneity in these properties affects the simulated climate.
+
+Begin by introducing spatially varying surface albedo while keeping the heat-transport coefficient constant. For instance, the albedo term could have the form
+
+Investigate the effects of continents, oceans, ice, and other surface types on the global temperature distribution.
+$$
+(1 - \alpha(x))S(x)
+$$
+where, as before, $x$ here is used for compactness to represent the latitutde and longitude coordinates.
+Be aware that sharp transitions in the albedo when transitioning to ice may require particular attention.
+
+Study how spatial resolution influences the representation of sharp transitions in albedo and diffusivity. Determine whether the resulting climate predictions converge as the spatial grid is refined.
