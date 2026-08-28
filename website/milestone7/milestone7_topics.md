@@ -13,7 +13,7 @@ tags = ["climatesystem"]
 \toc
 
 Below we list different topics that could be investigated for milestone 7.
-If your group wants to propose an alternative or modified topic, this is okay, just contact us to discuss the new projecr area.
+If your group wants to propose an alternative or modified topic, this is okay, just contact us to discuss the new project area.
 
 ## Parameter sensitivity and uncertainty
 

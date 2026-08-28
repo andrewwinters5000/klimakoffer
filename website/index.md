@@ -2,7 +2,8 @@
 @def tags = ["syntax", "code"]
 
 # Matematisk modellering för hållbar utveckling
-***TAMS48 Mathematical Modelling for Sustainable Development***
+
+**TAMS48 Mathematical Modelling for Sustainable Development**
 
 \fig{/assets/milestone_results/milestone6_annual_temperature.gif}
 
