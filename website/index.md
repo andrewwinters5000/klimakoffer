@@ -1,7 +1,8 @@
 @def title = "Klimakoffer: How to make your own Climate Model"
 @def tags = ["syntax", "code"]
 
-# Klimakoffer: Build Your Own Climate Model
+# Matematisk modellering för hållbar utveckling
+***TAMS48 Mathematical Modelling for Sustainable Development***
 
 \fig{/assets/milestone_results/milestone6_annual_temperature.gif}
 

@@ -29,6 +29,7 @@ tags = ["syntax", "code"]
 * We have 6 pre-made milestones (sub-projects) with the following structure:
   1. "Theory phase": Lectures that provide all theoretical information necessary to reach the milestone.
   2. "Implementation phase": Hands-on programming in groups. We are here to help: can be used to sit together and work on the milestones, ask questions, discussions, etc.
+* Work in groups of 4-5 students for the implementation exercises.
 * In the final part of the lecture, there will be the mysterious milestone 7.
 * The milestones build on each other, there will typically be 1 lecture session followed by 2 lab sessions.
 * For the milestones 1-6 solutions in Julia and Python are available and made accessible.
@@ -45,5 +46,5 @@ tags = ["syntax", "code"]
 
 ## Organization of the course
 
-* All announcements and internal communications will be done via [Lisam](https://liuonline.sharepoint.com/sites/Lisam_TAMS48_2026HT_CX).
+* All announcements and internal communications will be done via [Lisam](https://liuonline.sharepoint.com/sites/Lisam_TAMS48_2026HT_CX) or in the TAMS48 Teams channel.
 * If you have a question, feel free to contact Andrew or Martin via email.
