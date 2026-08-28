@@ -10,5 +10,5 @@ tags = ["ebm", "solar radiation", "orbital parameters"]
 
 # Milestone 7 (Uncertainty and beyond)
 
-[Introduction](/milestone7/introduction/)
-[Possible topics](/milestone7/introduction/)
+1. [Introduction](/milestone7/milestone7_intro/)
+2. [Possible topics](/milestone7/milestone7_topics/)
