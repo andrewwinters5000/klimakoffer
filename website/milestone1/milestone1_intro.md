@@ -143,7 +143,7 @@ as possible.
 **Remark 2:** Sometimes, the physics is well understood.
 However in many cases nature is "multi-scale".
 This means, for instance, that the spectra of
-spatial sales range from centimeter and meter
+spatial scales range from centimeter and meter
 up to 100+ km.
 We will learn that "resolution"
 makes simulations expensive to run on a computer.
@@ -165,7 +165,7 @@ PDEs+Numerics+Implementation (code/software).
 @@
 
 As mentioned above, the good news is that depending
-on the science question, some components processes
+on the science question, some component processes
 are more important than others. Hence, with
 enough expertise it is feasible to choose a
 subset of physics and consider simplified
