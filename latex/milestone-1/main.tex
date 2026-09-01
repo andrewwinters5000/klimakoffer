@@ -90,8 +90,7 @@ This function should return two matrices $X = x_{ij}$ and $Y = y_{ij}$, where $x
 \section{Bonus}
 
 \begin{enumerate}
-\item Implement the Winkel tripel projection as an alternative to the Robinson projection.
-The Winkel tripel projection is given by
+\item Implement the Winkel tripel projection, as an alternative to the Robinson projection, given by
 \[
 \begin{aligned}
 	x\left(\theta, \varphi \right) &= \frac{1}{2}\left(\varphi \cos\left(\theta_1\right) + \frac{2\cos(\theta)\sin\left(0.5 \varphi\right)}{\sinc(\alpha)}\right),\\[0.1cm]
@@ -99,7 +98,7 @@ The Winkel tripel projection is given by
 	\alpha(\theta, \varphi) &= \arccos\left(\cos(\theta)\cos(0.5 \varphi)\right),
 \end{aligned}
 \]
-where $\theta_1$ is the standard parallel and $\sinc$ is the unnormalized sine function which are
+where $\theta_1$ is the standard parallel and $\sinc$ is the unnormalized sine function that are
 \[
 \theta_1 = \arccos\left(\frac{2}{\pi}\right)
 \quad
@@ -112,8 +111,10 @@ where $\theta_1$ is the standard parallel and $\sinc$ is the unnormalized sine f
 \end{cases},
 \]
 respectively.
+\item Write a function to read in other data sets, like ICE-5G\footnote{https://www.atmosp.physics.utoronto.ca/~peltier/data.php}, originally presented and analyzed by Peltier\footnote{Peltier, W.R., Global glacial isostasy and the surface of the ice-age Earth: the ICE-5G (VM2) model and GRACE. Annual Review of Earth and Planetary Sciences, May 2004, Vol 32, 111-149.}. This function should parse this (binary) data which is provided in netCDF format. The data is given on an enriched grid, e.g., with 1$^\circ$ resolution. So, this read-in routine should also have the option to downsample the data in some way, e.g., via interpolation. After such downsampling, it can categorize the Earth surface types $g_{ij} \in \{1;2;3;5\}$ based on RGB color values for plotting.
+
+%\item Write a function to read in NASA satellite images, e.g., from the Blue Marble Next Generation\footnote{NASA's Goddard Space Flight Center, 2004, \url{https://svs.gsfc.nasa.gov/12564}}, which categorizes the earth surface types $g_{ij} \in \{1;2;3;5\}$ based on RGB color values.
 %\item Implement a 3D visualization.
-\item Write a function to read in NASA satellite images, e.g., from the Blue Marble Next Generation\footnote{NASA's Goddard Space Flight Center, 2004, \url{https://svs.gsfc.nasa.gov/12564}}, which categorizes the earth surface types $g_{ij} \in \{1;2;3;5\}$ based on RGB color values.
 %Plot a map mesh design based on the satellite image using a projection method of your choice.
 \end{enumerate}
 
