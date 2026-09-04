@@ -48,7 +48,7 @@ where $I$ is the radiation energy per time per area with units $[W/m^2]$, $T_R$ 
 For this idealized black-body Earth, the temperature is determined when the outgoing radiation is in equilibrium/balance with the incoming stellar radiation. The amount of incoming energy can be roughly estimated as $S_0\,(1-\alpha)\,\pi\,R_E^2$, where $S_0 = 1360 [W/m^2]$ is the solar constant (the mean solar elecromagnetic radiation received on Earth), $\alpha$ is the surface albedo (the amount of the solar radiation that is reflected back to space) with the planetary average being about $\alpha=0.3$ (more details in the [Albedo section](/milestone2/milestone2_albedo/)), and $R_E=6.378\cdot 10^{6} [m]$ is the radius of Earth.
 Note that the solar constant is scaled with the _effective_ area in which the solar radiation is applied on earth: $\pi\,R_E^2$.
 
-Taking into account that the surface of the sphere is $4\pi R_E^2$, the amount of outgoing energy is $\sigma_{SB} T_R^4 4\,\pi\,R_E^2$, and we get our first (simplest version of an) EBM
+Taking into account that the surface area of the sphere is $4\pi R_E^2$, the amount of outgoing energy is $\sigma_{SB} T_R^4 4\,\pi\,R_E^2$, and we get our first (simplest version of an) EBM
 $$\label{eq:blackbody}
 \sigma_{SB} T_R^4 4\,\pi\,R_E^2 = S_0\,(1-\alpha)\,\pi\,R_E^2.
 $$
@@ -75,15 +75,15 @@ It is in general motivated by available observational data, shown in the next fi
 * Measured outgoing longwave radiation as a function of the surface temperature between 1975 and 1985. Generated with data from [Graves, C. E., Lee, W. H., & North, G. R. (1993). New parameterizations and sensitivities for simple climate models. Journal of Geophysical Research: Atmospheres, 98(D3), 5025-5036](https://agupubs.onlinelibrary.wiley.com/doi/pdfdirect/10.1029/92JD02666?casa_token=X0WG_pxk8AUAAAAA:2mvPv6HgmsA467qq44RYKY8WrJZLh_Bl-lN2kzgdBLJi3-xSVh0il6g-p1PSlxda51H8YVdkx1dsxSI).
 
 The figure shows infrared radiation density plots averaged monthly, measured by satellite compared to the surface temperature at the same month and location.
-There are many measurements available in this paper, for instance whole sky (including clouds) and selected measurements with clear sky (cloudless). 
+There are many measurements available in this paper, for instance whole sky (including clouds) and selected measurements with clear sky (cloudless).
 
 If we consider the temperature in units Kelvin, we can fit the observed data with the linear model by choosing good constants $A$ and $B$ to get
 $$
 I_{IR/OLW} = A + B\,(T - 273.15).
 $$
 If we use simple linear regression for the particular set of data shown above in
-the figure, we get $A=202.1$ as the radiative cooling in units $[W/m^2]$, and $B=1.9$ as the radiative cooling feedback with units $[W/m^2/K]$. 
-It is important to note that the choice of these parameters has a direct impact on the outgoing radiation and hence on the cooling. Several other authors in the literature have fitted the data differently, hence some range of choices for $A$ and $B$ is available. 
+the figure, we get $A=202.1$ as the radiative cooling in units $[W/m^2]$, and $B=1.9$ as the radiative cooling feedback with units $[W/m^2/K]$.
+It is important to note that the choice of these parameters has a direct impact on the outgoing radiation and hence on the cooling. Several other authors in the literature have fitted the data differently, hence some range of choices for $A$ and $B$ is available.
 The values we choose for our implementation are from the paper by Zhuang et al. (2017): $A=210.3$ and $B=2.15$.
 
 We are now able to consider a second, but hopefully improved toy EBM. We replace the crude black-body radiation with a phenomenological approximation of the outgoing radiation (the Budyko model) to get
