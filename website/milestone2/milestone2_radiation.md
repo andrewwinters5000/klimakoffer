@@ -52,7 +52,7 @@ Taking into account that the surface area of the sphere is $4\pi R_E^2$, the amo
 $$\label{eq:blackbody}
 \sigma_{SB} T_R^4 4\,\pi\,R_E^2 = S_0\,(1-\alpha)\,\pi\,R_E^2.
 $$
-We can relate this simple EBM \eqref{eq:blackbody} to the [general EBM form](/milestone2/milestone2_ebm/#eqebm) by making the assumption of thermodynamic equilibrium (no temporal change $\partial T / \partial t= 0$), no heat diffusion ($d = 0$), and the following choice of source terms:
+We can relate this simple EBM \eqref{eq:blackbody} to the [general EBM form](/milestone2/milestone2_ebm/#eqebm) by making the assumption of thermodynamic equilibrium (no temporal change $\partial T / \partial t= 0$), no heat diffusion ($D = 0$), and the following choice of source terms:
 \begin{align}
 S_{sol} &= S_0\,(1-\alpha)\,\pi\,R_E^2, \\
 S_{OLW} &= - \sigma_{SB} T_R^4 4\,\pi\,R_E^2.

@@ -61,7 +61,7 @@ As mentioned, we are interested in the (surface) temperature $T(x,t)$ and its te
 $$
 \vec{f} = -D(x)\,\vec{\nabla} T,
 $$
-where the diffusion coefficient has positive entries, $D(x)\in\mathbb{R}_+$.
+where the diffusion coefficient has positive entries, $D(x)\in\mathbb{R}^+$.
 
 In this course, we consider an advanced version of the EBM where detailed solar/stellar radiation is the incoming energy source term and the outgoing longwave radiation (in the infrared) is an energy sink term, i.e., the source term has two major parts
 $$
