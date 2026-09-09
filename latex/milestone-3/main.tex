@@ -80,14 +80,29 @@ A (c) = 210.3-5.35 \log\left(\frac{c}{c_0}\right).
  \section{Bonus}
 
  \begin{enumerate}
- \item Calculate the temperature evolution with a function \small\texttt{\detokenize{calc_evolution}} \normalsize similar to the function in task 4. This time for the parameter $A$ use transient $CO_2$ concentrations that you can take from the input file \small\texttt{\detokenize{co2_nasa.txt}} \normalsize containing NASA $CO_2$-Data from 1958 to 2021, which means that you have to solve following equation with the backward Euler method:
+ \item Calculate the temperature evolution with a function \small\texttt{\detokenize{calc_evolution}} \normalsize similar to the function in task 4. This time for the parameter $A$ use transient $CO_2$ concentrations that you can take from the input file \small\texttt{\detokenize{co2_nasa.dat}} \normalsize containing NASA $CO_2$-Data from 1958 to 2025 with measurements taken from the Mauna Loa Observatory in Hawaii\footnote{https://gml.noaa.gov/ccgg/trends/mlo.html}.
+Each row of this $CO_2$ data lists:\\[0.2cm]
+year, month, decimal date, monthly average, seasonal average, \# measurements, std. deviation, uncertainty\\[0.2cm]
+For the last three entries values of $-1, -9.99, -0.99$ mean ``missing data" and should be ignored.
+
+\newpage
+
+ This means that you need to solve the following equation with the backward Euler method:
 
  \begin{align}
- C\frac{\partial T(t)}{\partial t}+A(t)+BT(t)=QS(t)(1-a),
+ \overline{C}\frac{\partial T_A(t)}{\partial t} + A(t) + BT_A(t) = \overline{S_\text{sol}}(t),
  \label{EBM2}
  \end{align}
+ with
+ \begin{align}
+A(t) = 210.3-5.35 \log\left(\frac{c}{\bar{c}_0(t)}\right),
+\label{A1}
+\end{align}
+where $\bar{c}_0(t)$ is the average $CO_2$ concentration for a given year.
 
- Thereafter plot your results.
+\item Use this transient $CO_2$ data to compute the average temperature for the year 2020.
+
+\item Create a function \small\texttt{\detokenize{calc_transient_0DEBM}} \normalsize that computes and saves the average temperature and annual temperatures for each year for which the transient $CO_2$ data is available.
 
  \end{enumerate}
 

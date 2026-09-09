@@ -14,7 +14,8 @@ tags = ["ebm", "solar radiation", "orbital parameters"]
 
 [(Download description in PDF format)](/assets/milestone3/description.pdf)\\
 [(Download *The_World65x128.dat*)](/assets/scripts/input/The_World65x128.dat)\\
-[(Download *True_Longitude.dat*)](/assets/scripts/input/True_Longitude.dat)
+[(Download *True_Longitude.dat*)](/assets/scripts/input/True_Longitude.dat)\\
+[(Download *nasa_co2.dat*)](/assets/scripts/input/nasa_co2.dat)
 
 ~~~
 <embed src="/assets/milestone3/description.pdf" width="1000" height="1000" type="application/pdf" style="width: 100%; height: 80vh;"/>
