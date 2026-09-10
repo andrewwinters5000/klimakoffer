@@ -14,7 +14,7 @@ tags = ["ebm", "solar radiation", "orbital parameters"]
 
 ---
 
-As mentioned, we need to be careful when computing spatial averages because of the spherical coordinate system. We need the averaging procedures to (i) define our simplified models, (ii) to later analyze the numerical results that we get, e.g., compute the average temperature in the southern hemisphere. We further need to define temporal averaging and apply all of this to our field data, such as, e.g., the temperature itself, the heat capacity, or the solar forcing terms. 
+As mentioned, we need to be careful when computing spatial averages because of the spherical coordinate system. We need the averaging procedures to (i) define our simplified models, (ii) to later analyze the numerical results that we get, e.g., compute the average temperature in the southern hemisphere. We further need to define temporal averaging and apply all of this to our field data, such as, e.g., the temperature itself, the heat capacity, or the solar forcing terms.
 
 ## Area average
 
@@ -75,7 +75,7 @@ A_{\text{int}} &= \frac{1}{2} \left(\cos \left(\lat_j - \frac{\Delta \lat}{2}\ri
 
 ### Implementation and data structures
 
-To compute the area average of a vector containing values at the grid points, we will directly store the normalized area entries ($\omega_{ij}$ of equation \eqref{eq:areaaverage}) in a vector of floats with length $\nlat$ that we will call `area`.
+To compute the area average of a vector containing values at the grid points, we will directly store the normalized area entries ($\omega_{ji}$ of equation \eqref{eq:areaaverage}) in a vector of floats with length $\nlat$ that we will call `area`.
 
 For instance, assuming $\nlat = 65$, we can declare the vector in Julia as
 ```julia:./define_area.jl
@@ -84,7 +84,7 @@ n_longitude = 2 * (n_latitude - 1)
 area = zeros(Float64, n_latitude)
 ```
 
-The grid size is 
+The grid size is
 $$
 \Delta \lat = \frac{\pi}{\nlat - 1}.
 $$
@@ -114,7 +114,7 @@ $$
 T(j=1,i=1) = T(j=1,i=2) = \cdots = T(j=1,i=\nlong)
 $$
 \begin{align}
-T(j=\nlat,i=1) &= T(j=\nlat,i=2) 
+T(j=\nlat,i=1) &= T(j=\nlat,i=2)
 \\
 &= \cdots = T(j=\nlat,i=\nlong)
 \end{align}
@@ -124,7 +124,7 @@ On the other hand, the solution values in the interior of the grid are in genera
 $$
 T(j,i=1) \ne T(j,i=2) \ne \cdots \ne T(j,i=\nlong),
 $$
-for $j\notin\{1,\nlat\}$. 
+for $j\notin\{1,\nlat\}$.
 That is why we store the areas of the individual cells (normalization with the factor $1/\nlong$) for the interior cells.
 @@
 
@@ -145,11 +145,11 @@ function calc_mean(field, area, n_latitude, n_longitude)
   for j in 2:n_latitude-1
       for i in 1:n_longitude
           mean += area[j] * field[j,i]
-      end 
+      end
   end
 
   return mean
-end 
+end
 ```
 
 We test our routine by computing the area average of the data $F(j,i)=1, \; \forall (j,i)$ to get the value of $1$.

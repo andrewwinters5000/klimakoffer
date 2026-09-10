@@ -29,7 +29,7 @@ where a simple physical units analysis shows that the ratio of $C$ and $B$ has t
 $$
 \tau := C / B.
 $$
-The timescale $\tau$ is the relaxation time and is about $5.9$ years for the ocean and about $5.4$ days for the land. Hence, following these arguments, we do expect to see a difference in the annual temperature distribution between south and north.
+The timescale $\tau$ is the relaxation time and is about $4.3$ years for the ocean and about $31$ days for the land. Hence, following these arguments, we do expect to see a difference in the annual temperature distribution between south and north.
 
 To investigate this behaviour we apply our time dependent EBM again, but not for the whole Earth. We are going to use one 0D-EBM for the southern hemisphere and one for the northern hemisphere. Hence, our goal is to get two OD-EBMs: for one we have to do area-averaging over the northern hemisphere
 $$
