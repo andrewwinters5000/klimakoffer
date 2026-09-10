@@ -10,7 +10,7 @@ function calc_mean(field, area, n_latitude, n_longitude)
   for j in 2:n_latitude-1
       for i in 1:n_longitude
           mean += area[j] * field[j,i]
-      end 
+      end
   end
 
   return mean

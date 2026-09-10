@@ -23,25 +23,6 @@
 
 <item>
   <title>
-    <![CDATA[  0 Literature  ]]>
-  </title>
-  <link> andrewwinters5000.github.io/literature/index.html </link>
-  <guid> andrewwinters5000.github.io/literature/index.html </guid>
-  <description>
-    <![CDATA[  Description  ]]>
-  </description>  
-    
-  <pubDate>Fri, 22 Mar 2019 00:00:00 +0000</pubDate>  
-  
-  
-  <atom:author>
-    <atom:name>Gregor Gassner and Andrés Rueda-Ramírez</atom:name>
-  </atom:author>
-        
-</item>
-
-<item>
-  <title>
     <![CDATA[  0 General Info  ]]>
   </title>
   <link> andrewwinters5000.github.io/general_info/index.html </link>
@@ -65,6 +46,25 @@
   </title>
   <link> andrewwinters5000.github.io/programming_info/index.html </link>
   <guid> andrewwinters5000.github.io/programming_info/index.html </guid>
+  <description>
+    <![CDATA[  Description  ]]>
+  </description>  
+    
+  <pubDate>Fri, 22 Mar 2019 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Gregor Gassner and Andrés Rueda-Ramírez</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
+    <![CDATA[  0 Literature  ]]>
+  </title>
+  <link> andrewwinters5000.github.io/literature/index.html </link>
+  <guid> andrewwinters5000.github.io/literature/index.html </guid>
   <description>
     <![CDATA[  Description  ]]>
   </description>  
