@@ -51,7 +51,7 @@ The idea of Budyko was to include an algebraic term that is proportional to
 $$
 \sim D\,[T(\lat) - T_{avg}],
 $$
-where $T(\lat)$ is the temperature at latitude $\lat$, $T_{avg}$ is the mean global surface temperature, and $D$ is a parameter that can be adjusted. The next figure shows a sketch of the model with energy fluxes across the latitude zones (rings), where the coefficient $D$ is denoted with $C$ in this figure.
+where $T(\lat)$ is the temperature at latitude $\lat$, $T_{avg}$ is the mean global surface temperature, and $D$ is a parameter that can be adjusted. The next figure shows a sketch of the model with energy fluxes across the latitude zones (rings).
 
 \fig{/assets/tikzpictures_out/heat_transfer_budyko.svg}
 <!-- * Figure from [https://pages.jh.edu/lhinnov1/paleoguide/tutorial2.html](https://pages.jh.edu/lhinnov1/paleoguide/tutorial2.html). -->
@@ -74,7 +74,7 @@ where $D$ is now the so-called diffusion coefficient. The diffusion coefficient 
 It is clear that all these complex processes cannot be phenomenologically modeled by a single parameter $D$. Coming back to our discussion on the different modeling strategies, we already had models based on first principles. These models are (supposed to be) universally valid and based on fundamental laws of nature with no tunable parameters. A next step was to approximate processes that can be measured with simplified models. These empirical models are tuned with parameters to approximate the behavior of the processes observed in measurements. The empircal models are still grounded in reality as they are calibrated with measurements, but include some for of parameter tuning. As an example, we had the radiation model of Budyko in milestone 2.
 
 Due to the complexity of the heat transport and the many mechanisms and processes involved, we do not consider first principle modeling, nor empirical models for the heat transfer in our EBM.
-Instead, we resort now to another strategy in modeling. We add a simple replacement model, which does not directly mimic the processes, but mimics the effect of the processes on the solution of the EBM. To be precise, we aim to model the effect of the poleward heat transfer on the resulting EBM temperature. This simple replacement model has again parameters, which cannot be tuned to measurements and observations of processes. Instead, the idea is to tune the parameters of the model such, that the resulting solution of the model (the surface temperature) behaves as realistic as possible.
+Instead, we resort now to another strategy in modeling. We add a simple replacement model, which does not directly mimic the processes, but mimics the effect of the processes on the solution of the EBM. To be precise, we aim to model the effect of the poleward heat transfer on the resulting EBM temperature. This simple replacement model, again, has parameters that cannot be tuned to measurements and observations of processes. Instead, the idea is to tune the parameters of the model such, that the resulting solution of the model (the surface temperature) behaves as realistic as possible.
 
 It is important to understand that this type of modeling is driven by data of the desired solution (temperature distribution), i.e., we fit the model to existing solutions (for instance from observations) as good as possible. So we do not tune the model of the process, but tune the outcome of the whole model. It is thus clear that such type of modeling is highly heuristic and should be used with extreme caution, as its predictive power is hard to gauge, i.e., expert knowledge and validation is necessary to give such an approach credibility.
 @@
@@ -205,19 +205,19 @@ Thus, for the actual values of the diffusion coefficients we differentiate betwe
 
 The values for oceanic grid cells in physical unit $[W/m^2/K]$ are
 $$
-\diffcoeff = \diffcoeff_{\text{ocean,poles}} + (\diffcoeff_{\text{ocean,equ}} - \diffcoeff_{\text{ocean,poles}})\,sin^5(\colat),
+\diffcoeff = \diffcoeff_{\text{ocean,poles}} + (\diffcoeff_{\text{ocean,equ}} - \diffcoeff_{\text{ocean,poles}})\,\sin^5(\colat),
 $$
 with $\diffcoeff_{\text{ocean,poles}} = 0.4$ and $\diffcoeff_{\text{ocean,equ}} = 0.65$.
 
 The values for non oceanic grid cells in the northern hemisphere in physical units $[W/m^2/K]$ are
 $$
-\diffcoeff = \diffcoeff_{\text{NP}} + (\diffcoeff_{\text{equ}} - \diffcoeff_{\text{NP}})\,sin^5(\colat),
+\diffcoeff = \diffcoeff_{\text{NP}} + (\diffcoeff_{\text{equ}} - \diffcoeff_{\text{NP}})\,\sin^5(\colat),
 $$
 with $\diffcoeff_{\text{NP}} = 0.28$ and $\diffcoeff_{\text{equ}} = 0.65$.
 
 The values for non oceanic grid cells in the southern hemisphere in physical units $[W/m^2/K]$ are
 $$
-\diffcoeff = \diffcoeff_{\text{SP}} + (\diffcoeff_{\text{equ}} - \diffcoeff_{\text{SP}})\,sin^5(\colat).
+\diffcoeff = \diffcoeff_{\text{SP}} + (\diffcoeff_{\text{equ}} - \diffcoeff_{\text{SP}})\,\sin^5(\colat).
 $$
 with $\diffcoeff_{\text{SP}} = 0.20$ and $\diffcoeff_{\text{equ}} = 0.65$.
 
