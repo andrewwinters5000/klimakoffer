@@ -390,10 +390,10 @@ version = "4.2.0+0"
 
 [[deps.LLVMOpenMP_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
-git-tree-sha1 = "b7970cef8ae1c990ba0c09cd8bdc1145e006632f"
+git-tree-sha1 = "e5b100780d4d30d63b4618d7930d48af409c1772"
 registries = "General"
 uuid = "1d63c593-3942-5779-bab2-d838dc0a180e"
-version = "22.1.7+0"
+version = "23.1.1+0"
 
 [[deps.LaTeXStrings]]
 git-tree-sha1 = "f88f3ccef05a6a72a0cf0ed417c8fd68530f4ab2"
@@ -657,11 +657,11 @@ uuid = "ccf2f8ad-2431-5c83-bf29-c5338b663b6a"
 version = "3.3.0"
 
 [[deps.PlotUtils]]
-deps = ["ColorSchemes", "Colors", "Dates", "PrecompileTools", "Printf", "Random", "Reexport", "StableRNGs", "Statistics"]
-git-tree-sha1 = "26ca162858917496748aad52bb5d3be4d26a228a"
+deps = ["ColorSchemes", "Colors", "Dates", "PrecompileTools", "Printf", "Reexport", "Statistics"]
+git-tree-sha1 = "f20e945b895d2009c6c28d8bbf40a5cd846f7c2f"
 registries = "General"
 uuid = "995b91a9-d308-5afd-9ec6-746e21dbc043"
-version = "1.4.4"
+version = "1.5.0"
 
 [[deps.Plots]]
 deps = ["Base64", "Contour", "Dates", "Downloads", "FFMPEG", "FixedPointNumbers", "GR", "JLFzf", "JSON", "LaTeXStrings", "Latexify", "LinearAlgebra", "Measures", "NaNMath", "Pkg", "PlotThemes", "PlotUtils", "PrecompileTools", "Printf", "REPL", "Random", "RecipesBase", "RecipesPipeline", "Reexport", "RelocatableFolders", "Requires", "Scratch", "Showoff", "SparseArrays", "Statistics", "StatsBase", "TOML", "UUIDs", "UnicodeFun", "Unzip"]
@@ -693,10 +693,10 @@ version = "1.3.4"
 
 [[deps.Preferences]]
 deps = ["TOML"]
-git-tree-sha1 = "8b770b60760d4451834fe79dd483e318eee709c4"
+git-tree-sha1 = "5005266de4bfe50e53ff44a5cb5c540b6e47a254"
 registries = "General"
 uuid = "21216c6a-2e73-6563-6e65-726566657250"
-version = "1.5.2"
+version = "1.6.0"
 
 [[deps.Printf]]
 deps = ["Unicode"]
@@ -848,13 +848,6 @@ deps = ["Libdl", "LinearAlgebra", "Random", "Serialization", "SuiteSparse_jll"]
 uuid = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
 version = "1.13.0"
 
-[[deps.StableRNGs]]
-deps = ["Random"]
-git-tree-sha1 = "4f96c596b8c8258cc7d3b19797854d368f243ddc"
-registries = "General"
-uuid = "860ef19b-820b-49d6-a774-d7a799459cd3"
-version = "1.0.4"
-
 [[deps.Statistics]]
 deps = ["LinearAlgebra"]
 git-tree-sha1 = "e2b53ce13a53367e96601081e33d34746b571bad"
@@ -992,10 +985,10 @@ version = "1.24.0+0"
 
 [[deps.XZ_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
-git-tree-sha1 = "b29c22e245d092b8b4e8d3c09ad7baa586d9f573"
+git-tree-sha1 = "e52eca002a11c30a858185efdfb15311e1c7a6bf"
 registries = "General"
 uuid = "ffd25f8a-64ca-5728-b0f7-c24cf3aae800"
-version = "5.8.3+0"
+version = "5.8.4+0"
 
 [[deps.Xorg_libICE_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
