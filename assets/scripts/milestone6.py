@@ -259,7 +259,7 @@ if __name__ == '__main__':
     average_temperature_linkoping = np.sum(annual_temperature_linkoping) / ntimesteps_
 
     plot_annual_temperature(annual_temperature_linkoping, average_temperature_linkoping,
-                            f"Annual temperature with CO2 = {co2_ppm} [ppm] in Linköping")
+                            f"Annual temperature with CO2 = {co2_ppm_} [ppm] in Linköping")
 
     plot_co2_evolution(jacobian_, mesh_, diffusion_coeff_, heat_capacity_, solar_forcing_)
 
