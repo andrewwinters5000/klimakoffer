@@ -47,7 +47,7 @@ How one samples this set of random numbers influences the quality and convergenc
 Therefore, Monte Carlo is a powerful, albeit brute force, technique to study the uncertainty in approximations.
 
 @@colbox-blue
-**Remark:**Monte Carlo is quite slow in terms of convergence with respect ot its representative statistics, i.e., on the order of $\mathcal{O}(1/\sqrt{n})$ for the number of samples $n$.
+**Remark:** Monte Carlo is quite slow in terms of convergence with respect ot its representative statistics, i.e., on the order of $\mathcal{O}(1/\sqrt{n})$ for the number of samples $n$.
 This is because standard Monte Carlo uses random samples that may lead to unintended clustering in stochastic space.
 Sobol sampling of the random variable space offers better convergence properties, on the order $\mathcal{O}(1/n)$, than the standard random sampling for such studies because it is a quasi-random low-discrepancy method that fills space more uniformly and provides deterministic reproducibility.
 @@
@@ -97,7 +97,7 @@ The most common variant, Metropolis-Hastings, works roughly as follows:
 The resulting chain of accepted parameter values is a set of samples *from the posterior* - and, notably, this is already an ensemble in the same sense as the Monte Carlo section above, except the samples are concentrated where the model actually agrees with observed data, rather than spread according to an assumed prior distribution alone.
 
 @@colbox-blue
-**Remark:** each step of the chain requires a full forward run of the model to evaluate the likelihood, exactly like standard Monte Carlo. For our 2D EBM, running the diffusive equilibrium solve thousands of times for a single MCMC calibration is expensive - one of the main motivations, together with the "many, many samples" issue from ordinary Monte Carlo. For the surrogate-model approach discussed next, a *cheap* ANN surrogate can stand in for the full model inside the MCMC loop, at the cost of introducing (and needing to validate) its own approximation error into the calibration.
+**Remark:** Each step of the chain requires a full forward run of the model to evaluate the likelihood, exactly like standard Monte Carlo. For our 2D EBM, running the diffusive equilibrium solve thousands of times for a single MCMC calibration is expensive - one of the main motivations, together with the "many, many samples" issue from ordinary Monte Carlo. For the surrogate-model approach discussed next, a *cheap* ANN surrogate can stand in for the full model inside the MCMC loop, at the cost of introducing (and needing to validate) its own approximation error into the calibration.
 @@
 
 ### An example: calibrating the diffusion coefficients
@@ -145,7 +145,10 @@ Because the uncertain parameter is fed in as an *input* rather than fixed at tra
 * The PINN training loop for the EBM. The network's own output is checked against the model's governing equation (via automatic differentiation, rather than a numerical discretization), against the initial/boundary constraints, and optionally against any sparse observational data available; these residuals combine into a single loss whose gradient is backpropagated into the network weights.
 
 Concretely, the total loss driving training is a weighted sum of several residual terms, evaluated at randomly sampled "collocation" points in the space-time-parameter domain:
-- **PDE residual**: using automatic differentiation to compute $\partial \hat T/\partial t$ and the diffusion operator directly from the network's own output, then penalizing any nonzero mismatch when substituted into the EBM's governing equation, $C(x)\frac{\partial \hat T}{\partial t} = \nabla\cdot(\kappa \nabla \hat T) + S_{SW} - S_{OLW}(\hat T, CO_2)$.
+- **PDE residual**: using automatic differentiation to compute $\partial T/\partial t$ and the diffusion operator directly from the network's own output, then penalizing any nonzero mismatch when substituted into the EBM's governing equation,
+$$
+C(x) \partialderiv{T}{t} + A(CO_2) + B T - \Nabla \cdot (D\Nabla T) = S_{sol}(x,t).
+$$
 - **Initial/boundary residual**: penalizing deviation from the prescribed initial temperature field and any boundary or periodicity constraints.
 - **Data residual (optional)**: if sparse, possibly noisy observational data is available (e.g. historical station temperatures), an additional term nudges the network toward matching those observations - offering a natural bridge to the Bayesian ideas above.
 
