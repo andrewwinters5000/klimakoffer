@@ -31,7 +31,7 @@ In a sense, the 1D spatial problem becomes two dimensional and a 2D spatial prob
 
 Also, there is a huge amount of flexibility in the choice of basis functions, $\Psi_k(\xi)$, for this polynomial expansion in stochastic space.
 Two common choices are Legendre polynomials or Haar wavelets, but many others are available.
-There is also some interplay with numerical errors due to the numerical method (like a finite volume or a spectral method) together with the numerical approximation error introduces by the truncated polynomial expansion in stochastic space.
+There is also some interplay with numerical errors due to the numerical method (like a finite volume or a spectral method) together with the approximation error introduces by the truncated polynomial expansion in stochastic space.
 These methods can be very high-order both in approximation and stochastic space but with a high computational cost.
 
 ## Monte Carlo
@@ -49,7 +49,7 @@ Therefore, Monte Carlo is a powerful, albeit brute force, technique to study the
 @@colbox-blue
 **Remark:** Monte Carlo is quite slow in terms of convergence with respect ot its representative statistics, i.e., on the order of $\mathcal{O}(1/\sqrt{n})$ for the number of samples $n$.
 This is because standard Monte Carlo uses random samples that may lead to unintended clustering in stochastic space.
-Sobol sampling of the random variable space offers better convergence properties, on the order $\mathcal{O}(1/n)$, than the standard random sampling for such studies because it is a quasi-random low-discrepancy method that fills space more uniformly and provides deterministic reproducibility.
+Sobol sampling of the random variable space offers better convergence properties, on the order $\mathcal{O}(1/n)$, than the standard random sampling for such studies because it is a quasi-random low-discrepancy method that fills the parameter space more uniformly and provides deterministic reproducibility.
 @@
 
 ### A Monte Carlo example regarding $A(CO_2)$
@@ -85,7 +85,7 @@ Each term has a concrete interpretation for us:
 - $p(\mathcal{D})$ is a normalizing constant and is usually the hardest term to compute directly, which is precisely why we turn to sampling-based methods rather than evaluating this formula outright.
 
 ### Markov Chain Monte Carlo (MCMC)
-In all but the simplest problems, the posterior $p(\theta\mid\mathcal{D})$ has no closed form that can written down and evaluate directly.
+In all but the simplest problems, the posterior $p(\theta\mid\mathcal{D})$ has no closed form that can written down and evaluated directly.
 MCMC methods sidestep this by constructing a random walk through parameter space whose long-run distribution of visited points *is* the posterior, without ever needing to know the normalizing constant $p(\mathcal{D})$.
 The most common variant, Metropolis-Hastings, works roughly as follows:
 1. Start from some initial guess $\theta_0$ for the parameters.
@@ -97,19 +97,19 @@ The most common variant, Metropolis-Hastings, works roughly as follows:
 The resulting chain of accepted parameter values is a set of samples *from the posterior* - and, notably, this is already an ensemble in the same sense as the Monte Carlo section above, except the samples are concentrated where the model actually agrees with observed data, rather than spread according to an assumed prior distribution alone.
 
 @@colbox-blue
-**Remark:** Each step of the chain requires a full forward run of the model to evaluate the likelihood, exactly like standard Monte Carlo. For our 2D EBM, running the diffusive equilibrium solve thousands of times for a single MCMC calibration is expensive - one of the main motivations, together with the "many, many samples" issue from ordinary Monte Carlo. For the surrogate-model approach discussed next, a *cheap* ANN surrogate can stand in for the full model inside the MCMC loop, at the cost of introducing (and needing to validate) its own approximation error into the calibration.
+**Remark:** Each step of the chain requires a full forward run of the model to evaluate the likelihood, exactly like standard Monte Carlo. For our 2D EBM, running the diffusive equilibrium solve thousands of times for a single MCMC calibration is expensive. This is one of the main motivations, together with the "many, many samples" issue from ordinary Monte Carlo, for the surrogate-model approach discussed next. A *cheap* ANN surrogate can stand in for the full model inside the MCMC loop, at the cost of introducing (and needing to validate) its own approximation error into the calibration.
 @@
 
 ### An example: calibrating the diffusion coefficients
 Concretely, one could treat the diffusion coefficients (`coeff_ocean_poles`, `coeff_ocean_equator`, `coeff_equator`, `coeff_north_pole`, `coeff_south_pole` in `calc_diffusion_coefficients`) as the uncertain parameter vector $\theta$, rather than the fixed, hand-tuned constants used throughout this course.
 Using ERA5 reanalysis surface temperature climatology as the observed data $\mathcal{D}$, an MCMC run would explore the space of diffusion coefficients, favoring choices that make the EBM's simulated meridional temperature profile track the reanalysis data closely.
-The result is not a single "best" set of diffusion coefficients, but a full posterior distribution over them - directly telling us, for instance, how tightly constrained the polar diffusion coefficient is by the available data compared to the equatorial one, and letting that calibrated uncertainty propagate into any later simulation via the same Monte Carlo machinery from before.
+The result is not a single "best" set of diffusion coefficients, but a full posterior distribution over them. This distribution then directly tells us, for instance, how tightly constrained the polar diffusion coefficient is by the available data compared to the equatorial one as well as letting that calibrated uncertainty propagate into any later simulation via the same Monte Carlo machinery from before.
 
 ## Surrogate models (ANNs)
 Turning up this idea from Bayesian inference to a logical extreme, as mathematicians like to do, we might arrive at surrogate models.
 In essence, surrogate models are built from the requirement that we have a lot of outcome data from a process, but may not know (or may not want to re-derive) the mechanism that created it.
 As strange as it sounds, this situation is quite common in computational science and engineering.
-These surrogate models serve to replace design decisions and completely eschew the design of approximate models (as we have done in this course).
+These surrogate models serve to replace design decisions and completely eschew the design of approximate models (i.e. the type of modeling we have done in this course for the diffusion coefficient).
 
 A modern approach for the creation of such surrogate models are artificial neural networks (ANNs).
 These big data strategies help remove ambiguity in the "training" of the model.
@@ -123,23 +123,23 @@ An ANN surrogate breaks this trade-off by moving the expense up front: we pay fo
 \fig{/assets/milestone6p5/ann_surrogate_workflow.png}
 * The surrogate modeling workflow: a design of experiments over the uncertain parameters (e.g. Latin hypercube or Sobol sampling of $CO_2$, diffusion coefficients, albedo parameters, etc.) generates training pairs from the full EBM; an ANN is trained on these pairs to approximate the map from parameters to a quantity of interest (e.g. annual-mean temperature); the trained network then stands in for the EBM in a large Monte Carlo ensemble.
 
-Concretely, for our 2D EBM this could mean training a network to map $(CO_2, D, \alpha) \mapsto \overline{T}$, the equilibrium global-mean surface temperature, using perhaps a few hundred full 2D EBM solves as training data. Once trained, evaluating the surrogate for a new parameter draw costs a single forward pass through the network - orders of magnitude cheaper than a fresh equilibrium solve - which makes it feasible to run the tens of thousands of samples needed for, say, a reliable estimate of a 95% confidence interval, or a global sensitivity analysis (e.g. Sobol indices) across several uncertain parameters at once.
+Concretely, for our 2D EBM this could mean training a network to map $(CO_2, D, \alpha) \mapsto T$, the equilibrium global-mean surface temperature, using perhaps a few hundred full 2D EBM solves as training data. Once trained, evaluating the surrogate for a new parameter draw costs a single forward pass through the network - orders of magnitude cheaper than a fresh equilibrium solve - which makes it feasible to run the tens of thousands of samples needed for, say, a reliable estimate of a 95% confidence interval, or a global sensitivity analysis (e.g. Sobol indices) across several uncertain parameters at once.
 
 @@colbox-blue
-**Caveats:** A surrogate is only as good as its training data. It must be validated against held-out (i.e. not used for training) full-model runs, and extrapolating a trained surrogate outside the region of parameter space it was trained on is unreliable - the network has no awareness of the underlying physics and will happily produce a smooth, confident-looking, and wrong answer outside its training envelope. This trade-off (upfront training cost and validation burden, in exchange for near-free repeated evaluation) is the central design decision in any surrogate modeling strategy.
+**Caveats:** A surrogate is only as good as its training data. It must be validated against held-out (i.e. not used for training) full-model runs, and extrapolating a trained surrogate outside the region of parameter space it was trained on is unreliable. The network has no awareness of the underlying physics and will happily produce a smooth, confident-looking, and **wrong** answer outside its training envelope. This trade-off (upfront training cost and validation burden, in exchange for near-free repeated evaluation) is the central design decision in any surrogate modeling strategy.
 @@
 
 @@colbox-blue
 **Remark:** Strategies built from ANNs firmly leave the idea of "first principles" modeling and are driven by available data and existing model results. There is currently a strong research push to enhance/generate parametrizations and even full sub-models/components
-of GCMs/ESMs that are data-driven. Because the use of ANNs and surrogate models boil down to curve fitting (essentially), a grain of salt shouold be taken when assessing the validity of these models. It is possible that these models might over fit their parameters to existing observational data, which would diminish the predictive power of the models for scenarios they are not trained in.
+of GCMs/ESMs that are data-driven. Because the use of ANNs and surrogate models boil down to curve fitting (essentially), a grain of salt should be taken when assessing the validity of these models. It is possible that these models might over-fit their parameters to existing observational data, which would diminish the predictive power of the models for scenarios they are not trained in.
 @@
 
 ## Physics Informed Neural Networks (PINNs)
 The next level of abstraction in parameter study is Physics Informed Neural Networks (PINNs) [(Raissi, Perdikaris & Karniadakis, 2019)](https://doi.org/10.1016/j.jcp.2018.10.045).
 This strategy couples the big data aspects of surrogate models to a particular problem like our EBM.
 Unlike the ANN surrogate above, which is trained purely on input/output *data* pairs from the full model, a PINN is trained to satisfy the governing equation itself.
-The network represents the solution field directly: it takes the independent variables (space $x$, time $t$) and, crucially for UQ purposes, the uncertain parameters (e.g. $CO_2$) as inputs, and outputs an approximation $\hat{T}(x, t, CO_2)$ of the temperature field.
-Because the uncertain parameter is fed in as an *input* rather than fixed at training time, a single trained network can be evaluated for any new parameter draw in a Monte Carlo ensemble without ever re-solving the underlying PDE - the parametric dependence on uncertainty is learned once, up front.
+The network represents the solution field directly: it takes the independent variables (space $x$, time $t$) and, crucially for UQ purposes, the uncertain parameters (e.g. $CO_2$ or $D$) as inputs, and outputs an approximation $T(x, t, CO_2, D)$ of the temperature field.
+Because the uncertain parameter is fed in as an *input* rather than fixed at training time, a single trained network can be evaluated for any new parameter from a Monte Carlo ensemble without ever re-solving the underlying PDE. The parametric dependence on uncertainty is learned once, up front.
 
 \fig{/assets/milestone6p5/pinn_training_loop.png}
 * The PINN training loop for the EBM. The network's own output is checked against the model's governing equation (via automatic differentiation, rather than a numerical discretization), against the initial/boundary constraints, and optionally against any sparse observational data available; these residuals combine into a single loss whose gradient is backpropagated into the network weights.
@@ -150,12 +150,13 @@ $$
 C(x) \partialderiv{T}{t} + A(CO_2) + B T - \Nabla \cdot (D\Nabla T) = S_{sol}(x,t).
 $$
 - **Initial/boundary residual**: penalizing deviation from the prescribed initial temperature field and any boundary or periodicity constraints.
-- **Data residual (optional)**: if sparse, possibly noisy observational data is available (e.g. historical station temperatures), an additional term nudges the network toward matching those observations - offering a natural bridge to the Bayesian ideas above.
+- **Data residual (optional)**: if sparse, possibly noisy observational data is available (e.g. historical station temperatures), an additional term nudges the network toward matching those observations. This offers a natural bridge to the Bayesian ideas described above.
 
 @@colbox-blue
-**Remark:** In climate modeling the boundary conditions are a nonissue, as the Earth climate system is treated as periodic. However, much work is done in improving or quantifying the initial conditions for the climate system. For instance, at Sveriges meteorologiska och hydrologiska institut (SMHI) they  use big-data tools to anchor simulations in real-world states for near-term forecasting and ensemble variability.
+**Remark:** In climate modeling, the boundary conditions are often a nonissue, as the Earth climate system is treated as periodic. However, much work is done in improving or quantifying the initial conditions for the climate system. For instance, at Sveriges meteorologiska och hydrologiska institut (SMHI) they use big-data tools to anchor simulations in real-world states for near-term forecasting and ensemble variability.
 @@
 
-Over successive optimization steps (e.g. Adam followed by L-BFGS), the network's weights are updated to jointly minimize all of these residuals at once, so that the trained network is simultaneously a good curve fit to any available data *and* an approximate solution of the PDE.
-This comes at the cost of significant upfront computational overhead in training, with the tradeoff being that the particular discretization of the EBM becomes irrelevant once training is complete - the network is a mesh-free, continuous representation of the solution that can be queried anywhere in space, time, or parameter space.
-However, because the PINN strategy uses the model equations themselves to train (rather than an independent ground truth), some grain of salt is needed when interpreting its results: training is a non-convex optimization problem, the relative weighting between the loss terms can be delicate to tune, and a network can satisfy the PDE residual well while still converging to a physically implausible or trivial solution if the initial/boundary terms are not weighted carefully.
+Over successive optimization steps (e.g. Adam followed by L-BFGS), the network's weights are updated to jointly minimize all of these residuals simultaneously, so that the trained network is a good curve fit to any available data **and** an approximate solution of the PDE.
+This comes at the cost of significant upfront computational overhead in training, with the tradeoff being that the particular discretization of the EBM becomes irrelevant once training is complete.
+That is, the network is a mesh-free, continuous representation of the solution that can be queried anywhere in space, time, or parameter space.
+However, because the PINN strategy uses the model equations themselves to train (rather than an independent ground truth), some grain of salt is needed when interpreting its results. Training is a non-convex optimization problem, the relative weighting between the loss terms can be delicate to tune, and a network can satisfy the PDE residual well while still converging to a physically implausible or trivial solution if the initial/boundary terms are not weighted carefully.

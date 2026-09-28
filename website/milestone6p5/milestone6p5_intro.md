@@ -76,7 +76,7 @@ For instance, in August 2024 the $CO_2$ concentration is given by $422.99 \pm 0.
 Immediately, we see that the uncertainty is quite small compared to the mean value (approximately $0.01\%$).
 So, one expects that making small changes in the $CO_2$ concentration would have a relatively small impact on the resulting solution of the EBM solution.
 
-To estimate this influence of uncertainty in the $C_{ref}$ value may have we differentiate $A(CO_2)$
+To estimate this influence of uncertainty in the $C_{ref}$ value may have, we differentiate $A(CO_2)$
 with respect to this variable to see
 $$
 \frac{d}{dC_{ref}}A(CO_2) = \frac{5.35}{C_{ref}}.
