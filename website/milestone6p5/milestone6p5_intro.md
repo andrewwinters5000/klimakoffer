@@ -93,7 +93,7 @@ That is, small changes in the $CO_2$ concentration will cause a minimal (if at a
 @@colbox-blue
 **Remark:** There is further uncertainty present in the radiation model in the additional
 coefficients in $A(CO_2)$ as well as $B$. One could further explore the influence of the
-$CO_2$ concentration of the surface termperature by changing to a different model than
+$CO_2$ concentration of the surface termperature by changing to a different empirical model than
 that of [Budyko in milestone 2](https://andrewwinters5000.github.io/klimakoffer/milestone2/milestone2_radiation/#budykos_empirical_infrared_model).
 For instance, looking at the observation data something other than a linear model may capture
 the trend in the data better.
