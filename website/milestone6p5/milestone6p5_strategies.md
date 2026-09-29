@@ -23,7 +23,7 @@ For instance, in a fluid flow simulation one of the unknown quantities is the de
 If we consider one spatial dimension with polynomial chaos then the density has a (truncated) stochastic expansion
 where the random function has space and time dependence
 $$
-\rho v(x, t, \xi) = \sum_{k=1}^K\rho(x,t) \Psi_k(\xi)
+\rho(x, t, \xi) = \sum_{k=1}^K\rho(x,t) \Psi_k(\xi)
 $$
 where $\Psi_k(\xi)$ is some set of basis functions in the stochastic solution space.
 Therefore, these polynomial chaos methods can suffer an accelerated version of the *curse of dimensionality*.
